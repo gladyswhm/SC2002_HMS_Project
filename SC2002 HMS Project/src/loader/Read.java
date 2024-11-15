@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import entity.medicalrecord;
 import entity.medicine;
+import entity.replenish;
 import entity.staff;
 import enum_class.*;
 import controller.AppointmentCon;
@@ -223,6 +224,26 @@ public class Read {
 
         return medicineList;
     }
+
+    //read replenish
+    public static List<replenish> readReplenishmentList(String filePath) {
+    List<replenish> replenishList = new ArrayList<>();
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(",");
+            String name = parts[0];
+            int quantity = Integer.parseInt(parts[1]);
+            ReplenishStatus status = ReplenishStatus.valueOf(parts[2].trim());
+            replenishList.add(new replenish(name, quantity, status));
+
+        }
+    } catch (IOException | IllegalArgumentException e) {
+        e.printStackTrace();
+    }
+    return replenishList;
+}
+
 
 
 }

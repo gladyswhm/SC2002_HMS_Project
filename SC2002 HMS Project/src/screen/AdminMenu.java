@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 import controller.AdminCon;
 import controller.InventoryCon;
+import controller.ReplenishCon;
 import entity.medicine;
+import entity.replenish;
 import enum_class.*;
 
 public class AdminMenu {
@@ -37,7 +39,7 @@ public class AdminMenu {
                     manageInventory(); 
                     break;
                 case 4:
-                	//approveReplenishmentRequests();
+                	approveReplenishmentRequests();
                     break;
                 case 5:
                     System.out.println("Logging out...");
@@ -233,45 +235,46 @@ public class AdminMenu {
         } while (choice != 6);
     }
 
-/* 
-    private void approveReplenishmentRequests() {
 
+    private void approveReplenishmentRequests() {
         Scanner scanner = new Scanner(System.in);
-        
-        // Filter out approved or rejected requests
-        List<Replenishment> pendingRequests = replenishmentList.stream()
-            .filter(request -> !request.getStatus().equalsIgnoreCase("Approved") && !request.getStatus().equalsIgnoreCase("Rejected"))
+    
+        ReplenishCon replenishCon = new ReplenishCon();
+        List<replenish> replenishList = replenishCon.getReplenishList();
+    
+        List<replenish> pendingRequests = replenishList.stream()
+            .filter(request -> request.getStatus() == ReplenishStatus.Pending)
             .collect(Collectors.toList());
-        
+    
         if (pendingRequests.isEmpty()) {
             System.out.println("No pending replenishment requests found.");
             return;
         }
-
-        for (Replenishment request : pendingRequests) {
+    
+        for (replenish request : pendingRequests) {
             System.out.println("\nRequest Details:");
             System.out.println("Name: " + request.getMedicineName());
             System.out.println("Quantity: " + request.getRequestedAmount());
             System.out.println("Current Status: " + request.getStatus());
             System.out.print("Approve this request? (yes/no): ");
             String input = scanner.nextLine();
-            
+    
             if (input.equalsIgnoreCase("yes")) {
-                // Update replenishment status
-            	admin.updateReplenishmentStatus(request.getMedicineName(), request.getRequestedAmount(), "Approved");
-                
-                // Update inventory stock level
-                inventory.updateStockLevel(request.getMedicineName(), request.getRequestedAmount());
+                request.setStatus(ReplenishStatus.Approved);
+                replenishCon.updateReplenishment(request.getMedicineName(), request.getRequestedAmount(), ReplenishStatus.Approved);
                 System.out.println("Inventory updated for " + request.getMedicineName() + ": Stock level increased by " + request.getRequestedAmount());
             } else {
-                admin.updateReplenishmentStatus(request.getMedicineName(), request.getRequestedAmount(), "Rejected");
+                request.setStatus(ReplenishStatus.Rejected);
+                replenishCon.updateReplenishment(request.getMedicineName(), request.getRequestedAmount(), ReplenishStatus.Rejected);
             }
         }
-
+    
         System.out.println("Replenishment requests have been processed.");
     }
+    
 
-    */
+
+    
 
     public static void main(String[] args){
 

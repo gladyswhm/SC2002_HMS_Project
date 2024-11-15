@@ -60,5 +60,18 @@ public class InventoryCon {
             System.out.println("Medicine not found: " + medicineName);
         }
     }
+
+    // New method to update stock level after replenishment
+    public void updateStockLevelAfterReplenishment(String medicineName, int replenishmentQuantity) {
+        medicine medicine = findMedicineByName(medicineName);
+        if (medicine != null) {
+            int updatedStockLevel = medicine.getStockLevel() + replenishmentQuantity;
+            medicine.setStockLevel(updatedStockLevel);
+            Write.saveMedicineListToCSV(medicineList); 
+            System.out.println("Updated stock level for " + medicineName + ": " + updatedStockLevel);
+        } else {
+            System.out.println("Medicine not found in inventory: " + medicineName);
+        }
+    }
     
 }

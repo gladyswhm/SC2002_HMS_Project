@@ -5,10 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import controller.AppointmentCon;
 import controller.AvailabilityCon;
 import entity.medicalrecord;
 import entity.medicine;
+import entity.replenish;
 import entity.staff;
 import entity.appointment;
 
@@ -95,6 +95,26 @@ public class Write {
         System.out.println("Error saving medicine list: " + e.getMessage());
     }
 }
+
+    public static void saveReplenishmentListToCSV(List<replenish> replenishmentList) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Replenishment_List.csv"))) {
+        // Write replenishment data without header
+        for (replenish replenishment : replenishmentList) {
+            writer.write(
+                replenishment.getMedicineName() + "," +
+                replenishment.getRequestedAmount() + "," +
+                replenishment.getStatus()
+            );
+            writer.newLine();
+        }
+
+        System.out.println("Replenishment list saved to Replenishment_List.csv.");
+
+    } catch (IOException e) {
+        System.out.println("Error saving replenishment list: " + e.getMessage());
+    }
+}
+
 
     
 }
