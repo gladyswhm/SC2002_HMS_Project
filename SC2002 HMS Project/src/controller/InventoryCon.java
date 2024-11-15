@@ -39,13 +39,12 @@ public class InventoryCon {
         return null;
     }
     
-    public void updateStockLevel(String medicineName, int amount) {
+    public void updateStockLevel(String medicineName, int newStockLevel) {
         medicine medicine = findMedicineByName(medicineName);
         if (medicine != null) {
-            // Update the stock level
-            medicine.setStockLevel(medicine.getStockLevel() + amount);
-            System.out.println("Stock level for " + medicineName + " updated to " + medicine.getStockLevel());
-            Write.saveMedicineListToCSV(medicineList); 
+            medicine.setStockLevel(newStockLevel);
+            Write.saveMedicineListToCSV(medicineList);
+            System.out.println("Stock level updated for " + medicineName + ": " + newStockLevel);
         } else {
             System.out.println("Medicine not found: " + medicineName);
         }
