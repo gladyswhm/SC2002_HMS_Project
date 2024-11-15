@@ -8,6 +8,7 @@ import java.util.List;
 import controller.AppointmentCon;
 import controller.AvailabilityCon;
 import entity.medicalrecord;
+import entity.staff;
 import entity.appointment;
 
 public class Write {
@@ -55,4 +56,23 @@ public class Write {
             System.out.println("Error saving appointment outcome record: " + e.getMessage());
         }
     }
+
+    public static void saveStaffList(List<staff> staffList) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
+        for (staff staffMember : staffList) {
+            writer.write(
+                staffMember.getUserID() + "," +
+                staffMember.getPassword() + "," +
+                staffMember.getName() + "," +
+                staffMember.getRole().toString() + "," +
+                staffMember.getGender().toString() + "," +
+                staffMember.getAge()
+            );
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        System.out.println("Error saving staff records: " + e.getMessage());
+    }
+}
+    
 }

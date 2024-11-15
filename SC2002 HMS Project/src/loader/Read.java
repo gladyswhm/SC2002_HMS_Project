@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import entity.medicalrecord;
-import enum_class.AvailStatus;
-import enum_class.DoctorAppointmentStatus;
+import entity.staff;
+import enum_class.*;
 import controller.AppointmentCon;
 import controller.AvailabilityCon;
 
@@ -134,5 +134,51 @@ public class Read {
         }
         return appointmentList;
     }
+
+    //read staff
+    public static List<staff> loadStaffList(String FILE_PATH) {
+        List<staff> staffList = new ArrayList<>();
+        File file = new File(FILE_PATH);
+    
+        if (!file.exists()) {
+            System.out.println("No staff records found.");
+            return staffList;
+        }
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+    
+                try {
+                    String staffId = fields[0].trim();
+                    String password = fields[1].trim();
+                    String name = fields[2].trim();
+    
+                    // Parse gender from string to enum
+                    Gender gender = Gender.valueOf(fields[4].trim().toUpperCase());
+                    Role role = Role.valueOf(fields[3].trim().toUpperCase());
+    
+                    int age = Integer.parseInt(fields[5].trim());
+    
+                    // Create a new staff object and add it to the list
+                    staff staffMember = new staff(staffId, password, name, gender, role, age);
+                    staffList.add(staffMember);
+    
+                } catch (NumberFormatException e) {
+                    System.out.println("Skipping line with invalid age: " + line);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Skipping incomplete line: " + line);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Skipping line with invalid gender or role: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading staff records: " + e.getMessage());
+        }
+    
+        return staffList;
+    }
+    
 
 }

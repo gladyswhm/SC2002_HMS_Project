@@ -2,7 +2,7 @@ package entity;
 
 import enum_class.*;
 
-public abstract class staff extends user{
+public class staff extends user{
     private Role role;
     private int age;
 
@@ -24,7 +24,7 @@ public abstract class staff extends user{
         return this.age;
     }
 
-    public void setUserID(int age){
+    public void setAge(int age){
         this.age = age;
     }
 }
