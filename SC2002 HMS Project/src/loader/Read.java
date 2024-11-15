@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,8 +139,8 @@ public class Read {
         return appointmentList;
     }
 
-    //read staff
-    public static List<staff> loadStaffList(String FILE_PATH) {
+      //read staff
+      public static List<staff> loadStaffList(String FILE_PATH) {
         List<staff> staffList = new ArrayList<>();
         File file = new File(FILE_PATH);
     
@@ -156,9 +159,14 @@ public class Read {
                     String password = fields[1].trim();
                     String name = fields[2].trim();
     
-                    // Parse gender from string to enum
-                    Gender gender = Gender.valueOf(fields[4].trim().toUpperCase());
-                    Role role = Role.valueOf(fields[3].trim().toUpperCase());
+                    // Directly use the values from the CSV without toUpperCase()
+                    String genderString = fields[4].trim();
+                    String roleString = fields[3].trim();
+                    //System.out.println("Parsing gender: " + genderString + ", role: " + roleString);
+    
+                
+                    Gender gender = Gender.valueOf(genderString); 
+                    Role role = Role.valueOf(roleString);          
     
                     int age = Integer.parseInt(fields[5].trim());
     
@@ -167,11 +175,11 @@ public class Read {
                     staffList.add(staffMember);
     
                 } catch (NumberFormatException e) {
-                    System.out.println("Skipping line with invalid age: " + line);
+                   // System.out.println("Skipping line with invalid age: " + line);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Skipping incomplete line: " + line);
+                    //System.out.println("Skipping incomplete line: " + line);
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Skipping line with invalid gender or role: " + line);
+                   // System.out.println("Skipping line with invalid gender or role: " + line);
                 }
             }
         } catch (IOException e) {
@@ -180,36 +188,33 @@ public class Read {
     
         return staffList;
     }
+    
 
-
-    //read medicine
+    // read medicine
     public static List<medicine> loadMedicineList(String FILE_PATH) {
         List<medicine> medicineList = new ArrayList<>();
-        File file = new File(FILE_PATH);
+        Path path = Paths.get(FILE_PATH);
 
-        if (!file.exists()) {
-            System.out.println("No medicine records found.");
+        // Check if file exists
+        if (!Files.exists(path)) {
+            System.out.println("Medicine records file not found at path: " + FILE_PATH);
             return medicineList;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-
                 try {
                     String name = fields[0].trim();
                     int stockLevel = Integer.parseInt(fields[1].trim());
                     int lowStockAlert = Integer.parseInt(fields[2].trim());
 
-                    // Create a new medicine object and add it to the list
                     medicine med = new medicine(name, stockLevel, lowStockAlert);
                     medicineList.add(med);
 
-                } catch (NumberFormatException e) {
-                    System.out.println("Skipping line with invalid data: " + line);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Skipping incomplete line: " + line);
+                } catch (Exception e) {
+                    System.out.println("Skipping invalid line: " + line);
                 }
             }
         } catch (IOException e) {
@@ -218,6 +223,6 @@ public class Read {
 
         return medicineList;
     }
-    
+
 
 }

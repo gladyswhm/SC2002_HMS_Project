@@ -59,7 +59,7 @@ public class Write {
     }
 
         public static void saveStaffList(List<staff> staffList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Staff_List.csv"))) {
             for (staff staffMember : staffList) {
                 writer.write(
                     staffMember.getUserID() + "," +
@@ -78,7 +78,7 @@ public class Write {
 
 
     public static void saveMedicineListToCSV(List<medicine> medicineList) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("Medicine_List.csv"))) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Medicine_List.csv"))) {
         // Write medicine data without header
         for (medicine med : medicineList) {
             writer.write(

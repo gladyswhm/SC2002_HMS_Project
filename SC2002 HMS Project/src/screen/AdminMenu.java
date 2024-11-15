@@ -37,7 +37,7 @@ public class AdminMenu {
                     manageInventory(); 
                     break;
                 case 4:
-                	approveReplenishmentRequests();
+                	//approveReplenishmentRequests();
                     break;
                 case 5:
                     System.out.println("Logging out...");
@@ -84,14 +84,14 @@ public class AdminMenu {
                         try {
                             gender = Gender.valueOf(genderInput);
                         } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid gender. Please enter MALE or FEMALE.");
+                            System.out.println("Invalid gender. Please enter Male or Female.");
                         }
                     }
 
                     // Handle role input
                     Role role = null;
                     while (role == null) {
-                        System.out.print("Enter role (Admin/Doctor/Pharmacist): ");
+                        System.out.print("Enter role (Administrator/Doctor/Pharmacist): ");
                         String roleInput = scanner.nextLine();
                         try {
                             role = Role.valueOf(roleInput);
@@ -117,20 +117,38 @@ public class AdminMenu {
                     String newStaffId = scanner.nextLine();
                     System.out.print("Enter new name: ");
                     String newName = scanner.nextLine();
-                    System.out.print("Enter new role: ");
-                    String newRole = scanner.nextLine();
-                    System.out.print("Enter new gender: ");
-                    String newGender = scanner.nextLine();
+                    Gender newGender = null;
+                    while (newGender == null) {
+                        System.out.print("Enter gender (Male/Female): ");
+                        String genderInput = scanner.nextLine();
+                        try {
+                            newGender = Gender.valueOf(genderInput);  
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid gender. Please enter Male or Female.");
+                        }
+                    }
+
+                    // Handle role input
+                    Role newRole = null;
+                    while (newRole == null) {
+                        System.out.print("Enter role (Administrator/Doctor/Pharmacist): ");
+                        String roleInput = scanner.nextLine();
+                        try {
+                            newRole = Role.valueOf(roleInput);  
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid role. Please enter a valid role.");
+                        }
+                    }
                     System.out.print("Enter new age: ");
                     int newAge = scanner.nextInt();
-                    adminCon.updateStaff(staffIdToUpdate, newStaffId, newName, newRole, newGender, newAge);
+                    adminCon.updateStaff(staffIdToUpdate, newStaffId, newName, newGender, newRole, newAge);
                     break;
                 case 4:
-                    System.out.print("Enter filter type (role/gender/age) or 'all' to display all: ");
+                    System.out.print("Enter filter type (Role/Gender/Age) or 'all' to display all: ");
                     String filterBy = scanner.nextLine();
                     String value = "";
                     if (!filterBy.equalsIgnoreCase("all")) {
-                        System.out.print("Enter value for filter: ");
+                        System.out.print("Enter value for filter (Gender: Male/Female OR Role:Administrator/Doctor/Pharmacist) OR Age: ");
                         value = scanner.nextLine();
                     }
                     adminCon.displayStaff(filterBy, value);
@@ -215,12 +233,8 @@ public class AdminMenu {
         } while (choice != 6);
     }
 
+/* 
     private void approveReplenishmentRequests() {
-        List<Replenishment> replenishmentList = SystemInitialization.readReplenishmentList("Replenishment_List.csv");
-        ReplenishmentRequest replenishmentRequest = ReplenishmentRequest.getInstance(replenishmentList);
-
-        // Retrieve the singleton inventory instance
-        Inventory inventory = Inventory.getInstance();
 
         Scanner scanner = new Scanner(System.in);
         
@@ -255,6 +269,14 @@ public class AdminMenu {
         }
 
         System.out.println("Replenishment requests have been processed.");
+    }
+
+    */
+
+    public static void main(String[] args){
+
+        AdminMenu adminMenu = new AdminMenu();  
+        adminMenu.showMenu();  
     }
 
 

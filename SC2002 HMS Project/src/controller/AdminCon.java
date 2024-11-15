@@ -12,7 +12,7 @@ import loader.Read;
 import loader.Write;
 
 public class AdminCon extends StaffCon{
-    List<staff> staffList = Read.loadStaffList("data/Staff_List.csv");
+    List<staff> staffList = Read.loadStaffList("SC2002 HMS Project/data/Staff_List.csv");
 
     public void addStaff(String staffId, String password, String name, Gender gender, Role role, int age) {
     staff newStaff = new staff(staffId, password, name, gender, role, age);
@@ -28,7 +28,7 @@ public class AdminCon extends StaffCon{
         return removed;
     }
 
-    public void updateStaff(String staffId, String newStaffId, String newName, String newRole, String newGender, Integer newAge) {
+    public void updateStaff(String staffId, String newStaffId, String newName, Gender newGender, Role newRole, Integer newAge) {
         for (staff staff : staffList) {
             if (staff.getUserID().equals(staffId)) {
                 if (newStaffId != null) {
@@ -38,18 +38,10 @@ public class AdminCon extends StaffCon{
                     staff.setName(newName);  
                 }
                 if (newRole != null) {
-                    try {
-                        staff.setRole(Role.valueOf(newRole));  
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid role provided.");
-                    }
+                    staff.setRole(newRole);
                 }
                 if (newGender != null) {
-                    try {
-                        staff.setGender(Gender.valueOf(newGender));  
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid gender provided.");
-                    }
+                    staff.setGender(newGender);
                 }
                 if (newAge != null) {
                     staff.setAge(newAge);  
@@ -68,23 +60,49 @@ public class AdminCon extends StaffCon{
         System.out.println("Staff List:");
         for (staff staff : staffList) {
             boolean matches = true;
-            if (filterType.equals("role") && !staff.getRole().equals(value)) {
-                matches = false;
-            }
-            if (filterType.equals("gender") && !staff.getGender().equals(value)) {
-                matches = false; 
-            }
-            if (filterType.equals("age")) {
-                int age = Integer.parseInt(value);
-                if (staff.getAge() != age) {
+    
+            if (filterType.equals("role")) {
+                try {
+                    Role role = Role.valueOf(value);  // Directly convert value to Role enum
+                    if (!staff.getRole().equals(role)) {
+                        matches = false;
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid role value: " + value);
                     matches = false;
                 }
             }
+    
+            if (filterType.equals("gender")) {
+                try {
+                    Gender gender = Gender.valueOf(value);  // Directly convert value to Gender enum
+                    if (!staff.getGender().equals(gender)) {
+                        matches = false;
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid gender value: " + value);
+                    matches = false;
+                }
+            }
+    
+            if (filterType.equals("age")) {
+                try {
+                    int age = Integer.parseInt(value);
+                    if (staff.getAge() != age) {
+                        matches = false;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid age value: " + value);
+                    matches = false;
+                }
+            }
+    
             if (matches) {
                 System.out.println(staff);
             }
         }
     }
+    
     
 
 

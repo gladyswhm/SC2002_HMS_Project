@@ -19,4 +19,9 @@ public class medicine {
     public void setStockLevel(int stockLevel) { this.stockLevel = stockLevel; }
     public void setLowStockAlert(int lowStockAlert) { this.lowStockAlert = lowStockAlert; }
     
+
+    @Override
+    public String toString() {
+        return "Medicine[name=" + name + ", stockLevel=" + stockLevel + ", lowStockAlert=" + lowStockAlert + "]";
+    }
 }
