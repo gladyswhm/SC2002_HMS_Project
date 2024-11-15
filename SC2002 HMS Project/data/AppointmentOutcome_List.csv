@@ -1,0 +1,4 @@
+﻿Appoinment ID,Patient ID,Doctor ID,Date,services,medication,status
+a001-test,p001,d001,3/11/2024,,completed,done
+a002-test,p002,d002,1/11/2024,,dontknow,nill
+a003-test,p003,d003,11/11/2024,,,na

@@ -1,0 +1,5 @@
+MedicineName,RequestedAmount,Status
+Paracetamol,3,Approved
+aa,1,Rejected
+bb,4,Approved
+cc,5,Rejected
