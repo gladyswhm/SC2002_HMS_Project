@@ -8,6 +8,7 @@ import java.util.List;
 import controller.AppointmentCon;
 import controller.AvailabilityCon;
 import entity.medicalrecord;
+import entity.medicine;
 import entity.staff;
 import entity.appointment;
 
@@ -57,22 +58,43 @@ public class Write {
         }
     }
 
-    public static void saveStaffList(List<staff> staffList) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
-        for (staff staffMember : staffList) {
+        public static void saveStaffList(List<staff> staffList) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
+            for (staff staffMember : staffList) {
+                writer.write(
+                    staffMember.getUserID() + "," +
+                    staffMember.getPassword() + "," +
+                    staffMember.getName() + "," +
+                    staffMember.getRole().toString() + "," +
+                    staffMember.getGender().toString() + "," +
+                    staffMember.getAge()
+                );
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving staff records: " + e.getMessage());
+        }
+    }
+
+
+    public static void saveMedicineListToCSV(List<medicine> medicineList) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("Medicine_List.csv"))) {
+        // Write medicine data without header
+        for (medicine med : medicineList) {
             writer.write(
-                staffMember.getUserID() + "," +
-                staffMember.getPassword() + "," +
-                staffMember.getName() + "," +
-                staffMember.getRole().toString() + "," +
-                staffMember.getGender().toString() + "," +
-                staffMember.getAge()
+                med.getName() + "," +
+                med.getStockLevel() + "," +
+                med.getLowStockAlert()
             );
             writer.newLine();
         }
+
+        System.out.println("Medicine list saved to Medicine_List.csv.");
+
     } catch (IOException e) {
-        System.out.println("Error saving staff records: " + e.getMessage());
+        System.out.println("Error saving medicine list: " + e.getMessage());
     }
 }
+
     
 }

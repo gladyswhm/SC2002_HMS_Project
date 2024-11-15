@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import entity.medicalrecord;
+import entity.medicine;
 import entity.staff;
 import enum_class.*;
 import controller.AppointmentCon;
@@ -178,6 +179,44 @@ public class Read {
         }
     
         return staffList;
+    }
+
+
+    //read medicine
+    public static List<medicine> loadMedicineList(String FILE_PATH) {
+        List<medicine> medicineList = new ArrayList<>();
+        File file = new File(FILE_PATH);
+
+        if (!file.exists()) {
+            System.out.println("No medicine records found.");
+            return medicineList;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+
+                try {
+                    String name = fields[0].trim();
+                    int stockLevel = Integer.parseInt(fields[1].trim());
+                    int lowStockAlert = Integer.parseInt(fields[2].trim());
+
+                    // Create a new medicine object and add it to the list
+                    medicine med = new medicine(name, stockLevel, lowStockAlert);
+                    medicineList.add(med);
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Skipping line with invalid data: " + line);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Skipping incomplete line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading medicine records: " + e.getMessage());
+        }
+
+        return medicineList;
     }
     
 

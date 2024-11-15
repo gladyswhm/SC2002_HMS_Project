@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import controller.AdminCon;
+import controller.InventoryCon;
+import entity.medicine;
 import enum_class.*;
 
 public class AdminMenu {
@@ -36,7 +38,6 @@ public class AdminMenu {
                     break;
                 case 4:
                 	approveReplenishmentRequests();
-                    //System.out.println("Approve Replenishment Requests feature is not implemented yet.");
                     break;
                 case 5:
                     System.out.println("Logging out...");
@@ -146,6 +147,7 @@ public class AdminMenu {
     
     
     public void manageInventory() { 
+        InventoryCon inventoryCon = new InventoryCon();
         Scanner scanner = new Scanner(System.in);
         int choice;
 
@@ -169,8 +171,8 @@ public class AdminMenu {
                     int stockLevel = scanner.nextInt();
                     System.out.print("Enter low stock alert level: ");
                     int lowStockAlert = scanner.nextInt();
-                    Medicine newMedicine = new Medicine(name, stockLevel, lowStockAlert);
-                    inventory.addMedicine(newMedicine); // Add to inventory singleton list
+                    medicine newMedicine = new medicine(name, stockLevel, lowStockAlert);
+                    inventoryCon.addMedicine(newMedicine); 
                     break;
 
                 case 2: // Update Stock Level
@@ -178,18 +180,18 @@ public class AdminMenu {
                     String medNameToUpdate = scanner.nextLine();
                     System.out.print("Enter new stock level: ");
                     int newStockLevel = scanner.nextInt();
-                    admin.updateStockLevel(medNameToUpdate, newStockLevel);
+                    inventoryCon.updateStockLevel(medNameToUpdate, newStockLevel);
                     break;
 
                 case 3: // Remove Medicine
                     System.out.print("Enter medicine name to remove: ");
                     String medNameToRemove = scanner.nextLine();
-                    admin.removeMedicine(medNameToRemove);
+                    inventoryCon.removeMedicine(medNameToRemove);
                     break;
 
                 case 4: // View Medicines
                     System.out.println("Current Medication Inventory:");
-                    for (Medicine medicine : inventory.getMedicineList()) {
+                    for (medicine medicine : inventoryCon.getMedicineList()) {
                         System.out.println(medicine);
                     }
                     break;
@@ -199,7 +201,7 @@ public class AdminMenu {
                     String medNameToUpdateAlert = scanner.nextLine();
                     System.out.print("Enter new low stock alert level: ");
                     int newLowStockAlert = scanner.nextInt();
-                    admin.updateLowStockAlert(medNameToUpdateAlert, newLowStockAlert);
+                    inventoryCon.updateLowStockAlert(medNameToUpdateAlert, newLowStockAlert);
                     break;
 
                 case 6: // Exit
