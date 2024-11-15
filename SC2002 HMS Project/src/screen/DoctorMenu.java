@@ -1,8 +1,13 @@
 package screen;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import controller.DoctorCon;
+import entity.medicalrecord;
 
 public class DoctorMenu {
+    private static List<medicalrecord> medicalRecords = new ArrayList<>();
 
     public static void displayDoctorMenu(String doctorID) {
         Scanner sc = new Scanner(System.in);
@@ -25,14 +30,16 @@ public class DoctorMenu {
             switch(option){
                 case 1:
                     System.out.println("\n--- Viewing Patient Medical Records ---");
-                    
+                    DoctorCon.displayMedicalRecords();
                     break;
                 case 2:
                     System.out.println("\n--- Update Patient Medical Record ---");
-                    
+                    DoctorCon.displayAvailablePatientIds();
+                    DoctorCon.updatePatientMedicalRecords(medicalRecords, sc);
                     break;
                 case 3:
                     System.out.println("\n--- Viewing Personal Schedule ---");
+                    
                     break;
                 case 4:
                     System.out.println("\n--- Set Availability ---");
