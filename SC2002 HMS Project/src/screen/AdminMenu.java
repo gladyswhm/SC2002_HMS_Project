@@ -164,7 +164,7 @@ public class AdminMenu {
     }
     
     
-    public void manageInventory() { 
+    private void manageInventory() { 
         InventoryCon inventoryCon = new InventoryCon();
         Scanner scanner = new Scanner(System.in);
         int choice;
