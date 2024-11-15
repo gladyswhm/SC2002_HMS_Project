@@ -3,7 +3,10 @@ package screen;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import controller.AvailabilityCon;
 import controller.DoctorCon;
+import entity.appointment;
 import entity.medicalrecord;
 
 public class DoctorMenu {
@@ -39,16 +42,24 @@ public class DoctorMenu {
                     break;
                 case 3:
                     System.out.println("\n--- Viewing Personal Schedule ---");
-                    
+
                     break;
                 case 4:
                     System.out.println("\n--- Set Availability ---");
+                    AvailabilityCon.setAvailability(doctorID, sc);
                     break;
                 case 5:
                     System.out.println("\n--- Showing Appointment Requests ---");
-
+                    appointment.displayPendingAppointments(doctorID);
+                    Appointment.AppointmentUpdate(doctorID, sc); //accept and decline appointment request
                     break;
                 case 6:
+                    Appointment.displayUpcomingAppointments(doctorID);//view upcoming appointments
+                    break;
+                case 7:
+                    Appointment.AppointmentOutcomeRecord(doctorID, sc);
+                    break;
+                    //view upcoming appointments
                     break;
                 case 7:
                     break;

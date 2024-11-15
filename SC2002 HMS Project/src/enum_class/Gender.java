@@ -1,5 +1,5 @@
 package enum_class;
 
 public enum Gender {
-    MALE, FEMALE
+    Male, Female
 }

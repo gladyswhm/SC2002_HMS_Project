@@ -10,7 +10,8 @@ import loader.Read;
 import loader.Write;
 
 public class DoctorCon extends StaffCon {
-    static List<medicalrecord> records = Read.loadMedicalRecords("data/medical_records.csv");
+    static List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
+    static List<AvailabilityCon> avail = Read.loadAvailability("data/Doctor_Availability.csv");
 
     //option 1: view medical record
     public static void displayMedicalRecords(){
@@ -95,5 +96,8 @@ public class DoctorCon extends StaffCon {
         }
         return null; //if not found
     }
+
+    //option 3
+    
     
 }

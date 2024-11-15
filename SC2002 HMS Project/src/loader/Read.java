@@ -9,7 +9,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import entity.medicalrecord;;
+import entity.medicalrecord;
+import enum_class.AvailStatus;
+import enum_class.DoctorAppointmentStatus;
+import controller.AppointmentCon;
+import controller.AvailabilityCon;
 
 public class Read {
     //read medical records
@@ -53,7 +57,37 @@ public class Read {
         return records;
     }
 
-    // Read file
+    //read doctor availability
+    public static List<AvailabilityCon> loadAvailability(String AVAILABILITY_FILE_PATH) {
+        List<AvailabilityCon> availabilityList = new ArrayList<>();
+        File file = new File(AVAILABILITY_FILE_PATH);
+
+        if (!file.exists()) {
+            System.out.println("No availability records found.");
+            return availabilityList;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields.length < 4) continue;
+
+                String doctorId = fields[0].trim();
+                String date = fields[1].trim();
+                String timeSlot = fields[2].trim();
+                String s = fields[3].trim();
+                AvailStatus status = AvailStatus.valueOf(s);
+                
+                availabilityList.add(new AvailabilityCon(doctorId, date, timeSlot, status));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading availability: " + e.getMessage());
+        }
+        return availabilityList;
+    }
+
+    // Read file (USER part)
     public static List<String> readFile(String filePath)
     {
         List<String> lines = new ArrayList<>();     // Initialize an empty list to avoid returning null in case of exceptions
@@ -68,4 +102,37 @@ public class Read {
         
         return lines;       // Return the list (even if it's empty in case of an exception)
     }
+
+    //load appointments
+    public static List<AppointmentCon> loadAppointments(String APPOINTMENT_FILE_PATH) {
+        List<AppointmentCon> appointmentList = new ArrayList<>();
+        File file = new File(APPOINTMENT_FILE_PATH);
+
+        if (!file.exists()) {
+            System.out.println("No appointment requests found.");
+            return appointmentList;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields.length < 5) continue;
+
+                String doctorId = fields[0].trim();
+                String patientId = fields[1].trim();
+                String date = fields[2].trim();
+                String timeSlot = fields[3].trim();
+                String s = fields[4].trim();
+                DoctorAppointmentStatus status = DoctorAppointmentStatus.valueOf(s);
+
+
+                appointmentList.add(new AppointmentCon(doctorId, patientId, date, timeSlot, status));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading appointment requests: " + e.getMessage());
+        }
+        return appointmentList;
+    }
+
 }
