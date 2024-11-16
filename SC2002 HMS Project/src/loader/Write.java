@@ -11,6 +11,7 @@ import entity.medicine;
 import entity.replenish;
 import entity.staff;
 import entity.appointment;
+import entity.patient;
 
 public class Write {
     public static void saveMedicalRecord(List<medicalrecord> records) {
@@ -114,6 +115,31 @@ public class Write {
         System.out.println("Error saving replenishment list: " + e.getMessage());
     }
 }
+
+    public static void savePatientListToCSV(List<patient> patientList) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Patient_List.csv"))) {
+            
+            for (patient p : patientList) {
+                writer.write(
+                    p.getUserID() + "," +
+                    p.getPassword() + "," +
+                    p.getName() + "," +
+                    p.getDobAsFormattedString()+", "+
+                    p.getGender() + "," +
+                    p.getBlood() + "," +
+                    p.getEmail() + "," +
+                    p.getPhonenumber()
+                );
+                writer.newLine(); 
+            }
+
+            System.out.println("Patient list saved to Patient_List.csv.");
+
+        } catch (IOException e) {
+            System.out.println("Error saving patient list: " + e.getMessage());
+        }
+    }
+
 
 
     

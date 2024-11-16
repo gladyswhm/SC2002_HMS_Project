@@ -10,10 +10,14 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Date;
 
+import entity.patient;
 import entity.appointmentoutcome;
 import entity.medicalrecord;
 import entity.medicine;
@@ -291,7 +295,40 @@ public class Read {
     return replenishList;
 }
 
-
+    //read patient
+    public static List<patient> readPatientList(String filePath) {
+        List<patient> patientList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  // Updated format
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+    
+                // Extract and trim data
+                String userID = parts[0].trim();
+                String password = parts[1].trim();
+                String name = parts[2].trim();
+                
+                // Parse the date of birth
+                Date dob = dateFormat.parse(parts[3].trim());
+                
+                // Parse Gender and BloodType enums
+                Gender gender = Gender.valueOf(parts[4].trim());  // This assumes proper case matching
+                BloodType bloodType = BloodType.fromString(parts[5].trim());  // Use BloodType's fromString method
+    
+                String email = parts[6].trim();
+                String phonenumber = parts[7].trim();
+    
+                patient newPatient = new patient(userID, password, name, dob, gender, bloodType, email, phonenumber);
+                patientList.add(newPatient);
+            }
+        } catch (IOException | ParseException | IllegalArgumentException e) {
+            e.printStackTrace();  // Handle exceptions (e.g., wrong enum values, invalid date)
+        }
+        return patientList;
+    }
 
 
 }
+
