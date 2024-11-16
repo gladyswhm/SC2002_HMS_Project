@@ -31,7 +31,8 @@ public class PatientMenu {
 
             switch (choice) {
                 case 1:
-                    viewMedicalRecord(); 
+                    //done for view medical record
+                    PatientCon.viewMedicalRecord("P1001"); 
                     break;
                 case 2:
                     updatePersonalInfo();

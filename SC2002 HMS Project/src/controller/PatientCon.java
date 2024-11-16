@@ -1,5 +1,6 @@
 package controller;
 
+import entity.medicalrecord;
 import entity.patient;
 import java.util.List;
 import loader.Read;
@@ -12,6 +13,8 @@ public class PatientCon {
     public static List<patient> getPatientList() {
         return patientList;
     }
+
+    static List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
     
     public static void updateContactInfo(patient patients, int option) {
         Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
@@ -36,6 +39,22 @@ public class PatientCon {
         Write.savePatientListToCSV(patientList);
     }
 
-    
+    public static void viewMedicalRecord(String patientID){
+        boolean found = false;
 
+    // Iterate through the records to find the one matching the patient's ID
+        for (medicalrecord record : records) {
+            if (record.getPatientId().equalsIgnoreCase(patientID)) {
+                System.out.println("Medical Record for Patient: " + record.getPatientName());
+                System.out.println("Diagnosis: " + record.getDiagnosis());
+                System.out.println("Treatment Plan: " + record.getTreatmentPlan());
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No medical record found for Patient ID: " + patientID);
+        }
+    }
 }
