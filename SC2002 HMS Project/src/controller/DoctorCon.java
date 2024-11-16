@@ -9,7 +9,7 @@ import entity.medicalrecord;
 import loader.Read;
 import loader.Write;
 
-public class DoctorCon extends StaffCon {
+public class DoctorCon {
     static List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
     static List<AvailabilityCon> avail = Read.loadAvailability("data/Doctor_Availability.csv");
 

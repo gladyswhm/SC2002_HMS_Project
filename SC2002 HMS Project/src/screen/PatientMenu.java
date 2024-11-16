@@ -151,11 +151,11 @@ public class PatientMenu {
 
 
 
-     public static void main(String[] args){
+    //  public static void main(String[] args){
 
-         //PatientMenu patientMenu = new PatientMenu();  
-         List<patient> patientList = PatientCon.getPatientList(); // Fetch the patient list
-        PatientMenu.showMenu("P1001", patientList); // Pass both arguments
-     }
+    //      //PatientMenu patientMenu = new PatientMenu();  
+    //      List<patient> patientList = PatientCon.getPatientList(); // Fetch the patient list
+    //     PatientMenu.showMenu("P1001", patientList); // Pass both arguments
+    //  }
     
 }
