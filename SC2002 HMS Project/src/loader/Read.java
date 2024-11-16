@@ -171,7 +171,7 @@ public class Read {
 
             line = line.trim(); // Remove unwanted characters
             String[] fields = line.split(",");
-            if (fields.length < 7) {
+            if (fields.length < 8) {
                 System.out.println("Skipping invalid line: " + line);
                 continue;
             }
@@ -183,8 +183,10 @@ public class Read {
             String services = fields[4].trim();
             String medication = fields[5].trim();
             String notes = fields[6].trim();
+            String status = fields[7].trim();
 
-            appointmentOutcomeList.add(new appointmentoutcome(Appid, patientId, doctorId, date, services, medication, notes));
+
+            appointmentOutcomeList.add(new appointmentoutcome(Appid, patientId, doctorId, date, services, medication, notes,status));
         }
     } catch (IOException e) {
         System.out.println("Error loading appointment outcome records: " + e.getMessage());
