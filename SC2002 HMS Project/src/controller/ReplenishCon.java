@@ -10,7 +10,7 @@ import loader.Read;
 import loader.Write;
 
 public class ReplenishCon {
-     List<replenish> replenishList = Read.readReplenishmentList("SC2002 HMS Project/data/Replenishment_List.csv");
+     List<replenish> replenishList = Read.readReplenishmentList("data/Replenishment_List.csv");
 
      public List<replenish> getReplenishList() {
           return replenishList;

@@ -13,7 +13,7 @@ import loader.Read;
 import loader.Write;
 
 public class AdminCon extends StaffCon{
-    List<staff> staffList = Read.loadStaffList("SC2002 HMS Project/data/Staff_List.csv");
+    List<staff> staffList = Read.loadStaffList("data/Staff_List.csv");
 
     public void addStaff(String staffId, String password, String name, Gender gender, Role role, int age) {
     staff newStaff = new staff(staffId, password, name, gender, role, age);

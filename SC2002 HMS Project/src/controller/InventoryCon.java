@@ -7,7 +7,7 @@ import loader.Read;
 import loader.Write;
 
 public class InventoryCon {
-    List<medicine> medicineList = Read.loadMedicineList("SC2002 HMS Project/data/Medicine_List.csv");
+    List<medicine> medicineList = Read.loadMedicineList("data/Medicine_List.csv");
 
     public List<medicine> getMedicineList() {
         return medicineList;

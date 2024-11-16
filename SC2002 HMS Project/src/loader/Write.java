@@ -63,7 +63,7 @@ public class Write {
     }
 
     public static void saveStaffList(List<staff> staffList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Staff_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
             for (staff staffMember : staffList) {
                 writer.write(
                     staffMember.getUserID() + "," +
@@ -84,7 +84,7 @@ public class Write {
  
  
     public static void saveMedicineListToCSV(List<medicine> medicineList) { 
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Medicine_List.csv"))) { 
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Medicine_List.csv"))) { 
         // Write medicine data without header 
         for (medicine med : medicineList) { 
             writer.write( 
@@ -103,7 +103,7 @@ public class Write {
 } 
  
     public static void saveReplenishmentListToCSV(List<replenish> replenishmentList) { 
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Replenishment_List.csv"))) { 
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Replenishment_List.csv"))) { 
         // Write replenishment data without header 
         for (replenish replenishment : replenishmentList) { 
             writer.write( 
@@ -122,7 +122,7 @@ public class Write {
 } 
  
     public static void savePatientListToCSV(List<patient> patientList) { 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Patient_List.csv"))) { 
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) { 
              
             for (patient p : patientList) { 
                 writer.write( 
