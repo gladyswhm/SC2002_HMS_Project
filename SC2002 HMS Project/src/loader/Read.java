@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Date;
 
 import entity.patient;
+import entity.appointment;
 import entity.appointmentoutcome;
 import entity.medicalrecord;
 import entity.medicine;
@@ -117,8 +118,8 @@ public class Read {
     }
 
     //load appointments list
-    public static List<AppointmentCon> loadAppointments(String APPOINTMENT_FILE_PATH) {
-        List<AppointmentCon> appointmentList = new ArrayList<>();
+    public static List<appointment> loadAppointments(String APPOINTMENT_FILE_PATH) {
+        List<appointment> appointmentList = new ArrayList<>();
         File file = new File(APPOINTMENT_FILE_PATH);
 
         if (!file.exists()) {
@@ -141,7 +142,7 @@ public class Read {
                 DoctorAppointmentStatus status = DoctorAppointmentStatus.valueOf(s);
 
 
-                appointmentList.add(new AppointmentCon(Appid,doctorId, patientId, date, timeSlot, status));
+                appointmentList.add(new appointment(Appid,doctorId, patientId, date, timeSlot, status));
             }
         } catch (IOException e) {
             System.out.println("Error loading appointment requests: " + e.getMessage());

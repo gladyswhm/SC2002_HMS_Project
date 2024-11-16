@@ -3,12 +3,12 @@ package entity;
 import enum_class.DoctorAppointmentStatus;
 
 public class appointment {
-    private String Appid;
-    private String DoctorID;
-    private String PatientID;
-    private String date;
-    private String time;
-    private DoctorAppointmentStatus status;
+    private static String Appid;
+    private static String DoctorID;
+    private static String PatientID;
+    private static String date;
+    private static String time;
+    private static DoctorAppointmentStatus status;
 
     public appointment(String Appid, String DoctorID, String PatientID, String date, String time, DoctorAppointmentStatus status){
         this.Appid = Appid;
@@ -20,32 +20,32 @@ public class appointment {
 
     }
 
-    public String geteAppID() {
+    public static String geteAppID() {
         return Appid;
     }
 
-    public String getDoctorId() {
+    public static String getDoctorId() {
         return DoctorID;
     }
 
-    public String getPatientId() {
+    public static String getPatientId() {
         return PatientID;
     }
 
-    public String getDate() {
+    public static String getDate() {
         return date;
     }
 
-    public String getTimeSlot() {
+    public static String getTimeSlot() {
         return time;
     }
 
-    public DoctorAppointmentStatus getStatus() {
+    public static DoctorAppointmentStatus getStatus() {
         return status;
     }
 
-    public DoctorAppointmentStatus setStatus(DoctorAppointmentStatus status) {
-        this.status = status;
-        return this.status;
+    public static DoctorAppointmentStatus setStatus(DoctorAppointmentStatus statusnew) {
+        status = statusnew;
+        return status;
     }
 }

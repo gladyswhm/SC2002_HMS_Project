@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.AvailabilityCon;
+import controller.AppointmentCon;
 import controller.DoctorCon;
-import entity.appointment;
 import entity.medicalrecord;
 
 public class DoctorMenu {
@@ -50,18 +50,14 @@ public class DoctorMenu {
                     break;
                 case 5:
                     System.out.println("\n--- Showing Appointment Requests ---");
-                    appointment.displayPendingAppointments(doctorID);
-                    Appointment.AppointmentUpdate(doctorID, sc); //accept and decline appointment request
+                    AppointmentCon.displayPendingAppointments(doctorID);
+                    AppointmentCon.AppointmentUpdate(doctorID, sc); //accept and decline appointment request
                     break;
                 case 6:
-                    Appointment.displayUpcomingAppointments(doctorID);//view upcoming appointments
+                    AppointmentCon.displayUpcomingAppointments(doctorID);//view upcoming appointments
                     break;
                 case 7:
-                    Appointment.AppointmentOutcomeRecord(doctorID, sc);
-                    break;
-                    //view upcoming appointments
-                    break;
-                case 7:
+                    AppointmentCon.AppointmentOutcomeRecord(doctorID, sc);
                     break;
                 case 8:
                     System.out.println("Logging out...");
@@ -72,5 +68,9 @@ public class DoctorMenu {
 
         }while(option!=8);
     }
-    
+    public static void main(String[] args){
+
+         DoctorMenu doctormenu = new DoctorMenu();  
+        doctormenu.displayDoctorMenu("D1001");  
+    }
 }

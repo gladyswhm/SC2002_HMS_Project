@@ -18,13 +18,9 @@ public class AppointmentCon {
     private String date;       // YYYY-MM-DD
     private String timeSlot;   // HH:MM
     private DoctorAppointmentStatus status;     // Pending, Accepted, Declined, Completed (for last part)
-
-    // Path to the CSV file to store appointment requests
-    private static final String APPOINTMENT_FILE_PATH = "src/doctor/Appointment_List.csv";
-    private static final String OUTCOME_FILE_PATH = "src/doctor/appointment_outcomerecord.csv";
-
-    static List<AppointmentCon> appointmentList = Read.loadAppointments("SC2002 HMS Project/data/Appointment_List.csv");
     
+    static List<appointment> appointmentList = Read.loadAppointments("src/data/Appointment_List.csv");
+
     // Constructor
     public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, DoctorAppointmentStatus status) {
         this.Appid=Appid;
@@ -89,28 +85,27 @@ public class AppointmentCon {
         DoctorAppointmentStatus status = DoctorAppointmentStatus.valueOf(aptStatus);
 
         //upload into csv file
-        Write.saveAppointmentOutcomeRecord(doctorId, aptDate, aptID, aptType, aptMedications, aptStatus);
+        Write.saveAppointmentOutcomeRecord(doctorId, aptDate, aptID, aptType, aptMedications, status);
     }
 
     public static void acceptAppointment(String doctorId, String patientId, String date, String timeSlot) {
-        List<AppointmentCon> appointmentList = Read.loadAppointments(APPOINTMENT_FILE_PATH);
         boolean found = false;
 
-        for (AppointmentCon appointment : appointmentList) {
-            if (appointment.this.doctorId().equals(doctorId) &&
+        for (appointment appointment : appointmentList) {
+            if (appointment.getDoctorId().equals(doctorId) &&
                 appointment.getPatientId().equals(patientId) &&
                 appointment.getDate().equals(date) &&
                 appointment.getTimeSlot().equals(timeSlot) &&
                 appointment.getStatus().equals("Pending")) {
                 
-                appointment.setStatus("Accepted");
+                appointment.setStatus(DoctorAppointmentStatus.Accepted);
                 found = true;
                 break;
             }
         }
 
         if (found) {
-            saveAppointments(appointmentList);
+            Write.saveAppointments(appointmentList);
             System.out.println("Appointment accepted for Patient ID: " + patientId);
         } else {
             System.out.println("Pending appointment not found for acceptance.");
@@ -120,7 +115,7 @@ public class AppointmentCon {
     public static void declineAppointment(String doctorId, String patientId, String date, String timeSlot) {
         boolean found = false;
 
-        for (AppointmentCon appointment : appointmentList) {
+        for (appointment appointment : appointmentList) {
             if (appointment.getDoctorId().equals(doctorId) &&
                 appointment.getPatientId().equals(patientId) &&
                 appointment.getDate().equals(date) &&
@@ -164,7 +159,7 @@ public class AppointmentCon {
     }
 
     //admin display appointment list
-    public static List<AppointmentCon> getAppointmentList() {
+    public static List<appointment> getAppointmentList() {
         return appointmentList;
     }
 

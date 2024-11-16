@@ -292,11 +292,11 @@ public class AdminMenu {
 
         switch (choice) {
             case 1:
-                List<AppointmentCon> appointments = AppointmentCon.getAppointmentList();
+                List<appointment> appointments = AppointmentCon.getAppointmentList();
                 if (appointments.isEmpty()) {
                     System.out.println("No appointments found.");
                 } else {
-                    for (AppointmentCon apt : appointments) {
+                    for (appointment apt : appointments) {
                         System.out.println(apt);
                     }
                 }
@@ -328,11 +328,11 @@ public class AdminMenu {
 
     
 
-    // public static void main(String[] args){
+     //public static void main(String[] args){
 
-    //     AdminMenu adminMenu = new AdminMenu();  
-    //     adminMenu.showMenu();  
-    // }
+      //   AdminMenu adminMenu = new AdminMenu();  
+      //  adminMenu.showMenu();  
+    //}
 
 
 }
