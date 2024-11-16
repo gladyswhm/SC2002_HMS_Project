@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 import entity.appointment;
 import entity.medicalrecord;
+import entity.medicine;
 import enum_class.DoctorAppointmentStatus;
 import enum_class.AvailStatus;
 import loader.Read;
 import loader.Write;
 
 public class AppointmentCon {
+    private String Appid;
     private String doctorId;
     private String patientId;
     private String date;       // YYYY-MM-DD
@@ -21,10 +23,11 @@ public class AppointmentCon {
     private static final String APPOINTMENT_FILE_PATH = "src/doctor/Appointment_List.csv";
     private static final String OUTCOME_FILE_PATH = "src/doctor/appointment_outcomerecord.csv";
 
-    static List<AppointmentCon> appointmentList = Read.loadAppointments("data/Appointment_List.csv");
-
+    static List<AppointmentCon> appointmentList = Read.loadAppointments("SC2002 HMS Project/data/Appointment_List.csv");
+    
     // Constructor
-    public AppointmentCon(String doctorId, String patientId, String date, String timeSlot, DoctorAppointmentStatus status) {
+    public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, DoctorAppointmentStatus status) {
+        this.Appid=Appid;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.date = date;
@@ -159,4 +162,11 @@ public class AppointmentCon {
         }
         System.out.println("------------------------------------");
     }
+
+    //admin display appointment list
+    public static List<AppointmentCon> getAppointmentList() {
+        return appointmentList;
+    }
+
+   
 }

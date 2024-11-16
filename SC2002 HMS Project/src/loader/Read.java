@@ -2,6 +2,7 @@ package loader;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,12 +13,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import entity.appointmentoutcome;
 import entity.medicalrecord;
 import entity.medicine;
 import entity.replenish;
 import entity.staff;
 import enum_class.*;
 import controller.AppointmentCon;
+import controller.AppointmentOutcomeCon;
 import controller.AvailabilityCon;
 
 public class Read {
@@ -108,7 +112,7 @@ public class Read {
         return lines;       // Return the list (even if it's empty in case of an exception)
     }
 
-    //load appointments
+    //load appointments list
     public static List<AppointmentCon> loadAppointments(String APPOINTMENT_FILE_PATH) {
         List<AppointmentCon> appointmentList = new ArrayList<>();
         File file = new File(APPOINTMENT_FILE_PATH);
@@ -122,23 +126,68 @@ public class Read {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                if (fields.length < 5) continue;
+                if (fields.length < 6) continue;
 
-                String doctorId = fields[0].trim();
-                String patientId = fields[1].trim();
-                String date = fields[2].trim();
-                String timeSlot = fields[3].trim();
-                String s = fields[4].trim();
+                String Appid = fields[0].trim();
+                String doctorId = fields[1].trim();
+                String patientId = fields[2].trim();
+                String date = fields[3].trim();
+                String timeSlot = fields[4].trim();
+                String s = fields[5].trim();
                 DoctorAppointmentStatus status = DoctorAppointmentStatus.valueOf(s);
 
 
-                appointmentList.add(new AppointmentCon(doctorId, patientId, date, timeSlot, status));
+                appointmentList.add(new AppointmentCon(Appid,doctorId, patientId, date, timeSlot, status));
             }
         } catch (IOException e) {
             System.out.println("Error loading appointment requests: " + e.getMessage());
         }
         return appointmentList;
     }
+
+    public static List<appointmentoutcome> loadAppointmentsOutcome(String APPOINTMENT_FILE_PATH) {
+    List<appointmentoutcome> appointmentOutcomeList = new ArrayList<>();
+    File file = new File(APPOINTMENT_FILE_PATH);
+
+    if (!file.exists()) {
+        System.out.println("No appointment outcome records found.");
+        return appointmentOutcomeList;
+    }
+
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+        String line;
+        boolean firstLine = true;
+
+        while ((line = reader.readLine()) != null) {
+            // Skip BOM if it's the first line
+            if (firstLine && line.startsWith("\uFEFF")) {
+                line = line.substring(1); // Remove BOM
+                firstLine = false;
+            }
+
+            line = line.trim(); // Remove unwanted characters
+            String[] fields = line.split(",");
+            if (fields.length < 7) {
+                System.out.println("Skipping invalid line: " + line);
+                continue;
+            }
+
+            String Appid = fields[0].trim();
+            String patientId = fields[1].trim();
+            String doctorId = fields[2].trim();
+            String date = fields[3].trim();
+            String services = fields[4].trim();
+            String medication = fields[5].trim();
+            String notes = fields[6].trim();
+
+            appointmentOutcomeList.add(new appointmentoutcome(Appid, patientId, doctorId, date, services, medication, notes));
+        }
+    } catch (IOException e) {
+        System.out.println("Error loading appointment outcome records: " + e.getMessage());
+    }
+    return appointmentOutcomeList;
+}
+
 
       //read staff
       public static List<staff> loadStaffList(String FILE_PATH) {
@@ -160,7 +209,6 @@ public class Read {
                     String password = fields[1].trim();
                     String name = fields[2].trim();
     
-                    // Directly use the values from the CSV without toUpperCase()
                     String genderString = fields[4].trim();
                     String roleString = fields[3].trim();
                     //System.out.println("Parsing gender: " + genderString + ", role: " + roleString);
@@ -170,8 +218,7 @@ public class Read {
                     Role role = Role.valueOf(roleString);          
     
                     int age = Integer.parseInt(fields[5].trim());
-    
-                    // Create a new staff object and add it to the list
+
                     staff staffMember = new staff(staffId, password, name, gender, role, age);
                     staffList.add(staffMember);
     
@@ -196,7 +243,7 @@ public class Read {
         List<medicine> medicineList = new ArrayList<>();
         Path path = Paths.get(FILE_PATH);
 
-        // Check if file exists
+
         if (!Files.exists(path)) {
             System.out.println("Medicine records file not found at path: " + FILE_PATH);
             return medicineList;
@@ -243,6 +290,7 @@ public class Read {
     }
     return replenishList;
 }
+
 
 
 

@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
 import controller.AdminCon;
 import controller.InventoryCon;
 import controller.ReplenishCon;
-
+import controller.AppointmentCon;
+import controller.AppointmentOutcomeCon;
+import entity.appointment;
+import entity.appointmentoutcome;
+import entity.medicalrecord;
 import entity.medicine;
 import entity.replenish;
 import enum_class.*;
@@ -34,7 +38,7 @@ public class AdminMenu {
                 	manageStaff(); 
                     break;
                 case 2:
-                	//admin.displayAppointments();
+                	displayAppointments();
                     break;
                 case 3:
                     manageInventory(); 
@@ -273,6 +277,53 @@ public class AdminMenu {
         System.out.println("Replenishment requests have been processed.");
     }
     
+    private void displayAppointments() {
+    Scanner scanner = new Scanner(System.in);
+    int choice;
+
+    do {
+        System.out.println("\n--- View Appointment Details ---");
+        System.out.println("1. View All Appointments");
+        System.out.println("2. View Appointment Outcome Records");
+        System.out.println("3. Return to Main Menu");
+        System.out.print("Enter your choice: ");
+        choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                List<AppointmentCon> appointments = AppointmentCon.getAppointmentList();
+                if (appointments.isEmpty()) {
+                    System.out.println("No appointments found.");
+                } else {
+                    for (AppointmentCon apt : appointments) {
+                        System.out.println(apt);
+                    }
+                }
+                break;
+
+            case 2:
+                List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeList() ;
+                if (records.isEmpty()) {
+                    System.out.println("No outcome records found.");
+                } else {
+                    for (appointmentoutcome record : records) {
+                        System.out.println(record);
+                    }
+                }
+                break;
+
+            case 3:
+                System.out.println("Returning to main menu...");
+                break;
+
+            default:
+                System.out.println("Invalid choice! Please try again.");
+                break;
+        }
+    } while (choice != 3);
+}
+
 
 
     

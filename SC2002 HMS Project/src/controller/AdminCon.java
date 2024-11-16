@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
+import entity.appointment;
+import entity.medicine;
 import entity.staff;
 import enum_class.*;
 import loader.Read;
@@ -103,8 +104,6 @@ public class AdminCon extends StaffCon{
         }
     }
     
-    
-
 
 
 }
