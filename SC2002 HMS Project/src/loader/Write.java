@@ -20,7 +20,7 @@ public class Write {
     
     // Write to Patient_List csv file
     public static void savePatientListToCSV(List<patient> patientList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Patient_List.csv"))) {
             
             for (patient p : patientList) {
                 writer.write(
