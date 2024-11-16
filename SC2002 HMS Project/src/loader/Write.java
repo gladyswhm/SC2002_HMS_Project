@@ -20,7 +20,7 @@ public class Write {
     
     // Write to Patient_List csv file
     public static void savePatientListToCSV(List<patient> patientList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Patient_List.csv"))) {
             
             for (patient p : patientList) {
                 writer.write(
@@ -44,7 +44,7 @@ public class Write {
 
     // Write to Staff_List csv file
     public static void saveStaffList(List<staff> staffList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Staff_List.csv"))) {
             for (staff staffMember : staffList) {
                 writer.write(
                     staffMember.getUserID() + "," +

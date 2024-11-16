@@ -13,7 +13,7 @@ public class AppointmentOutcomeCon {
 
     static Scanner sc = new Scanner(System.in);
 
-    static List<appointmentoutcome> appointmentOutcomeList = Read.loadAppointmentsOutcome("data/AppointmentOutcome_List.csv");
+    static List<appointmentoutcome> appointmentOutcomeList = Read.loadAppointmentsOutcome("SC2002 HMS Project/data/AppointmentOutcome_List.csv");
 
      //admin display appointment outcome
      public static List<appointmentoutcome> getAppointmentOutcomeList() {

@@ -37,7 +37,7 @@ public class PatientMenu {
                     PatientCon.viewMedicalRecord("P1001"); 
                     break;
                 case 2:
-                    updatePersonalInfo();
+                    updatePersonalInfo(userID);
                     break;
                 case 3:
                     viewAvailableAppointments();
@@ -55,7 +55,7 @@ public class PatientMenu {
                     viewScheduledAppointments();
                     break;
                 case 8:
-                    viewPastAppointmentOutcomes();
+                    viewPastAppointmentOutcomes(userID);
                     break;
                 case 9:
                     // Change password
@@ -77,23 +77,19 @@ public class PatientMenu {
 
     }
 
-    private static void updatePersonalInfo() {
+    private static void updatePersonalInfo(String userID) {
         Scanner scanner = new Scanner(System.in);
-        
-        // Prompt for Patient ID to identify the correct patient
-        System.out.print("Enter your Patient ID (case sensative): ");
-        String patientId = scanner.nextLine();
-
-        // Fetch the list of patients and find the matching patient
+    
+        // Fetch the list of patients and find the matching patient using the userID
         List<patient> patients = PatientCon.getPatientList();
         patient patientToUpdate = null;
         for (patient p : patients) {
-            if (p.getUserID().equals(patientId)) {
+            if (p.getUserID().equals(userID)) {
                 patientToUpdate = p;
                 break;
             }
         }
-
+    
         if (patientToUpdate != null) {
             System.out.println("Which information would you like to update?");
             System.out.println("1. Update Email");
@@ -102,15 +98,15 @@ public class PatientMenu {
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline
-
+    
             // Update the patient's contact info based on the user's choice
             PatientCon.updateContactInfo(patientToUpdate, choice);
             System.out.println("Personal information updated successfully.");
         } else {
             System.out.println("Patient ID not found.");
         }
-        
     }
+    
 
 
     private static void viewAvailableAppointments() {
@@ -137,32 +133,29 @@ public class PatientMenu {
 
     }
 
-    private static void viewPastAppointmentOutcomes() {
-        Scanner scanner = new Scanner(System.in);
-
-        // Prompt for the patient's ID
-        System.out.print("Enter your Patient ID (case sensitive): ");
-        String patientId = scanner.nextLine();
-
+    private static void viewPastAppointmentOutcomes(String userID) {
         // Fetch and display the appointment outcomes for the entered ID
-        List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeForPatient(patientId);
-
+        List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeForPatient(userID);
+    
         if (records.isEmpty()) {
-            System.out.println("No outcome records found for Patient ID: " + patientId);
+            System.out.println("No outcome records found for Patient ID: " + userID);
         } else {
             System.out.println("\n--- Appointment Outcome Records ---");
             for (appointmentoutcome record : records) {
                 System.out.println(record);
             }
+        }
     }
+    
 
-    }
 
 
 
     //  public static void main(String[] args){
 
-    //      PatientMenu patientMenu = new PatientMenu();  
-    //      patientMenu.showMenu();  
+    //      //PatientMenu patientMenu = new PatientMenu();  
+    //      List<patient> patientList = PatientCon.getPatientList(); // Fetch the patient list
+    //     PatientMenu.showMenu("P1001", patientList); // Pass both arguments
     //  }
+    
 }
