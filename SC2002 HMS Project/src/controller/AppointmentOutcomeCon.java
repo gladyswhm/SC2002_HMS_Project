@@ -12,7 +12,7 @@ import loader.Write;
 public class AppointmentOutcomeCon {
 
     static Scanner sc = new Scanner(System.in);
-    
+
     static List<appointmentoutcome> appointmentOutcomeList = Read.loadAppointmentsOutcome("data/AppointmentOutcome_List.csv");
 
      //admin display appointment outcome
@@ -63,4 +63,42 @@ public class AppointmentOutcomeCon {
             System.out.println("There is no such Patient ID found.\n\n");
         }
     }
+    
+    
+    // Pharmacist 2: Update Prescription Status
+    public static void updateStatus()
+    {
+        System.out.println("\n\n----- Update Prescription Status -----");
+        System.out.print("Enter Patient ID: ");
+        String patientID = sc.nextLine();
+        
+        // Used to check if there is such user
+        boolean patientFound = false;
+
+        // Traverse each line from the file
+        for (appointmentoutcome line : appointmentOutcomeList)
+        {
+            // Check if there is such a patientID in the file
+            if (line.getPatientId().equals(patientID))         // If found match
+            {
+                System.out.println("Key in new prescription status: ");
+                String newStatus = sc.nextLine();
+
+                line.setStatus(newStatus);
+                Write.saveAppointmentOutcome(appointmentOutcomeList);
+                
+                System.out.println("Prescription Status changed successfully.\n\n");
+                patientFound = true;
+                break;
+            }     
+        }
+
+        if(patientFound == false)       // No such patient found
+        {
+            System.out.println("There is no such Patient ID found.\n\n");
+        }
+    }
+
+
+    
 }

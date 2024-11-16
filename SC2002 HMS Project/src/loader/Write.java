@@ -14,13 +14,14 @@ import entity.replenish;
 import entity.staff;
 import enum_class.DoctorAppointmentStatus;
 import entity.appointment;
+import entity.appointmentoutcome;
 import entity.doctoravailability;
 
 public class Write {
     
     // Write to Patient_List csv file
     public static void savePatientListToCSV(List<patient> patientList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Patient_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) {
             
             for (patient p : patientList) {
                 writer.write(
@@ -44,7 +45,7 @@ public class Write {
 
     // Write to Staff_List csv file
     public static void saveStaffList(List<staff> staffList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("SC2002 HMS Project/data/Staff_List.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
             for (staff staffMember : staffList) {
                 writer.write(
                     staffMember.getUserID() + "," +
@@ -105,6 +106,28 @@ public class Write {
             writer.newLine();    
         } catch (IOException e) {
             System.out.println("Error saving appointment outcome record: " + e.getMessage());
+        }
+    }
+
+
+    // Write to AppointmentOutcome_List csv file
+    public static void saveAppointmentOutcome(List<appointmentoutcome> appointmentoutcomelist) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/AppointmentOutcome_List.csv"))) {
+            for (appointmentoutcome outcome : appointmentoutcomelist) {
+                writer.write(
+                    outcome.getAppId() + "," +
+                    outcome.getPatientId() + "," +
+                    outcome.getDoctorId() + "," +
+                    outcome.getDate() + "," +
+                    outcome.getServices() + "," +
+                    outcome.getMedication() + "," +
+                    outcome.getNotes() + "," +
+                    outcome.getStatus()
+                );
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving appointment outcome records: " + e.getMessage());
         }
     }
  

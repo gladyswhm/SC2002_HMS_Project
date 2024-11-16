@@ -35,7 +35,7 @@ public class PharmacistMenu {
                 
                 case 2:
                     // Update Prescription Status
-                    //Pharmacist.updateStatus();
+                    AppointmentOutcomeCon.updateStatus();
                     break;
 
                 case 3:
