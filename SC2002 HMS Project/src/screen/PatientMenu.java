@@ -2,7 +2,10 @@ package screen;
 
 import java.util.List;
 import java.util.Scanner;
+
+import controller.AppointmentOutcomeCon;
 import controller.PatientCon;
+import entity.appointmentoutcome;
 import entity.patient;
 
 public class PatientMenu {
@@ -128,7 +131,23 @@ public class PatientMenu {
     }
 
     private void viewPastAppointmentOutcomes() {
-        System.out.println("Displaying past appointment outcomes...");
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt for the patient's ID
+        System.out.print("Enter your Patient ID (case sensitive): ");
+        String patientId = scanner.nextLine();
+
+        // Fetch and display the appointment outcomes for the entered ID
+        List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeForPatient(patientId);
+
+        if (records.isEmpty()) {
+            System.out.println("No outcome records found for Patient ID: " + patientId);
+        } else {
+            System.out.println("\n--- Appointment Outcome Records ---");
+            for (appointmentoutcome record : records) {
+                System.out.println(record);
+            }
+    }
 
     }
 

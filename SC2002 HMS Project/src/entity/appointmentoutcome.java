@@ -19,6 +19,10 @@ public class appointmentoutcome {
         this.notes = notes;
     }
 
+    public String getPatientId() {
+        return patientId;
+    }
+
     @Override
     public String toString() {
         return String.format("Appointment ID: %s, Patient ID: %s, Doctor ID: %s, Date: %s, Services: %s, Medication: %s, Notes: %s",
