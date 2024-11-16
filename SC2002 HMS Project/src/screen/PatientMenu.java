@@ -3,6 +3,7 @@ package screen;
 import java.util.List;
 import java.util.Scanner;
 
+import account_manager.ChangePassword;
 import controller.AppointmentOutcomeCon;
 import controller.PatientCon;
 import entity.appointmentoutcome;
@@ -10,7 +11,7 @@ import entity.patient;
 
 public class PatientMenu {
 
-    public void showMenu() { 
+    public static void showMenu(String userID, List<patient> patientList) { 
         Scanner scanner = new Scanner(System.in);
         int choice;
 
@@ -24,7 +25,8 @@ public class PatientMenu {
             System.out.println("6. Cancel an Appointment");
             System.out.println("7. View Scheduled Appointments");
             System.out.println("8. View Past Appointment Outcome Records");
-            System.out.println("9. Logout");
+            System.out.println("9. Change Password");
+            System.out.println("10. Logout");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline
@@ -56,22 +58,26 @@ public class PatientMenu {
                     viewPastAppointmentOutcomes();
                     break;
                 case 9:
+                    // Change password
+                    ChangePassword.changePatientPassword(userID, patientList);
+                    break;
+                case 10:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
                     break;
             }
-        } while (choice != 9);
+        } while (choice != 10);
     }
 
 
-    private void viewMedicalRecord() {
+    private static void viewMedicalRecord() {
         System.out.println("Displaying medical record...");
 
     }
 
-    private void updatePersonalInfo() {
+    private static void updatePersonalInfo() {
         Scanner scanner = new Scanner(System.in);
         
         // Prompt for Patient ID to identify the correct patient
@@ -107,31 +113,31 @@ public class PatientMenu {
     }
 
 
-    private void viewAvailableAppointments() {
+    private static void viewAvailableAppointments() {
         System.out.println("Displaying available appointment slots...");
 
     }
 
-    private void scheduleAppointment() {
+    private static void scheduleAppointment() {
         System.out.println("Scheduling an appointment...");
 
     }
 
-    private void rescheduleAppointment() {
+    private static void rescheduleAppointment() {
         System.out.println("Rescheduling an appointment...");
     }
 
-    private void cancelAppointment() {
+    private static void cancelAppointment() {
         System.out.println("Canceling an appointment...");
 
     }
 
-    private void viewScheduledAppointments() {
+    private static void viewScheduledAppointments() {
         System.out.println("Displaying scheduled appointments...");
 
     }
 
-    private void viewPastAppointmentOutcomes() {
+    private static void viewPastAppointmentOutcomes() {
         Scanner scanner = new Scanner(System.in);
 
         // Prompt for the patient's ID

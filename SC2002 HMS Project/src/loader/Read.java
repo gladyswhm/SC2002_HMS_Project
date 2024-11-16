@@ -30,6 +30,87 @@ import controller.AppointmentOutcomeCon;
 import controller.AvailabilityCon;
 
 public class Read {
+    
+    // Read Patient_List csv file
+    public static List<patient> readPatientList(String filePath)
+    {
+        List<patient> patientList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  // Updated format
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+    
+                // Extract and trim data
+                String userID = parts[0].trim();
+                String password = parts[1].trim();
+                String name = parts[2].trim();
+                
+                // Parse the date of birth
+                Date dob = dateFormat.parse(parts[3].trim());
+                
+                // Parse Gender and BloodType enums
+                Gender gender = Gender.valueOf(parts[4].trim());  // This assumes proper case matching
+                BloodType bloodType = BloodType.fromString(parts[5].trim());  // Use BloodType's fromString method
+    
+                String email = parts[6].trim();
+                String phonenumber = parts[7].trim();
+    
+                patient newPatient = new patient(userID, password, name, dob, gender, bloodType, email, phonenumber);
+                patientList.add(newPatient);
+            }
+        } catch (IOException | ParseException | IllegalArgumentException e) {
+            e.printStackTrace();  // Handle exceptions (e.g., wrong enum values, invalid date)
+        }
+        return patientList;
+    }
+
+
+    // Read Staff_List csv file
+    public static List<staff> loadStaffList(String FILE_PATH)
+    {
+        List<staff> staffList = new ArrayList<>();
+        File file = new File(FILE_PATH);
+    
+        if (!file.exists()) {
+            System.out.println("No staff records found.");
+            return staffList;
+        }
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+    
+                try {
+                    String fileStaffID = fields[0].trim();      // 1st column in csv file is staffID
+                    String filePassword = fields[1].trim();    // 2nd column in csv file is password
+                    String fileName = fields[2].trim();    // 3rd column in csv file is name
+                    Role fileRole = Role.valueOf(fields[3].trim());    // 4th column in csv file is role
+                    Gender fileGender = Gender.valueOf(fields[4].trim());    // 5th column in csv file is gender
+                    int fileAge = Integer.parseInt(fields[5].trim());    // 6th column in csv file is age
+
+                    staff staffMember = new staff(fileStaffID, filePassword, fileName, fileGender, fileRole, fileAge);
+                    staffList.add(staffMember);
+    
+                } catch (NumberFormatException e) {
+                   // System.out.println("Skipping line with invalid age: " + line);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    //System.out.println("Skipping incomplete line: " + line);
+                } catch (IllegalArgumentException e) {
+                   // System.out.println("Skipping line with invalid gender or role: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading staff records: " + e.getMessage());
+        }
+    
+        return staffList;
+    }
+    
+    
+    
     //read medical records
     public static List<medicalrecord> loadMedicalRecords(String FILE_PATH) {
         List<medicalrecord> records = new ArrayList<>();
@@ -194,55 +275,6 @@ public class Read {
     }
     return appointmentOutcomeList;
 }
-
-
-      //read staff
-      public static List<staff> loadStaffList(String FILE_PATH) {
-        List<staff> staffList = new ArrayList<>();
-        File file = new File(FILE_PATH);
-    
-        if (!file.exists()) {
-            System.out.println("No staff records found.");
-            return staffList;
-        }
-    
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-    
-                try {
-                    String staffId = fields[0].trim();
-                    String password = fields[1].trim();
-                    String name = fields[2].trim();
-    
-                    String genderString = fields[4].trim();
-                    String roleString = fields[3].trim();
-                    //System.out.println("Parsing gender: " + genderString + ", role: " + roleString);
-    
-                
-                    Gender gender = Gender.valueOf(genderString); 
-                    Role role = Role.valueOf(roleString);          
-    
-                    int age = Integer.parseInt(fields[5].trim());
-
-                    staff staffMember = new staff(staffId, password, name, gender, role, age);
-                    staffList.add(staffMember);
-    
-                } catch (NumberFormatException e) {
-                   // System.out.println("Skipping line with invalid age: " + line);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    //System.out.println("Skipping incomplete line: " + line);
-                } catch (IllegalArgumentException e) {
-                   // System.out.println("Skipping line with invalid gender or role: " + line);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error loading staff records: " + e.getMessage());
-        }
-    
-        return staffList;
-    }
     
 
     // read medicine
@@ -297,41 +329,6 @@ public class Read {
     }
     return replenishList;
 }
-
-    //read patient
-    public static List<patient> readPatientList(String filePath) {
-        List<patient> patientList = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  // Updated format
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-    
-                // Extract and trim data
-                String userID = parts[0].trim();
-                String password = parts[1].trim();
-                String name = parts[2].trim();
-                
-                // Parse the date of birth
-                Date dob = dateFormat.parse(parts[3].trim());
-                
-                // Parse Gender and BloodType enums
-                Gender gender = Gender.valueOf(parts[4].trim());  // This assumes proper case matching
-                BloodType bloodType = BloodType.fromString(parts[5].trim());  // Use BloodType's fromString method
-    
-                String email = parts[6].trim();
-                String phonenumber = parts[7].trim();
-    
-                patient newPatient = new patient(userID, password, name, dob, gender, bloodType, email, phonenumber);
-                patientList.add(newPatient);
-            }
-        } catch (IOException | ParseException | IllegalArgumentException e) {
-            e.printStackTrace();  // Handle exceptions (e.g., wrong enum values, invalid date)
-        }
-        return patientList;
-    }
-
 
 }
 

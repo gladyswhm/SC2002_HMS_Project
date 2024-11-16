@@ -17,6 +17,52 @@ import entity.appointment;
 import entity.doctoravailability;
 
 public class Write {
+    
+    // Write to Patient_List csv file
+    public static void savePatientListToCSV(List<patient> patientList) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) {
+            
+            for (patient p : patientList) {
+                writer.write(
+                    p.getUserID() + "," +
+                    p.getPassword() + "," +
+                    p.getName() + "," +
+                    p.getDobAsFormattedString()+", "+
+                    p.getGender() + "," +
+                    p.getBlood() + "," +
+                    p.getEmail() + "," +
+                    p.getPhonenumber()
+                );
+                writer.newLine(); 
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error saving patient list: " + e.getMessage());
+        }
+    }
+
+
+    // Write to Staff_List csv file
+    public static void saveStaffList(List<staff> staffList) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
+            for (staff staffMember : staffList) {
+                writer.write(
+                    staffMember.getUserID() + "," +
+                    staffMember.getPassword() + "," +
+                    staffMember.getName() + "," +
+                    staffMember.getRole().toString() + "," +
+                    staffMember.getGender().toString() + "," +
+                    staffMember.getAge()
+                );
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving staff records: " + e.getMessage());
+        }
+    }
+    
+    
+
     public static void saveMedicalRecord(List<medicalrecord> records) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/medical_records.csv"))) {
             for (medicalrecord record : records) {
@@ -61,26 +107,6 @@ public class Write {
             System.out.println("Error saving appointment outcome record: " + e.getMessage());
         }
     }
-
-    public static void saveStaffList(List<staff> staffList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Staff_List.csv"))) {
-            for (staff staffMember : staffList) {
-                writer.write(
-                    staffMember.getUserID() + "," +
-                    staffMember.getPassword() + "," +
-                    staffMember.getName() + "," +
-                    staffMember.getRole().toString() + "," +
-                    staffMember.getGender().toString() + "," +
-                    staffMember.getAge()
-                );
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving staff records: " + e.getMessage());
-        }
-    }
-
-
  
  
     public static void saveMedicineListToCSV(List<medicine> medicineList) { 
@@ -121,27 +147,4 @@ public class Write {
     } 
 } 
  
-    public static void savePatientListToCSV(List<patient> patientList) { 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) { 
-             
-            for (patient p : patientList) { 
-                writer.write( 
-                    p.getUserID() + "," + 
-                    p.getPassword() + "," + 
-                    p.getName() + "," + 
-                    p.getDobAsFormattedString()+", "+ 
-                    p.getGender() + "," + 
-                    p.getBlood() + "," + 
-                    p.getEmail() + "," + 
-                    p.getPhonenumber() 
-                ); 
-                writer.newLine();  
-            } 
- 
-            System.out.println("Patient list saved to Patient_List.csv."); 
- 
-        } catch (IOException e) { 
-            System.out.println("Error saving patient list: " + e.getMessage()); 
-        } 
-    }
 }
