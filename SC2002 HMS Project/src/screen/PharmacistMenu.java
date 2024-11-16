@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import account_manager.ChangePassword;
+import controller.AppointmentOutcomeCon;
 import entity.staff;
 
 public class PharmacistMenu {
@@ -29,9 +30,7 @@ public class PharmacistMenu {
             switch (menuChoice) {
                 case 1:
                     // View Appointment Outcome Record
-                    System.out.println("\n\n----- View Appointment Outcome Record -----");
-                    System.out.print("Enter Patient ID: ");
-
+                    AppointmentOutcomeCon.viewOutcomeRecord();
                     break;
                 
                 case 2:

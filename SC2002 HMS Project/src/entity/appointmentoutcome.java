@@ -21,9 +21,71 @@ public class appointmentoutcome {
         this.status=status;
     }
 
+    public String getAppId() {
+        return Appid;
+    }
+    
     public String getPatientId() {
         return patientId;
     }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public String getMedication() {
+        return medication;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setAppId(String Appid){
+        this.Appid = Appid;
+    }
+    
+    public void setPatientId(String patientId){
+        this.patientId = patientId;
+    }
+
+    public void setDoctorId(String doctorId){
+        this.doctorId = doctorId;
+    }
+
+    public void setDate(String date){
+        this.date = date;
+    }
+
+    public void setServices(String services){
+        this.services = services;
+    }
+
+    public void setMedication(String medication){
+        this.medication = medication;
+    }
+
+    public void setNotes(String notes){
+        this.notes = notes;
+    }
+
+    public void setStatus(String status){
+        this.status=status;
+    }
+
+
 
     @Override
     public String toString() {
