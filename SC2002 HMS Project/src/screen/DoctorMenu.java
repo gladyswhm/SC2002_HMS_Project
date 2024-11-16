@@ -68,9 +68,9 @@ public class DoctorMenu {
 
         }while(option!=8);
     }
-    public static void main(String[] args){
+    //public static void main(String[] args){
 
-         DoctorMenu doctormenu = new DoctorMenu();  
-        doctormenu.displayDoctorMenu("D1001");  
-    }
+        //DoctorMenu doctormenu = new DoctorMenu();  
+        //doctormenu.displayDoctorMenu("D1001");  
+    //}
 }
