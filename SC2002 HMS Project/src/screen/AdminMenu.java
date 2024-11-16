@@ -155,7 +155,7 @@ public class AdminMenu {
                     String filterBy = scanner.nextLine();
                     String value = "";
                     if (!filterBy.equalsIgnoreCase("all")) {
-                        System.out.print("Enter value for filter (Gender: Male/Female OR Role:Administrator/Doctor/Pharmacist) OR Age: ");
+                        System.out.print("Enter value for filter: ");
                         value = scanner.nextLine();
                     }
                     adminCon.displayStaff(filterBy, value);
@@ -328,11 +328,11 @@ public class AdminMenu {
 
     
 
-     //public static void main(String[] args){
+    public static void main(String[] args){
 
-      //   AdminMenu adminMenu = new AdminMenu();  
-      //  adminMenu.showMenu();  
-    //}
+         AdminMenu adminMenu = new AdminMenu();  
+        adminMenu.showMenu();  
+    }
 
 
 }

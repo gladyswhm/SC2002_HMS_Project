@@ -59,12 +59,14 @@ public class AdminCon extends StaffCon{
 
     public void displayStaff(String filterType, String value) {
         System.out.println("Staff List:");
+        boolean printed = false;  // To track if any staff was printed after filtering
         for (staff staff : staffList) {
             boolean matches = true;
     
-            if (filterType.equals("role")) {
+            // Handle role filter
+            if (filterType.equalsIgnoreCase("role")) {
                 try {
-                    Role role = Role.valueOf(value);  // Directly convert value to Role enum
+                    Role role = Role.valueOf(value);  // Convert string to Role enum
                     if (!staff.getRole().equals(role)) {
                         matches = false;
                     }
@@ -74,9 +76,10 @@ public class AdminCon extends StaffCon{
                 }
             }
     
-            if (filterType.equals("gender")) {
+            // Handle gender filter
+            if (filterType.equalsIgnoreCase("gender")) {
                 try {
-                    Gender gender = Gender.valueOf(value);  // Directly convert value to Gender enum
+                    Gender gender = Gender.valueOf(value);  // Convert string to Gender enum
                     if (!staff.getGender().equals(gender)) {
                         matches = false;
                     }
@@ -86,9 +89,10 @@ public class AdminCon extends StaffCon{
                 }
             }
     
-            if (filterType.equals("age")) {
+            // Handle age filter
+            if (filterType.equalsIgnoreCase("age")) {
                 try {
-                    int age = Integer.parseInt(value);
+                    int age = Integer.parseInt(value);  // Parse age from string to integer
                     if (staff.getAge() != age) {
                         matches = false;
                     }
@@ -98,11 +102,23 @@ public class AdminCon extends StaffCon{
                 }
             }
     
+            // If all conditions match, print the staff member
             if (matches) {
                 System.out.println(staff);
+                printed = true;  // Indicate that at least one staff was printed
             }
         }
+    
+        if (!printed) {
+            System.out.println("No staff members found with the given filter criteria.");
+        }
     }
+    
+    
+
+
+    
+    
     
 
 
