@@ -335,29 +335,37 @@ public class Read {
     }
 
 
-
-    // Method to get the latest appointment ID by reading the last line of the CSV file
     public static int getLatestAppointmentID(String filepath) {
-        int latestId = 12005;  // Default starting ID (if file is empty or first read)
+        int latestId = 12111;  // Default starting ID if file is empty or first read
         String line = null;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
-            // Read through the file, line by line, to get the last line
+            //obtain last line
             while ((line = reader.readLine()) != null) {
-                // Continuously update line until the last one is reached
+                System.out.println("Reading line: " + line);  
             }
-            String[] fields = line.split(",");
-            latestId = Integer.parseInt(fields[0].trim()); // Assuming the ID is the first field
+
+            // checking
+            if (line != null && !line.trim().isEmpty()) {
+                String[] fields = line.split(",");
+                if (fields.length > 0) {
+                    try {
+                        latestId = Integer.parseInt(fields[0].trim());  
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error parsing ID: " + e.getMessage());
+                    }
+                }
+            } else {
+                System.out.println("File is empty or improperly formatted.");
+            }
 
         } catch (IOException e) {
-            // Handle file reading errors gracefully
             System.out.println("Error reading the file: " + e.getMessage());
         } catch (Exception e) {
-            // Catch any unexpected exceptions
             System.out.println("Unexpected error: " + e.getMessage());
         }
 
-        return latestId;  // Return the latest ID found or the default value if none found
+        return latestId;
     }
 
 

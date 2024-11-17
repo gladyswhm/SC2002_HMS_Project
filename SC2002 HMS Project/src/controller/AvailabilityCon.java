@@ -26,45 +26,23 @@ public class AvailabilityCon {
         this.date = date;
         this.timeSlot = timeSlot;
         this.status = status;
-        this.notes = notes; // Default
+        this.notes = notes; //default
     }
 
     public static void setAvailability(String doctorId, Scanner sc) {
-        id++;  // Increment the availability ID to avoid conflicts
+        id++;  
         System.out.println("Enter the date (DD/MM/YYYY): ");
         String newDate = sc.nextLine();
         System.out.println("Enter the time (HH:MM): ");
         String newTime = sc.nextLine();
 
-        // Load the current availability data from the CSV file
         List<appointment> availabilityList = Read.loadAppointments(AVAILABILITY_FILE_PATH);
 
-        // Add the new availability to the list
         availabilityList.add(new appointment(Integer.toString(id), doctorId, newDate, newTime, AvailStatus.Available, "nil"));
 
-        // Write the updated list back to the CSV file, without overwriting existing data
         Write.saveAppointments(availabilityList);
 
         System.out.println("Availability added for Doctor ID: " + doctorId);
     }
 
-    public String getDoctorId() {
-        return doctorID;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getTimeSlot() {
-        return timeSlot;
-    }
-
-    public AvailStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AvailStatus status) {
-        this.status = status;
-    }
 }

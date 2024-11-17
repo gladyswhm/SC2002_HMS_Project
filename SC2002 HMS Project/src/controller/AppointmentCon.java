@@ -18,7 +18,6 @@ public class AppointmentCon {
     private String timeSlot;   // HH:MM
     private AvailStatus status;     // Pending, Accepted, Declined, Completed (for last part)
     
-    private int appValue = Read.getLatestAppointmentID("data/Doctor_Availability.csv");
     // Constructor
     public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, AvailStatus status) {
         this.Appid=Appid;
