@@ -24,6 +24,11 @@ public class InventoryCon {
         {
             System.out.println("\nMedicine name: " + line.getName());
             System.out.println("Quantity: " + line.getStockLevel());
+
+            if (line.getStockLevel() <= line.getLowStockAlert())
+            {
+                System.out.println("---LOW STOCK ALERT!!---");
+            }
         }
     }
 
