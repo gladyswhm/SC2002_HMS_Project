@@ -9,11 +9,12 @@ import controller.InventoryCon;
 import controller.ReplenishCon;
 import entity.staff;
 
-public class PharmacistMenu {
+public class PharmacistMenu implements UserMenu{
 
-    public static void menu(String userID, List<staff> lines)
+    static Scanner sc = new Scanner(System.in);
+    
+    public void showMenu(String userID, List<staff> lines)
     {
-        Scanner sc = new Scanner(System.in);
         int menuChoice;
 
         do
@@ -57,6 +58,7 @@ public class PharmacistMenu {
                 
                 case 6:
                     // Logout
+                    System.out.println("Logging out...");
                     break;
             
                 default:

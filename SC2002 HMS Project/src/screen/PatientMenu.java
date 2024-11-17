@@ -11,8 +11,10 @@ import entity.patient;
 
 public class PatientMenu {
 
+    static Scanner scanner = new Scanner(System.in);
+
     public static void showMenu(String userID, List<patient> patientList) { 
-        Scanner scanner = new Scanner(System.in);
+        
         int choice;
 
         do {
@@ -78,7 +80,6 @@ public class PatientMenu {
     }
 
     private static void updatePersonalInfo(String userID) {
-        Scanner scanner = new Scanner(System.in);
     
         // Fetch the list of patients and find the matching patient using the userID
         List<patient> patients = PatientCon.getPatientList();
