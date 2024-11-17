@@ -32,8 +32,8 @@ public class AppointmentOutcomeCon {
     public static void viewOutcomeRecord()
     {
         System.out.println("\n\n----- View Appointment Outcome Record -----");
-        System.out.print("Enter Patient ID: ");
-        String patientID = sc.nextLine();
+        System.out.print("Enter Appointment ID: ");
+        String appID = sc.nextLine();
         
         // Used to check if there is such user
         boolean patientFound = false;
@@ -42,7 +42,7 @@ public class AppointmentOutcomeCon {
         for (appointmentoutcome line : appointmentOutcomeList)
         {
             // Check if there is such a patientID in the file
-            if (line.getPatientId().equals(patientID))         // If found match
+            if (line.getAppId().equals(appID))         // If found match
             {
                 System.out.println("\n\nAppointment ID: " + line.getAppId());
                 System.out.println("Patient's ID: " + line.getPatientId());
@@ -60,7 +60,7 @@ public class AppointmentOutcomeCon {
 
         if(patientFound == false)       // No such patient found
         {
-            System.out.println("There is no such Patient ID found.\n\n");
+            System.out.println("There is no such Appointment ID found.\n\n");
         }
     }
     
@@ -69,8 +69,8 @@ public class AppointmentOutcomeCon {
     public static void updateStatus()
     {
         System.out.println("\n\n----- Update Prescription Status -----");
-        System.out.print("Enter Patient ID: ");
-        String patientID = sc.nextLine();
+        System.out.print("Enter Appointment ID: ");
+        String appID = sc.nextLine();
         
         // Used to check if there is such user
         boolean patientFound = false;
@@ -79,7 +79,7 @@ public class AppointmentOutcomeCon {
         for (appointmentoutcome line : appointmentOutcomeList)
         {
             // Check if there is such a patientID in the file
-            if (line.getPatientId().equals(patientID))         // If found match
+            if (line.getAppId().equals(appID))         // If found match
             {
                 System.out.println("Key in new prescription status: ");
                 String newStatus = sc.nextLine();
@@ -95,10 +95,7 @@ public class AppointmentOutcomeCon {
 
         if(patientFound == false)       // No such patient found
         {
-            System.out.println("There is no such Patient ID found.\n\n");
+            System.out.println("There is no such Appointment ID found.\n\n");
         }
     }
-
-
-    
 }
