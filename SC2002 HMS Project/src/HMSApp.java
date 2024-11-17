@@ -42,7 +42,8 @@ public class HMSApp {
                     Role role = (Role) toBeUsed[0];
                     switch (role) {
                         case Doctor:
-                            DoctorMenu.displayDoctorMenu((String) toBeUsed[1], (List<staff>) toBeUsed[2]);
+                            UserMenu doctorMenu = new DoctorMenu(); // Polymorphism applied for Admin Menu    
+                            doctorMenu.showMenu((String) toBeUsed[1], (List<staff>) toBeUsed[2]);
                             break;
                         
                         case Pharmacist:

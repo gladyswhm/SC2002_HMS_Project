@@ -12,10 +12,10 @@ import controller.DoctorCon;
 import entity.medicalrecord;
 import entity.staff;
 
-public class DoctorMenu{
+public class DoctorMenu implements UserMenu{
     private static List<medicalrecord> medicalRecords = new ArrayList<>();
 
-    public static void displayDoctorMenu(String doctorID, List<staff> lines) {
+    public void showMenu(String doctorID, List<staff> lines) {
         Scanner sc = new Scanner(System.in);
         int option;
         do{
