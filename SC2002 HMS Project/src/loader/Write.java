@@ -62,7 +62,7 @@ public class Write {
     }
     
     public static void saveMedicalRecord(List<medicalrecord> records) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/medical_records.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Medical_Records.csv"))) {
             for (medicalrecord record : records) {
                 writer.write(record.getPatientId() + "," + record.getPatientName() + "," + record.getDiagnosis() + "," + record.getTreatmentPlan() + "," + String.join(";", record.getMedications()));
                 writer.newLine();

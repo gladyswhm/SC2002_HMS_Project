@@ -20,10 +20,10 @@ public class AvailabilityCon {
     public AvailabilityCon(int id, String doctorID, String date, String timeSlot, AvailStatus status, String notes) {
         this.id = id;
         this.doctorID = doctorID;
-        this.date = date;
+        this.date = date;   
         this.timeSlot = timeSlot;
         this.status = status;
-        this.notes = notes;
+        this.notes = notes; //default
     }
 
     public static void setAvailability(String doctorId, Scanner sc) {

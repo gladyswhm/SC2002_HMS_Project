@@ -133,7 +133,7 @@ public class Read {
                     String name = fields[3].trim();
                     String diag = fields[4].trim();
                     String treatment = fields[5].trim();
-                    List<String> meds = new ArrayList<>(Arrays.asList(fields[4].trim().split(";"))); // Split medications by semicolon
+                    List<String> meds = new ArrayList<>(Arrays.asList(fields[6].trim().split(";"))); // Split medications by semicolon
     
                     // Create a new MedicalRecord and set fields
                     medicalrecord record = new medicalrecord(patid, name);
@@ -177,8 +177,9 @@ public class Read {
                 String timeSlot = fields[3].trim();
                 String s = fields[4].trim();
                 AvailStatus status = AvailStatus.valueOf(s);
+                String notes = fields[5].trim();
                 
-                availabilityList.add(new AvailabilityCon(doctorId, date, timeSlot, status));
+                availabilityList.add(new AvailabilityCon(Integer.parseInt(id),doctorId, date, timeSlot, status, notes));
             }
         } catch (IOException e) {
             System.out.println("Error loading availability: " + e.getMessage());
@@ -220,14 +221,13 @@ public class Read {
 
                 String Appid = fields[0].trim();
                 String doctorId = fields[1].trim();
-                String patientId = fields[2].trim();
-                String date = fields[3].trim();
-                String timeSlot = fields[4].trim();
-                String s = fields[5].trim();
+                String date = fields[2].trim();
+                String timeSlot = fields[3].trim();
+                String s = fields[4].trim();
                 DoctorAppointmentStatus status = DoctorAppointmentStatus.valueOf(s);
+                String details = fields[5].trim();
 
-
-                appointmentList.add(new appointment(Appid,doctorId, patientId, date, timeSlot, status));
+                appointmentList.add(new appointment(Appid,doctorId, date, timeSlot, status, details));
             }
         } catch (IOException e) {
             System.out.println("Error loading appointment requests: " + e.getMessage());

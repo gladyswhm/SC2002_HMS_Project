@@ -41,6 +41,7 @@ public class DoctorMenu {
                     break;
                 case 2:
                     DoctorCon.addPatientMedicalRecords(doctorID, medicalRecords, sc);
+                    break;
                 case 3:
                     System.out.println("\n--- Update Patient Medical Record ---");
                     DoctorCon.displayAvailablePatientIds();

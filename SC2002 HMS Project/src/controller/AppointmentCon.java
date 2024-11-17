@@ -17,12 +17,12 @@ public class AppointmentCon {
     private String patientId;
     private String date;       // YYYY-MM-DD
     private String timeSlot;   // HH:MM
-    private DoctorAppointmentStatus status;     // Pending, Accepted, Declined, Completed (for last part)
+    private AvailStatus status;     // Pending, Accepted, Declined, Completed (for last part)
     
-    static List<appointment> appointmentList = Read.loadAppointments("data/Appointment_List.csv");
+    static List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
 
     // Constructor
-    public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, DoctorAppointmentStatus status) {
+    public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, AvailStatus status) {
         this.Appid=Appid;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -151,7 +151,7 @@ public class AppointmentCon {
         System.out.println("--- Upcoming Appointments for Doctor ID: " + doctorId + " ---");
 
         for (appointment appointment : appointmentList) {
-            if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus().equals("Accepted")) {
+            if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus().equals("Confirmed")) {
                 System.out.println("Patient ID: " + appointment.getPatientId() + ", Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
             }
         }

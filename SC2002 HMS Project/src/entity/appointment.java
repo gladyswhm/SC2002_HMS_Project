@@ -9,15 +9,15 @@ public class appointment {
     private static String date;
     private static String time;
     private static DoctorAppointmentStatus status;
+    private static String details;
 
-    public appointment(String Appid, String DoctorID, String PatientID, String date, String time, DoctorAppointmentStatus status){
+    public appointment(String Appid, String DoctorID, String date, String time, DoctorAppointmentStatus status, String details){
         this.Appid = Appid;
         this.DoctorID = DoctorID;
-        this.PatientID = PatientID;
         this.date = date;
         this.time = time;
         this.status = status;
-
+        this.details = details;
     }
 
     public static String geteAppID() {
