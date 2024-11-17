@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import account_manager.ChangePassword;
 import controller.AvailabilityCon;
 import controller.AppointmentCon;
 import controller.DoctorCon;
 import entity.medicalrecord;
+import entity.staff;
 
 public class DoctorMenu {
     private static List<medicalrecord> medicalRecords = new ArrayList<>();
 
-    public static void displayDoctorMenu(String doctorID) {
+    public static void displayDoctorMenu(String doctorID, List<staff> lines) {
         Scanner sc = new Scanner(System.in);
         int option;
         do{
@@ -24,7 +26,8 @@ public class DoctorMenu {
             System.out.println("5. Accept or Decline Appointment Requests");
             System.out.println("6. View Upcoming Appointments");
             System.out.println("7. Record Appointment Outcome");
-            System.out.println("8. Logout");
+            System.out.println("8. Change Password");
+            System.out.println("9. Logout");
             System.out.print("Enter your choice: ");
     
             option = sc.nextInt();
@@ -60,13 +63,17 @@ public class DoctorMenu {
                     AppointmentCon.AppointmentOutcomeRecord(doctorID, sc);
                     break;
                 case 8:
+                    // Change Password
+                    ChangePassword.changeStaffPassword(doctorID, lines);
+                    break;
+                case 9:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice, please try again.");
             }
 
-        }while(option!=8);
+        }while(option!=9);
     }
     //public static void main(String[] args){
 

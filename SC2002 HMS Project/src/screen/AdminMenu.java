@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import account_manager.ChangePassword;
 import controller.AdminCon;
 import controller.InventoryCon;
 import controller.ReplenishCon;
@@ -14,11 +15,12 @@ import entity.appointmentoutcome;
 import entity.medicalrecord;
 import entity.medicine;
 import entity.replenish;
+import entity.staff;
 import enum_class.*;
 
 public class AdminMenu {
 
-    public void showMenu() { 
+    public static void showMenu(String userID, List<staff> lines) { 
         Scanner scanner = new Scanner(System.in);
         int choice;
 
@@ -28,7 +30,8 @@ public class AdminMenu {
             System.out.println("2. View Appointments details");
             System.out.println("3. View and Manage Medication Inventory");
             System.out.println("4. Approve Replenishment Requests");
-            System.out.println("5. Logout");
+            System.out.println("5. Change Password");
+            System.out.println("6. Logout");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline
@@ -47,18 +50,22 @@ public class AdminMenu {
                 	approveReplenishmentRequests();
                     break;
                 case 5:
+                    // Change Password
+                    ChangePassword.changeStaffPassword(userID, lines);
+                    break;
+                case 6:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 6);
 
         
     }
     
-    private void manageStaff() {
+    private static void manageStaff() {
         
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -171,7 +178,7 @@ public class AdminMenu {
     }
     
     
-    private void manageInventory() { 
+    private static void manageInventory() { 
         InventoryCon inventoryCon = new InventoryCon();
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -241,7 +248,7 @@ public class AdminMenu {
     }
 
 
-    private void approveReplenishmentRequests() {
+    private static void approveReplenishmentRequests() {
         Scanner scanner = new Scanner(System.in);
     
         ReplenishCon replenishCon = new ReplenishCon();
@@ -277,7 +284,7 @@ public class AdminMenu {
         System.out.println("Replenishment requests have been processed.");
     }
     
-    private void displayAppointments() {
+    private static void displayAppointments() {
     Scanner scanner = new Scanner(System.in);
     int choice;
 
@@ -328,11 +335,11 @@ public class AdminMenu {
 
     
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
 
          AdminMenu adminMenu = new AdminMenu();  
         adminMenu.showMenu();  
-    }
+    }*/
 
 
 }

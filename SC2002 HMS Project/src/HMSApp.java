@@ -2,6 +2,8 @@ import java.util.List;
 import java.util.Scanner;
 import entity.*;
 import enum_class.*;
+import screen.AdminMenu;
+import screen.DoctorMenu;
 import screen.PatientMenu;
 import screen.PharmacistMenu;
 import account_manager.Login;
@@ -39,7 +41,7 @@ public class HMSApp {
                     Role role = (Role) toBeUsed[0];
                     switch (role) {
                         case Doctor:
-                            
+                            DoctorMenu.displayDoctorMenu((String) toBeUsed[1], (List<staff>) toBeUsed[2]);
                             break;
                         
                         case Pharmacist:
@@ -47,7 +49,7 @@ public class HMSApp {
                             break;
 
                         case Administrator:
-                            
+                            AdminMenu.showMenu((String) toBeUsed[1], (List<staff>) toBeUsed[2]);
                             break;
                     
                         default:
