@@ -19,9 +19,10 @@ import entity.replenish;
 import entity.staff;
 import enum_class.*;
 
-public class AdminMenu {
+public class AdminMenu implements UserMenu{
 
-    public static void showMenu(String userID, List<staff> lines) { 
+    public void showMenu(String userID, List<staff> lines) { 
+        List<staff> staffList = (List<staff>) lines;
         Scanner scanner = new Scanner(System.in);
         int choice;
 
@@ -359,11 +360,11 @@ public class AdminMenu {
 
     
 
-    public static void main(String[] args){
+    // public static void main(String[] args){
 
-         List<staff> staffList = new ArrayList<>(); // Create or populate the list as needed
-        AdminMenu.showMenu("A001", staffList);
-    }
+    //      List<staff> staffList = new ArrayList<>(); // Create or populate the list as needed
+    //     AdminMenu.showMenu("A001", staffList);
+    // }
 
 
 }

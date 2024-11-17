@@ -11,7 +11,7 @@ import controller.DoctorCon;
 import entity.medicalrecord;
 import entity.staff;
 
-public class DoctorMenu {
+public class DoctorMenu{
     private static List<medicalrecord> medicalRecords = new ArrayList<>();
 
     public static void displayDoctorMenu(String doctorID, List<staff> lines) {
