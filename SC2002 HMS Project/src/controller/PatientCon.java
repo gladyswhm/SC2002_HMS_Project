@@ -8,7 +8,7 @@ import loader.Write;
 import java.util.Scanner;
 
 public class PatientCon {
-    static List<patient> patientList = Read.readPatientList("SC2002 HMS Project/data/Patient_List.csv");
+    static List<patient> patientList = Read.readPatientList("data/Patient_List.csv");
 
     public static List<patient> getPatientList() {
         return patientList;
