@@ -324,14 +324,7 @@ public class AdminMenu implements UserMenu{
 
         switch (choice) {
             case 1:
-                List<appointment> appointments = AppointmentCon.getAppointmentList();
-                if (appointments.isEmpty()) {
-                    System.out.println("No appointments found.");
-                } else {
-                    for (appointment apt : appointments) {
-                        System.out.println(apt);
-                    }
-                }
+            AppointmentCon.displayAppointmentList();
                 break;
 
             case 2:

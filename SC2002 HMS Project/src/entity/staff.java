@@ -30,6 +30,6 @@ public class staff extends user{
 
     @Override
     public String toString() {
-        return "Staff [staffId=" + getUserID() + ", password=" + getPassword() + ", name=" + getName() + ", gender=" + getGender() + ", role=" + role + ", age=" + age + "]";
+        return "[staffId=" + getUserID() + ", password=" + getPassword() + ", name=" + getName() + ", gender=" + getGender() + ", role=" + role + ", age=" + age + "]";
     }
 }

@@ -150,9 +150,31 @@ public class AppointmentCon {
     }
 
     //admin display appointment list
-    public static List<appointment> getAppointmentList() {
-        return Read.loadAppointments("data/Doctor_Availability.csv");
+    public static void displayAppointmentList() {
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        if (appointmentList.isEmpty()) {
+            System.out.println("No appointments found.");
+            return;
+        }
+    
+        int idWidth = 15;
+        int doctorIdWidth = 10;
+        int dateWidth = 15;
+        int timeSlotWidth = 15;
+        int statusWidth = 10;
+        int detailsWidth = 30;
+
+        System.out.println(String.format("%-" + idWidth + "s%-" + doctorIdWidth + "s%-" + dateWidth + "s%-" + timeSlotWidth + "s%-" + statusWidth + "s%-" + detailsWidth + "s",
+                "Appointment ID", "Doctor ID", "Date", "Time Slot", "Status", "Details"));
+        System.out.println("----------------------------------------------------------------------------");
+ 
+        for (appointment app : appointmentList) {
+            System.out.println(String.format("%-" + idWidth + "s%-" + doctorIdWidth + "s%-" + dateWidth + "s%-" + timeSlotWidth + "s%-" + statusWidth + "s%-" + detailsWidth + "s",
+                    app.getAppID(), app.getDoctorId(), app.getDate(), app.getTimeSlot(), app.getStatus(), app.getDetails()));
+        }
+        System.out.println("--------------------------");
     }
+    
 
    
 }

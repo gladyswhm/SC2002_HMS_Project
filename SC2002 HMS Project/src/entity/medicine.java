@@ -22,6 +22,6 @@ public class medicine {
 
     @Override
     public String toString() {
-        return "Medicine[name=" + name + ", stockLevel=" + stockLevel + ", lowStockAlert=" + lowStockAlert + "]";
+        return "[Medicine name=" + name + ", stockLevel=" + stockLevel + ", lowStockAlert=" + lowStockAlert + "]";
     }
 }
