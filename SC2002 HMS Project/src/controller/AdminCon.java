@@ -12,7 +12,7 @@ import enum_class.*;
 import loader.Read;
 import loader.Write;
 
-public class AdminCon extends StaffCon{
+public class AdminCon implements StaffCon{
     List<staff> staffList = Read.loadStaffList("data/Staff_List.csv");
 
     public void addStaff(String staffId, String password, String name, Gender gender, Role role, int age) {

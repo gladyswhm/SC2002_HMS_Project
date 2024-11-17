@@ -1,5 +1,6 @@
 package screen;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -162,7 +163,7 @@ public class AdminMenu {
                     String filterBy = scanner.nextLine();
                     String value = "";
                     if (!filterBy.equalsIgnoreCase("all")) {
-                        System.out.print("Enter value for filter: ");
+                        System.out.print("Enter value for filter (Case sensitive): ");
                         value = scanner.nextLine();
                     }
                     adminCon.displayStaff(filterBy, value);
@@ -210,15 +211,30 @@ public class AdminMenu {
                 case 2: // Update Stock Level
                     System.out.print("Enter medicine name to update stock level: ");
                     String medNameToUpdate = scanner.nextLine();
-                    System.out.print("Enter new stock level: ");
-                    int newStockLevel = scanner.nextInt();
-                    inventoryCon.updateStockLevel(medNameToUpdate, newStockLevel);
+
+                    // Check if medicine exists
+                    medicine medToUpdate = inventoryCon.findMedicineByName(medNameToUpdate);
+                    if (medToUpdate == null) {
+                        System.out.println("Error: Medicine with name '" + medNameToUpdate + "' does not exist in the inventory.");
+                    } else {
+                        System.out.print("Enter new stock level: ");
+                        int newStockLevel = scanner.nextInt();
+                        inventoryCon.updateStockLevel(medNameToUpdate, newStockLevel);
+                        System.out.println("Stock level updated successfully for " + medNameToUpdate + ".");
+                    }
                     break;
 
                 case 3: // Remove Medicine
                     System.out.print("Enter medicine name to remove: ");
                     String medNameToRemove = scanner.nextLine();
-                    inventoryCon.removeMedicine(medNameToRemove);
+                    // Check if medicine exists
+                    medicine medToRemove = inventoryCon.findMedicineByName(medNameToRemove);
+                    if (medToRemove == null) {
+                        System.out.println("Error: Medicine with name '" + medNameToRemove + "' does not exist in the inventory.");
+                    } else {
+                        inventoryCon.removeMedicine(medNameToRemove);
+                        System.out.println("Medicine '" + medNameToRemove + "' has been successfully removed from the inventory.");
+                    }
                     break;
 
                 case 4: // View Medicines
@@ -231,9 +247,17 @@ public class AdminMenu {
                 case 5: // Update Low Stock Alert
                     System.out.print("Enter medicine name to update low stock alert: ");
                     String medNameToUpdateAlert = scanner.nextLine();
-                    System.out.print("Enter new low stock alert level: ");
-                    int newLowStockAlert = scanner.nextInt();
-                    inventoryCon.updateLowStockAlert(medNameToUpdateAlert, newLowStockAlert);
+
+                    // Check if medicine exists
+                    medicine medForAlert = inventoryCon.findMedicineByName(medNameToUpdateAlert);
+                    if (medForAlert == null) {
+                        System.out.println("Error: Medicine with name '" + medNameToUpdateAlert + "' does not exist in the inventory.");
+                    } else {
+                        System.out.print("Enter new low stock alert level: ");
+                        int newLowStockAlert = scanner.nextInt();
+                        inventoryCon.updateLowStockAlert(medNameToUpdateAlert, newLowStockAlert);
+                        System.out.println("Low stock alert updated successfully for " + medNameToUpdateAlert + ".");
+                    }
                     break;
 
                 case 6: // Exit
@@ -335,11 +359,11 @@ public class AdminMenu {
 
     
 
-    /*public static void main(String[] args){
+    public static void main(String[] args){
 
-         AdminMenu adminMenu = new AdminMenu();  
-        adminMenu.showMenu();  
-    }*/
+         List<staff> staffList = new ArrayList<>(); // Create or populate the list as needed
+        AdminMenu.showMenu("A001", staffList);
+    }
 
 
 }
