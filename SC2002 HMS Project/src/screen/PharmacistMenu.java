@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import account_manager.ChangePassword;
 import controller.AppointmentOutcomeCon;
+import controller.InventoryCon;
 import entity.staff;
 
 public class PharmacistMenu {
@@ -17,12 +18,12 @@ public class PharmacistMenu {
         do
         {
             System.out.println("\n\nPharmacist Menu:");
-            System.out.println("\t1: View Appointment Outcome Record");
-            System.out.println("\t2: Update Prescription Status");
-            System.out.println("\t3: View Medication Inventory");
-            System.out.println("\t4: Submit Replenishment Request");
-            System.out.println("\t5: Change Password");
-            System.out.println("\t6: Logout");
+            System.out.println("1. View Appointment Outcome Record");
+            System.out.println("2. Update Prescription Status");
+            System.out.println("3. View Medication Inventory");
+            System.out.println("4. Submit Replenishment Request");
+            System.out.println("5. Change Password");
+            System.out.println("6. Logout");
 
             System.out.print("Enter your choice: ");
             menuChoice = sc.nextInt();
@@ -40,7 +41,7 @@ public class PharmacistMenu {
 
                 case 3:
                     // View Medication Inventory
-                    //Pharmacist.viewInventory();
+                    InventoryCon.viewInventory();
                     break;
 
                 case 4:

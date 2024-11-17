@@ -2,16 +2,31 @@ package controller;
 
 import java.util.List;
 
+import entity.appointmentoutcome;
 import entity.medicine;
 import loader.Read;
 import loader.Write;
 
 public class InventoryCon {
-    List<medicine> medicineList = Read.loadMedicineList("data/Medicine_List.csv");
+    static List<medicine> medicineList = Read.loadMedicineList("data/Medicine_List.csv");
 
     public List<medicine> getMedicineList() {
         return medicineList;
     }
+
+    // Pharmacist 3: View Medication Inventory
+    public static void viewInventory()
+    {
+        System.out.println("\n\n----- View Medication Inventory -----");
+
+        // Traverse each line from the file
+        for (medicine line : medicineList)
+        {
+            System.out.println("\nMedicine name: " + line.getName());
+            System.out.println("Quantity: " + line.getStockLevel());
+        }
+    }
+
 
     public void addMedicine(medicine medicine) {
         medicineList.add(medicine); 
