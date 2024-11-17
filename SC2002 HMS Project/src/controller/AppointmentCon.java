@@ -19,7 +19,7 @@ public class AppointmentCon {
     private String timeSlot;   // HH:MM
     private DoctorAppointmentStatus status;     // Pending, Accepted, Declined, Completed (for last part)
     
-    static List<appointment> appointmentList = Read.loadAppointments("src/data/Appointment_List.csv");
+    static List<appointment> appointmentList = Read.loadAppointments("data/Appointment_List.csv");
 
     // Constructor
     public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, DoctorAppointmentStatus status) {
