@@ -28,6 +28,22 @@ public class InventoryCon {
     }
 
 
+    // Update stock level after dispense
+    public static void dispensedMedicine(String medName, int dispensedAmt)
+    {
+        // Traverse each line from the file
+        for (medicine line : medicineList)
+        {
+            if(line.getName().equals(medName))
+            {
+                int newAmt = line.getStockLevel() - dispensedAmt;
+                line.setStockLevel(newAmt);
+                Write.saveMedicineListToCSV(medicineList);
+            }
+        }
+    }
+
+
     public void addMedicine(medicine medicine) {
         medicineList.add(medicine); 
         Write.saveMedicineListToCSV(medicineList); 
@@ -90,5 +106,4 @@ public class InventoryCon {
             System.out.println("Medicine not found in inventory: " + medicineName);
         }
     }
-    
 }

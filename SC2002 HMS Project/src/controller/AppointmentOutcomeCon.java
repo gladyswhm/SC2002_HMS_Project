@@ -39,8 +39,8 @@ public class AppointmentOutcomeCon {
         System.out.print("Enter Appointment ID: ");
         String appID = sc.nextLine();
         
-        // Used to check if there is such user
-        boolean patientFound = false;
+        // Used to check if there is such an appointment
+        boolean aptFound = false;
 
         // Traverse each line from the file
         for (appointmentoutcome line : appointmentOutcomeList)
@@ -57,12 +57,12 @@ public class AppointmentOutcomeCon {
                 System.out.println("Amount: " + line.getAmount());
                 System.out.println("Prescription status: " + line.getStatus());
 
-                patientFound = true;
+                aptFound = true;
                 break;
             }     
         }
 
-        if(patientFound == false)       // No such patient found
+        if(aptFound == false)       // No such appointment found
         {
             System.out.println("There is no such Appointment ID found.\n\n");
         }
@@ -76,28 +76,47 @@ public class AppointmentOutcomeCon {
         System.out.print("Enter Appointment ID: ");
         String appID = sc.nextLine();
         
-        // Used to check if there is such user
-        boolean patientFound = false;
+        // Used to check if there is such an appointment
+        boolean aptFound = false;
 
         // Traverse each line from the file
         for (appointmentoutcome line : appointmentOutcomeList)
         {
-            // Check if there is such a patientID in the file
+            // Check if there is such a aptID in the file
             if (line.getAppId().equals(appID))         // If found match
             {
-                System.out.println("Key in new prescription status: ");
-                String newStatus = sc.nextLine();
-
-                line.setStatus(newStatus);
-                Write.saveAppointmentOutcome(appointmentOutcomeList);
+                System.out.println("Would you like to change prescription status to 'dispensed'? (Y/N)");
+                String choice = sc.nextLine();
                 
-                System.out.println("Prescription Status changed successfully.\n\n");
-                patientFound = true;
+                if (choice.equals("Y"))
+                {
+                    if (!(line.getStatus().equals("Dispensed")))
+                    {
+                        String newStatus = "Dispensed";
+                        line.setStatus(newStatus);
+                        Write.saveAppointmentOutcome(appointmentOutcomeList);
+
+                        // Update stock level in Medicine_list
+                        InventoryCon.dispensedMedicine(line.getMedication(), Integer.parseInt(line.getAmount()));
+                        System.out.println("Prescription Status changed successfully.\n\n");
+                    }
+                    else
+                    {
+                        System.out.println("Medication have already been dispensed.\n\n");
+                    }
+                }
+
+                else if (choice.equals("N"))
+                {
+                    System.out.println("Prescription Status not changed.\n\n");
+                }
+                
+                aptFound = true;
                 break;
             }     
         }
 
-        if(patientFound == false)       // No such patient found
+        if(aptFound == false)       // No such appointment found
         {
             System.out.println("There is no such Appointment ID found.\n\n");
         }
@@ -125,9 +144,5 @@ public class AppointmentOutcomeCon {
 
         // Write new entry to Replenishment_List CSV file
         Write.saveAppointmentOutcome(appointmentOutcomeList);
-
-
-
     }
-
 }
