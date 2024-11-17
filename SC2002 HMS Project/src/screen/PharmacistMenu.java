@@ -6,6 +6,7 @@ import java.util.Scanner;
 import account_manager.ChangePassword;
 import controller.AppointmentOutcomeCon;
 import controller.InventoryCon;
+import controller.ReplenishCon;
 import entity.staff;
 
 public class PharmacistMenu {
@@ -46,7 +47,7 @@ public class PharmacistMenu {
 
                 case 4:
                     // Submit Replenishment Request
-                    //Pharmacist.replenishmentRequest();
+                    ReplenishCon.replenishmentRequest();
                     break;
 
                 case 5:
