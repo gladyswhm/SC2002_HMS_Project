@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 
 import entity.appointmentoutcome;
 import entity.patient;
+import enum_class.AvailStatus;
 import loader.Read;
 import loader.Write;
 
 public class AppointmentOutcomeCon {
 
     static Scanner sc = new Scanner(System.in);
+    private static int OUTid = Read.getOutcomeID("data/AppointmentOutcome_List.csv");
 
     static List<appointmentoutcome> appointmentOutcomeList = Read.loadAppointmentsOutcome("data/AppointmentOutcome_List.csv");
 
@@ -97,5 +99,23 @@ public class AppointmentOutcomeCon {
         {
             System.out.println("There is no such Appointment ID found.\n\n");
         }
+    }
+
+    //for appointment outcome record (option 7)
+    public static void AppointmentOutcomeRecord(String doctorId, Scanner sc){
+        OUTid++;
+        AppointmentCon.displayUpcomingAppointments(doctorId);
+        System.out.println("\n--- Recording Appointment Outcome ---");
+        System.out.println("Enter the patientID: ");
+        String aptID = sc.nextLine();
+        System.out.println("Enter the date of appointment: ");
+        String aptDate = sc.nextLine();
+        System.out.println("Enter the type of service provided: ");
+        String aptType = sc.nextLine();
+        System.out.println("Enter the prescribed medications: ");
+        String aptMedications = sc.nextLine();
+
+        //upload into csv file
+        Write.saveAppointmentOutcomeRecord(Integer.toString(OUTid), aptID, doctorId, aptDate, aptType, aptMedications, "Pending");
     }
 }

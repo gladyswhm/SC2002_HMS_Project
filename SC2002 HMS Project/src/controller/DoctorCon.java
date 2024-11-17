@@ -11,9 +11,7 @@ import loader.Write;
 
 public class DoctorCon {
     static List<AvailabilityCon> avail = Read.loadAvailability("data/Doctor_Availability.csv");
-
-    static int value = 2004; //hold current value
-
+ 
     //option 1: view medical record
     public static void displayMedicalRecords(){
         List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
@@ -30,6 +28,7 @@ public class DoctorCon {
     }
 
     public static void addPatientMedicalRecords(String doctorID, List<medicalrecord> medicalRecords, Scanner sc){
+        int value = Read.getOutcomeID("data/Medical_Records.csv");
         value++;
 
         System.out.println("Enter Patient ID: ");
@@ -109,7 +108,7 @@ public class DoctorCon {
 
         System.out.println("Available Patient IDs:");
         for (medicalrecord record : records) {
-            System.out.println("Patient ID: " + record.getPatientId() + ", Name: " + record.getPatientName());
+            System.out.println("ID: " + record.getMRID() +"Patient ID: " + record.getPatientId() + ", Name: " + record.getPatientName());
         }
         System.out.println("------------------------------------");
     }

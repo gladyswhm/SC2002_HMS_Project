@@ -7,6 +7,7 @@ import java.util.Scanner;
 import account_manager.ChangePassword;
 import controller.AvailabilityCon;
 import controller.AppointmentCon;
+import controller.AppointmentOutcomeCon;
 import controller.DoctorCon;
 import entity.medicalrecord;
 import entity.staff;
@@ -49,7 +50,7 @@ public class DoctorMenu{
                     break;
                 case 4:
                     System.out.println("\n--- Viewing Personal Schedule ---");
-                    AppointmentCon.displayUpcomingAppointments(doctorID);
+                    AppointmentCon.displayAllDoctor(doctorID);
                     break;
                 case 5:
                     System.out.println("\n--- Set Availability ---");
@@ -64,7 +65,7 @@ public class DoctorMenu{
                     AppointmentCon.displayUpcomingAppointments(doctorID);//view upcoming appointments
                     break;
                 case 8:
-                    AppointmentCon.AppointmentOutcomeRecord(doctorID, sc);
+                    AppointmentOutcomeCon.AppointmentOutcomeRecord(doctorID, sc);
                     break;
                 case 9:
                     // Change Password

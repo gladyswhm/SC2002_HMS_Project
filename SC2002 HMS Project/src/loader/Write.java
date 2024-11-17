@@ -96,9 +96,9 @@ public class Write {
         }
     }
 
-    public static void saveAppointmentOutcomeRecord(String doctorId, String aptDate, String aptID, String aptType, String aptMedications, AvailStatus aptStatus) {
+    public static void saveAppointmentOutcomeRecord(String aptID, String patID, String doctorId, String aptDate, String aptType, String aptMedications, String aptStatus) {
     
-        String outcomeRecord = doctorId + "," + aptDate + "," + aptID + "," + aptType + "," + aptMedications + "," + aptStatus;
+        String outcomeRecord = aptID + "," + patID + "," + doctorId + "," + aptDate + "," + aptType + "," + aptMedications + "," + aptStatus;
     
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/AppointmentOutcome_List", true))) {
             writer.write(outcomeRecord);  

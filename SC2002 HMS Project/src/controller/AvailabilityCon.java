@@ -11,8 +11,7 @@ import loader.Write;
 public class AvailabilityCon {
     private static final String AVAILABILITY_FILE_PATH = "data/Doctor_Availability.csv";
 
-    private static int id = Read.getLatestAppointmentID("data/Doctor_Availability.csv"); // Availability ID
-
+    private int id;
     private String doctorID;
     private String date; // YYYY-MM-DD
     private String timeSlot; // HH:MM
@@ -30,6 +29,7 @@ public class AvailabilityCon {
     }
 
     public static void setAvailability(String doctorId, Scanner sc) {
+        int id = Read.getOutcomeID("data/Doctor_Availability.csv"); // Availability ID
         id++;  
         System.out.println("Enter the date (DD/MM/YYYY): ");
         String newDate = sc.nextLine();

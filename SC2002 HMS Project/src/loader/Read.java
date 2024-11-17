@@ -334,40 +334,33 @@ public class Read {
         return replenishList;
     }
 
-
-    public static int getLatestAppointmentID(String filepath) {
-        int latestId = 12111;  // Default starting ID if file is empty or first read
+    
+    public static int getOutcomeID(String filepath) {
+        int latestId = 13113;  //for testing
         String line = null;
+        String lastnonempty = null;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
-            //obtain last line
             while ((line = reader.readLine()) != null) {
-                System.out.println("Reading line: " + line);  
-            }
-
-            // checking
-            if (line != null && !line.trim().isEmpty()) {
-                String[] fields = line.split(",");
-                if (fields.length > 0) {
-                    try {
-                        latestId = Integer.parseInt(fields[0].trim());  
-                    } catch (NumberFormatException e) {
-                        System.out.println("Error parsing ID: " + e.getMessage());
-                    }
+                if(!line.trim().isEmpty()){
+                    lastnonempty = line;
                 }
-            } else {
-                System.out.println("File is empty or improperly formatted.");
             }
+            
+            String[] fields = lastnonempty.split(",");
+            latestId = Integer.parseInt(fields[0].trim());
+
 
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Error parsing ID: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected error: " + e.getMessage());
         }
 
         return latestId;
+    
     }
 
-
 }
-

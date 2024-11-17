@@ -58,25 +58,6 @@ public class AppointmentCon {
         System.out.println("\n--- Appointment status has been updated ---");
     }
 
-    //for appointment outcome record (option 7)
-    public static void AppointmentOutcomeRecord(String doctorId, Scanner sc){
-        displayUpcomingAppointments(doctorId);
-        System.out.println("\n--- Recording Appointment Outcome ---");
-        System.out.println("Enter the patientID: ");
-        String aptID = sc.nextLine();
-        System.out.println("Enter the date of appointment: ");
-        String aptDate = sc.nextLine();
-        System.out.println("Enter the type of service provided: ");
-        String aptType = sc.nextLine();
-        System.out.println("Enter the prescribed medications: ");
-        String aptMedications = sc.nextLine();
-        System.out.println("Enter the status: ");
-        String aptStatus = sc.nextLine();
-        AvailStatus status = AvailStatus.valueOf(aptStatus);
-
-        //upload into csv file
-        Write.saveAppointmentOutcomeRecord(doctorId, aptDate, aptID, aptType, aptMedications, status);
-    }
 
     public static void acceptAppointment(String doctorId, String appID) {
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
@@ -144,6 +125,18 @@ public class AppointmentCon {
         for (appointment appointment : appointmentList) {
             if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus() == AvailStatus.Confirmed) {
                 System.out.println("Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot() + ", Patient ID: " + appointment.getDetails());
+            }
+        }
+        System.out.println("------------------------------------");
+    }
+
+    public static void displayAllDoctor(String doctorId) {
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        System.out.println("--- Appointments for Doctor ID: " + doctorId + " ---");
+
+        for (appointment appointment : appointmentList) {
+            if (appointment.getDoctorId().equals(doctorId)) {
+                System.out.println("Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot() + ", Patient ID: " + appointment.getDetails() + ", Status: " + appointment.getStatus());
             }
         }
         System.out.println("------------------------------------");
