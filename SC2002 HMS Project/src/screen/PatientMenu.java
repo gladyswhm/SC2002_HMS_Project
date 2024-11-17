@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import account_manager.ChangePassword;
+import controller.AppointmentCon;
 import controller.AppointmentOutcomeCon;
 import controller.PatientCon;
 import entity.appointmentoutcome;
@@ -55,7 +56,7 @@ public class PatientMenu {
                     PatientCon.cancelAppointment(userID);
                     break;
                 case 7:
-                    viewScheduledAppointments();
+                    viewScheduledAppointments(userID);
                     break;
                 case 8:
                     viewPastAppointmentOutcomes(userID);
@@ -113,7 +114,7 @@ public class PatientMenu {
 
     private static void viewAvailableAppointments() {
         System.out.println("Displaying available appointment slots...");
-
+        AppointmentCon.displayAvailableAppointmentList();
     }
 
     private static void scheduleAppointment() {
@@ -130,8 +131,9 @@ public class PatientMenu {
 
     }
 
-    private static void viewScheduledAppointments() {
-        System.out.println("Displaying scheduled appointments...");
+    private static void viewScheduledAppointments(String userID) {
+        System.out.println("Displaying your scheduled appointments...");
+        AppointmentCon.displayScheduledAppointments(userID);
 
     }
 

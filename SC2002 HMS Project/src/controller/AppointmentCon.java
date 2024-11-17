@@ -174,23 +174,71 @@ public class AppointmentCon {
             return;
         }
     
-        int idWidth = 15;
-        int doctorIdWidth = 10;
-        int dateWidth = 15;
-        int timeSlotWidth = 15;
-        int statusWidth = 10;
-        int detailsWidth = 30;
-
-        System.out.println(String.format("%-" + idWidth + "s%-" + doctorIdWidth + "s%-" + dateWidth + "s%-" + timeSlotWidth + "s%-" + statusWidth + "s%-" + detailsWidth + "s",
-                "Appointment ID", "Doctor ID", "Date", "Time Slot", "Status", "Details"));
-        System.out.println("----------------------------------------------------------------------------");
- 
         for (appointment app : appointmentList) {
-            System.out.println(String.format("%-" + idWidth + "s%-" + doctorIdWidth + "s%-" + dateWidth + "s%-" + timeSlotWidth + "s%-" + statusWidth + "s%-" + detailsWidth + "s",
-                    app.getAppID(), app.getDoctorId(), app.getDate(), app.getTimeSlot(), app.getStatus(), app.getDetails()));
+            System.out.println("Appointment ID: " + app.getAppID() + ", Doctor ID: " + app.getDoctorId() + ", Date: " + app.getDate() + ", Time Slot: " + app.getTimeSlot() + ", Status: " + app.getStatus() + ", Details: " + app.getDetails());
         }
-        System.out.println("--------------------------");
     }
+    
+    
+    
+
+    //patient to print available slots
+    public static void displayAvailableAppointmentList() {
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        if (appointmentList.isEmpty()) {
+            System.out.println("No available appointments found.");
+            return;
+        }
+    
+        boolean foundAvailable = false; 
+    
+        for (appointment app : appointmentList) {
+            if (app.getStatus() == AvailStatus.Available) { 
+                System.out.println("Appointment ID: " + app.getAppID() + ", Doctor ID: " + app.getDoctorId() + 
+                                   ", Date: " + app.getDate() + ", Time Slot: " + app.getTimeSlot() + 
+                                   ", Status: " + app.getStatus());
+                foundAvailable = true; 
+            }
+        }
+    
+        if (!foundAvailable) {
+            System.out.println("No available appointments.");
+        }
+    }
+    
+    
+
+
+    //patient view scheduled appointment
+    public static void displayScheduledAppointments(String userID) {
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        if (appointmentList.isEmpty()) {
+            System.out.println("No appointments found.");
+            return;
+        }
+    
+        boolean foundScheduled = false; 
+    
+        for (appointment app : appointmentList) {
+            if (app.getDetails().contains(userID) && 
+                (app.getStatus() == AvailStatus.Confirmed || app.getStatus() == AvailStatus.Pending)) {
+                System.out.println("Appointment ID: " + app.getAppID() + 
+                                   ", Doctor ID: " + app.getDoctorId() + 
+                                   ", Date: " + app.getDate() + 
+                                   ", Time Slot: " + app.getTimeSlot() + 
+                                   ", Status: " + app.getStatus());
+                foundScheduled = true; 
+            }
+        }
+    
+        if (!foundScheduled) {
+            System.out.println("No scheduled appointments for user ID: " + userID);
+        }
+    }
+    
+    
+    
+    
     
 
    
