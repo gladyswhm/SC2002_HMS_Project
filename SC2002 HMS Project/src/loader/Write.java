@@ -96,18 +96,6 @@ public class Write {
         }
     }
 
-    public static void saveAppointmentOutcomeRecord(String aptID, String patID, String doctorId, String aptDate, String aptType, String aptMedications, String aptStatus) {
-    
-        String outcomeRecord = aptID + "," + patID + "," + doctorId + "," + aptDate + "," + aptType + "," + aptMedications + "," + aptStatus;
-    
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/AppointmentOutcome_List", true))) {
-            writer.write(outcomeRecord);  
-            writer.newLine();    
-        } catch (IOException e) {
-            System.out.println("Error saving appointment outcome record: " + e.getMessage());
-        }
-    }
-
     // Write to AppointmentOutcome_List csv file
     public static void saveAppointmentOutcome(List<appointmentoutcome> appointmentoutcomelist) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/AppointmentOutcome_List.csv"))) {

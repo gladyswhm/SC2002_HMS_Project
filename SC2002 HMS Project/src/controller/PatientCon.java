@@ -49,7 +49,6 @@ public class PatientCon {
                 System.out.println("Diagnosis: " + record.getDiagnosis());
                 System.out.println("Treatment Plan: " + record.getTreatmentPlan());
                 found = true;
-                break;
             }
         }
 

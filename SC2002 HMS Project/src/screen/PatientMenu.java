@@ -21,8 +21,8 @@ public class PatientMenu {
             System.out.println("\n--- Patient Menu ---");
             System.out.println("1. View Medical Record");
             System.out.println("2. Update Personal Information");
-            System.out.println("3. View Available Appointment Slots");
-            System.out.println("4. Schedule an Appointment");
+            System.out.println("3. View Available Appointment Slots"); //all available 
+            System.out.println("4. Schedule an Appointment"); //choose by doctor
             System.out.println("5. Reschedule an Appointment");
             System.out.println("6. Cancel an Appointment");
             System.out.println("7. View Scheduled Appointments");
@@ -36,12 +36,13 @@ public class PatientMenu {
             switch (choice) {
                 case 1:
                     //done for view medical record
-                    PatientCon.viewMedicalRecord("P1001"); 
+                    PatientCon.viewMedicalRecord(userID); 
                     break;
                 case 2:
                     updatePersonalInfo(userID);
                     break;
                 case 3:
+                    
                     viewAvailableAppointments();
                     break;
                 case 4:

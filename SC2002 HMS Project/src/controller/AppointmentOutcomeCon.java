@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 import entity.appointmentoutcome;
 import entity.patient;
+import entity.replenish;
 import enum_class.AvailStatus;
+import enum_class.ReplenishStatus;
 import loader.Read;
 import loader.Write;
 
@@ -107,15 +109,27 @@ public class AppointmentOutcomeCon {
         AppointmentCon.displayUpcomingAppointments(doctorId);
         System.out.println("\n--- Recording Appointment Outcome ---");
         System.out.println("Enter the patientID: ");
-        String aptID = sc.nextLine();
+        String patID = sc.nextLine();
         System.out.println("Enter the date of appointment: ");
         String aptDate = sc.nextLine();
         System.out.println("Enter the type of service provided: ");
         String aptType = sc.nextLine();
         System.out.println("Enter the prescribed medications: ");
         String aptMedications = sc.nextLine();
+        System.out.println("Enter the notes: ");
+        String aptNotes = sc.nextLine();
 
-        //upload into csv file
-        Write.saveAppointmentOutcomeRecord(Integer.toString(OUTid), aptID, doctorId, aptDate, aptType, aptMedications, "Pending");
+        // Create new appointment object
+       // public appointmentoutcome(String Appid, String patientId, String doctorId, String date, String services, String medication, String notes, String status) {
+
+        appointmentoutcome newOut = new appointmentoutcome(Integer.toString(OUTid), patID, doctorId,aptDate, aptType,aptMedications, aptNotes, "Pending");
+        appointmentOutcomeList.add(newOut);
+
+        // Write new entry to Replenishment_List CSV file
+        Write.saveAppointmentOutcome(appointmentOutcomeList);
+
+
+
     }
+
 }

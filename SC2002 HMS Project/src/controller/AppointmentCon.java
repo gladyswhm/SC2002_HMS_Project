@@ -130,6 +130,18 @@ public class AppointmentCon {
         System.out.println("------------------------------------");
     }
 
+    public static void displayAvailableSlots(String doctorId) {
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        System.out.println("--- Pending Appointments for Doctor ID: " + doctorId + " ---");
+
+        for (appointment appointment : appointmentList) {
+            if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus() == AvailStatus.Pending) {
+                System.out.println("Appointment ID: " + appointment.getAppID() + "Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
+            }
+        }
+        System.out.println("------------------------------------");
+    }
+
     public static void displayAllDoctor(String doctorId) {
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         System.out.println("--- Appointments for Doctor ID: " + doctorId + " ---");
