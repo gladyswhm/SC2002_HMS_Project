@@ -58,6 +58,7 @@ public class AppointmentOutcomeCon {
                 System.out.println("Prescription: " + line.getMedication());
                 System.out.println("Amount: " + line.getAmount());
                 System.out.println("Prescription status: " + line.getStatus());
+                System.out.println("Payment status: " + line.getPayment());
 
                 aptFound = true;
                 break;
@@ -141,11 +142,41 @@ public class AppointmentOutcomeCon {
         String amount = sc.nextLine();
 
         // Create new appointment object
-        appointmentoutcome newOut = new appointmentoutcome(Integer.toString(OUTid), patID, doctorId,aptDate, aptType,aptMedications, amount, "Pending");
+        appointmentoutcome newOut = new appointmentoutcome(Integer.toString(OUTid), patID, doctorId,aptDate, aptType,aptMedications, amount, "Pending", "Unpaid");
         appointmentOutcomeList.add(newOut);
 
         // Write new entry to Replenishment_List CSV file
         Write.saveAppointmentOutcome(appointmentOutcomeList);
     }
     
+    public static void makePayment(String userID){
+        boolean found = false;
+
+        System.out.println("--- Make Payment ---");
+        System.out.print("Enter Appointment ID (e.g. 13001): ");
+        String appID = sc.nextLine();
+
+        for (appointmentoutcome list : appointmentOutcomeList) {
+            if (list.getAppId().equals(appID)) {
+                
+                System.out.println("Select payment method: \n");
+                System.out.println("1. Cash");
+                System.out.println("2. Card");
+                String method = sc.nextLine();
+                if(method.equals("1") || method.equals("2")){
+                    list.setPayment("Paid");
+                }
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            Write.saveAppointmentOutcome(appointmentOutcomeList);
+            System.out.println("Payment has been made");
+        } else {
+            System.out.println("Pending payment.");
+        }
+    }
+
 }

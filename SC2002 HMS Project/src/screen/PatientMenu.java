@@ -28,8 +28,9 @@ public class PatientMenu {
             System.out.println("6. Cancel an Appointment");
             System.out.println("7. View Scheduled Appointments");
             System.out.println("8. View Past Appointment Outcome Records");
-            System.out.println("9. Change Password");
-            System.out.println("10. Logout");
+            System.out.println("9. Make Payment");
+            System.out.println("10. Change Password");
+            System.out.println("11. Logout");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline
@@ -62,17 +63,19 @@ public class PatientMenu {
                     viewPastAppointmentOutcomes(userID);
                     break;
                 case 9:
-                    // Change password
-                    ChangePassword.changePatientPassword(userID, patientList);
+                    AppointmentOutcomeCon.makePayment(userID);
                     break;
                 case 10:
+                    ChangePassword.changePatientPassword(userID, patientList);
+                    break;
+                case 11:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
                     break;
             }
-        } while (choice != 10);
+        } while (choice != 11);
     }
 
 
@@ -162,17 +165,5 @@ public class PatientMenu {
                 System.out.println(record);
             }
         }
-    }
-    
-
-
-
-
-    //  public static void main(String[] args){
-
-    //      //PatientMenu patientMenu = new PatientMenu();  
-    //      List<patient> patientList = PatientCon.getPatientList(); // Fetch the patient list
-    //     PatientMenu.showMenu("P1001", patientList); // Pass both arguments
-    //  }
-    
+    }    
 }

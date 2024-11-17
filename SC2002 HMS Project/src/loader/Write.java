@@ -108,7 +108,8 @@ public class Write {
                     outcome.getServices() + "," +
                     outcome.getMedication() + "," +
                     outcome.getAmount() + "," +
-                    outcome.getStatus()
+                    outcome.getStatus() + "," +
+                    outcome.getPayment()
                 );
                 writer.newLine();
             }
