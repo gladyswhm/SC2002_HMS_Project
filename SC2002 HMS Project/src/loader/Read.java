@@ -224,7 +224,7 @@ public class Read {
                 String date = fields[2].trim();
                 String timeSlot = fields[3].trim();
                 String s = fields[4].trim();
-                DoctorAppointmentStatus status = DoctorAppointmentStatus.valueOf(s);
+                AvailStatus status = AvailStatus.valueOf(s);
                 String details = fields[5].trim();
 
                 appointmentList.add(new appointment(Appid,doctorId, date, timeSlot, status, details));
@@ -317,22 +317,49 @@ public class Read {
 
     //read replenish
     public static List<replenish> readReplenishmentList(String filePath) {
-    List<replenish> replenishList = new ArrayList<>();
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",");
-            String name = parts[0];
-            int quantity = Integer.parseInt(parts[1]);
-            ReplenishStatus status = ReplenishStatus.valueOf(parts[2].trim());
-            replenishList.add(new replenish(name, quantity, status));
+        List<replenish> replenishList = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int quantity = Integer.parseInt(parts[1]);
+                ReplenishStatus status = ReplenishStatus.valueOf(parts[2].trim());
+                replenishList.add(new replenish(name, quantity, status));
 
+            }
+        } catch (IOException | IllegalArgumentException e) {
+            e.printStackTrace();
         }
-    } catch (IOException | IllegalArgumentException e) {
-        e.printStackTrace();
+        return replenishList;
     }
-    return replenishList;
-}
+
+
+
+    // Method to get the latest appointment ID by reading the last line of the CSV file
+    public static int getLatestAppointmentID(String filepath) {
+        int latestId = 12005;  // Default starting ID (if file is empty or first read)
+        String line = null;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            // Read through the file, line by line, to get the last line
+            while ((line = reader.readLine()) != null) {
+                // Continuously update line until the last one is reached
+            }
+            String[] fields = line.split(",");
+            latestId = Integer.parseInt(fields[0].trim()); // Assuming the ID is the first field
+
+        } catch (IOException e) {
+            // Handle file reading errors gracefully
+            System.out.println("Error reading the file: " + e.getMessage());
+        } catch (Exception e) {
+            // Catch any unexpected exceptions
+            System.out.println("Unexpected error: " + e.getMessage());
+        }
+
+        return latestId;  // Return the latest ID found or the default value if none found
+    }
+
 
 }
 

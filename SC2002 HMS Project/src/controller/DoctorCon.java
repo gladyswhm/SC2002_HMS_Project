@@ -10,13 +10,13 @@ import loader.Read;
 import loader.Write;
 
 public class DoctorCon {
-    static List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
     static List<AvailabilityCon> avail = Read.loadAvailability("data/Doctor_Availability.csv");
 
-    static int value = 2003; //hold current value
+    static int value = 2004; //hold current value
 
     //option 1: view medical record
     public static void displayMedicalRecords(){
+        List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
         if (records.isEmpty()) {
             System.out.println("No medical records available.");
             return;
@@ -49,16 +49,16 @@ public class DoctorCon {
         List<String> PresMedication = new ArrayList<>(Arrays.asList(inputMed.split(",\\s*")));
             
         //add into list
-        Write.saveNewMedicalRecord(Integer.toString(value), doctorID, patID, patName, newdiagnosis, inputMed, PresMedication);
+        Write.saveNewMedicalRecord(Integer.toString(value), doctorID, patID, patName, newdiagnosis, newTP, PresMedication);
     }
     //edit medical record (option 2 for doctor)
-    public static void updatePatientMedicalRecords(List<medicalrecord> medicalRecords, Scanner sc) {
-        System.out.print("Enter Patient ID to update (e.g., P1001): ");
-        String patientID = sc.nextLine();
+    public static void updatePatientMedicalRecords(List<medicalrecord> medicalRecords, Scanner sc, String DoctorID) {
+        System.out.print("Enter Medical Record ID to update (e.g., 2004): ");
+        String MRID = sc.nextLine();
 
-        medicalrecord medicalRecordtoChange = findMedicalRecord(patientID, medicalRecords);
+        medicalrecord medicalRecordtoChange = findMedicalRecord(MRID, medicalRecords);
         if(medicalRecordtoChange != null){
-            System.out.println("Updating Medical Record for " + patientID + " " + medicalRecordtoChange.getPatientName());
+            System.out.println("Updating Medical Record " + MRID + " for " + medicalRecordtoChange.getPatientName());
             
             System.out.println("Enter new Diagnosis: ");
             String newdiagnosis = sc.nextLine();
@@ -70,19 +70,20 @@ public class DoctorCon {
             String inputMed = sc.nextLine();
             List<String> PresMedication = new ArrayList<>(Arrays.asList(inputMed.split(",\\s*")));
             
-            DoctorCon.editMedicalRecord(patientID,newdiagnosis,newTP,PresMedication);
+            DoctorCon.editMedicalRecord(MRID,newdiagnosis,newTP,PresMedication, DoctorID);
             System.out.println("Medical Record updated successfully for " + medicalRecordtoChange.getPatientName());
         }
-        else System.out.println("Medical Record not found for Patient ID: " + patientID);
+        else System.out.println("Medical Record not found for: " + MRID);
     }
     
-    public static void editMedicalRecord(String patientId, String newDiagnosis, String newTreatmentPlan, List<String> newMedications) {
+    public static void editMedicalRecord(String MRID, String newDiagnosis, String newTreatmentPlan, List<String> newMedications, String DoctorID) {
         boolean found = false;
+        List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
 
         //iterate through records to find the matching patientId
         for (medicalrecord record : records) {
-            System.out.println("Comparing: " + record.getPatientId() + " with " + patientId);
-            if (record.getPatientId().trim().equalsIgnoreCase(patientId)) {
+            System.out.println("Comparing: " + record.getMRID() + " with " + MRID);
+            if (record.getMRID().trim().equalsIgnoreCase(MRID)) {
                 record.setDiagnosis(newDiagnosis) ;
                 record.setTreatmentPlan(newTreatmentPlan) ;
                 record.setMedications(newMedications) ;
@@ -92,14 +93,15 @@ public class DoctorCon {
         }
 
         if (found) {
-            Write.saveMedicalRecord(records);
-            System.out.println("Medical record updated successfully for Patient ID: " + patientId);
+            Write.saveMedicalRecord(records, DoctorID);
+            System.out.println("Medical record updated successfully for: " + MRID);
         } else {
-            System.out.println("Medical record not found for Patient ID: " + patientId);
+            System.out.println("Medical record not found for: " + MRID);
         }
     }
 
     public static void displayAvailablePatientIds() {
+        List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
         if (records.isEmpty()) {
             System.out.println("No medical records available.");
             return;
@@ -112,9 +114,10 @@ public class DoctorCon {
         System.out.println("------------------------------------");
     }
 
-    public static medicalrecord findMedicalRecord(String patientID, List<medicalrecord> medicalRecords){
+    public static medicalrecord findMedicalRecord(String MRID, List<medicalrecord> medicalRecords){
+        List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
         for(medicalrecord r : records){
-            if(r.getPatientId().equals(patientID)){
+            if(r.getMRID().equals(MRID)){
                 return r;
             }
         }

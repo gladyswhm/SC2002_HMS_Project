@@ -1,51 +1,81 @@
 package entity;
 
-import enum_class.DoctorAppointmentStatus;
+import enum_class.AvailStatus;
 
 public class appointment {
-    private static String Appid;
-    private static String DoctorID;
-    private static String PatientID;
-    private static String date;
-    private static String time;
-    private static DoctorAppointmentStatus status;
-    private static String details;
+    private String Appid;      // Appointment ID
+    private String DoctorID;   // Doctor's ID
+    //private String PatientID;  // Patient's ID
+    private String date;       // Appointment Date
+    private String time;       // Appointment Time Slot
+    private AvailStatus status;  // Status (Available, Booked, etc.)
+    private String details;    // Appointment details (e.g., notes)
 
-    public appointment(String Appid, String DoctorID, String date, String time, DoctorAppointmentStatus status, String details){
+    // Constructor
+    public appointment(String Appid, String DoctorID, String date, String time, AvailStatus status, String details) {
         this.Appid = Appid;
         this.DoctorID = DoctorID;
+        //this.PatientID = PatientID;
         this.date = date;
         this.time = time;
         this.status = status;
         this.details = details;
     }
 
-    public static String geteAppID() {
+    // Getters and setters
+    public String getAppID() {
         return Appid;
     }
 
-    public static String getDoctorId() {
+    public void setAppID(String Appid) {
+        this.Appid = Appid;
+    }
+
+    public String getDoctorId() {
         return DoctorID;
     }
 
-    public static String getPatientId() {
+    public void setDoctorId(String DoctorID) {
+        this.DoctorID = DoctorID;
+    }
+
+    /*public String getPatientId() {
         return PatientID;
     }
 
-    public static String getDate() {
+    public void setPatientId(String PatientID) {
+        this.PatientID = PatientID;
+    }*/
+
+    public String getDate() {
         return date;
     }
 
-    public static String getTimeSlot() {
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTimeSlot() {
         return time;
     }
 
-    public static DoctorAppointmentStatus getStatus() {
+    public void setTimeSlot(String time) {
+        this.time = time;
+    }
+
+    public AvailStatus getStatus() {
         return status;
     }
 
-    public static DoctorAppointmentStatus setStatus(DoctorAppointmentStatus statusnew) {
-        status = statusnew;
-        return status;
+    public void setStatus(AvailStatus status) {
+        this.status = status;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

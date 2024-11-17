@@ -45,7 +45,7 @@ public class DoctorMenu{
                 case 3:
                     System.out.println("\n--- Update Patient Medical Record ---");
                     DoctorCon.displayAvailablePatientIds();
-                    DoctorCon.updatePatientMedicalRecords(medicalRecords, sc);
+                    DoctorCon.updatePatientMedicalRecords(medicalRecords, sc, doctorID);
                     break;
                 case 4:
                     System.out.println("\n--- Viewing Personal Schedule ---");

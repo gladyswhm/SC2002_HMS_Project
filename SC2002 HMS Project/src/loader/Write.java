@@ -12,6 +12,7 @@ import entity.medicine;
 import entity.patient;
 import entity.replenish;
 import entity.staff;
+import enum_class.AvailStatus;
 import enum_class.DoctorAppointmentStatus;
 import entity.appointment;
 import entity.appointmentoutcome;
@@ -61,10 +62,10 @@ public class Write {
         }
     }
     
-    public static void saveMedicalRecord(List<medicalrecord> records) {
+    public static void saveMedicalRecord(List<medicalrecord> records, String doctorID) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Medical_Records.csv"))) {
             for (medicalrecord record : records) {
-                writer.write(record.getPatientId() + "," + record.getPatientName() + "," + record.getDiagnosis() + "," + record.getTreatmentPlan() + "," + String.join(";", record.getMedications()));
+                writer.write(record.getMRID() + "," + doctorID + "," + record.getPatientId() + "," + record.getPatientName() + "," + record.getDiagnosis() + "," + record.getTreatmentPlan() + "," + String.join(";", record.getMedications()));
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -77,28 +78,17 @@ public class Write {
         String newMedRec = mrID + "," + doctorID + "," + patID + "," + patName + "," + diag + "," + treat + "," + medication;
     
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Medical_Records.csv", true))) {
-            writer.write(newMedRec);  
             writer.newLine();    
+            writer.write(newMedRec);  
         } catch (IOException e) {
             System.out.println("Error saving new medical record: " + e.getMessage());
         }
     }
 
-    public static void saveDoctorAvailability(List<AvailabilityCon> availabilityList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Doctor_Availability.csv"))) {
-            for (AvailabilityCon availability : availabilityList) {
-                writer.write(doctoravailability.getDoctorId() + "," + doctoravailability.getDate() + "," + doctoravailability.getTimeSlot() + "," + doctoravailability.getStatus());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving availability: " + e.getMessage());
-        }
-    }
-
     public static void saveAppointments(List<appointment> appointmentList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Appointment_List"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Doctor_Availability.csv"))) {
             for (appointment ap : appointmentList) {
-                writer.write(ap.getDoctorId() + "," + ap.getPatientId() + "," + ap.getDate() + "," + ap.getTimeSlot() + "," + ap.getStatus());
+                writer.write(ap.getAppID() + "," + ap.getDoctorId() + "," + ap.getDate() + "," + ap.getTimeSlot() + "," + ap.getStatus() + "," + ap.getDetails());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -106,7 +96,7 @@ public class Write {
         }
     }
 
-    public static void saveAppointmentOutcomeRecord(String doctorId, String aptDate, String aptID, String aptType, String aptMedications, DoctorAppointmentStatus aptStatus) {
+    public static void saveAppointmentOutcomeRecord(String doctorId, String aptDate, String aptID, String aptType, String aptMedications, AvailStatus aptStatus) {
     
         String outcomeRecord = doctorId + "," + aptDate + "," + aptID + "," + aptType + "," + aptMedications + "," + aptStatus;
     
@@ -117,7 +107,6 @@ public class Write {
             System.out.println("Error saving appointment outcome record: " + e.getMessage());
         }
     }
-
 
     // Write to AppointmentOutcome_List csv file
     public static void saveAppointmentOutcome(List<appointmentoutcome> appointmentoutcomelist) {
