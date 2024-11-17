@@ -1,7 +1,10 @@
 package controller;
 
+import entity.appointment;
 import entity.medicalrecord;
 import entity.patient;
+import enum_class.AvailStatus;
+
 import java.util.List;
 import loader.Read;
 import loader.Write;
@@ -54,6 +57,106 @@ public class PatientCon {
 
         if (!found) {
             System.out.println("No medical record found for Patient ID: " + patientID);
+        }
+    }
+
+    //option 4
+    public static void scheduleAppointment(String patientID){
+        Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
+
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        boolean found = false;
+
+        System.out.print("Enter doctor you want to book: ");
+        String doctorID = scanner.nextLine();
+        AppointmentCon.displayAvailableAppointments(doctorID);
+
+        System.out.print("Enter Appointment ID you want to book: ");
+        String aptID = scanner.nextLine();
+
+        for (appointment appointment : appointmentList) {
+            if (appointment.getDoctorId().equals(doctorID) &&
+                appointment.getAppID().equals(aptID)) {
+                
+                appointment.setStatus(AvailStatus.Pending);
+                appointment.setDetails(patientID);
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            Write.saveAppointments(appointmentList);
+            System.out.println("Appointment accepted for " + aptID);
+        } else {
+            System.out.println("Pending appointment not found for acceptance.");
+        }
+    }
+
+    //option 5: reschedule an appointment
+    public static void rescheduleAppointment(String patientID){
+        Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
+
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        boolean found = false;
+
+        //call option 7 method to display all booked appointments
+
+        System.out.print("Enter Appointment ID you want to reschedule: ");
+        String id = scanner.nextLine().trim();
+
+        for (appointment appointment : appointmentList) {
+            if (appointment.getAppID().trim().equals(id)) {
+
+                //display available appointments (option 3)
+                System.out.print("Enter new Appointment ID: ");
+                String NEWaptID = scanner.nextLine();
+                for (appointment ap : appointmentList) {
+                    if (ap.getAppID().trim().equals(NEWaptID)) {
+                        
+                        ap.setStatus(AvailStatus.Pending);
+                        ap.setDetails(patientID);
+                        found = true;
+                        break;
+                    }
+                }
+                appointment.setStatus(AvailStatus.Available);
+                appointment.setDetails("nil");
+            }
+        }
+        if (found) {
+            Write.saveAppointments(appointmentList);
+            System.out.println("Appointment rescheduled from " + id + " to ");
+        } else {
+            System.out.println("Not found.");
+        }
+    }
+
+    //option 6: cancel appointment
+    public static void cancelAppointment(String patientID){
+        Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
+
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        boolean found = false;
+
+        //call option 7 method to display
+
+        System.out.print("Enter Appointment ID you want to cancel: ");
+        String aptID = scanner.nextLine();
+
+        for (appointment appointment : appointmentList) {
+            if (appointment.getAppID().equals(aptID)) {
+                
+                appointment.setStatus(AvailStatus.Available);
+                appointment.setDetails("nil");
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            Write.saveAppointments(appointmentList);
+            System.out.println("Appointment cancelled for " + aptID);
+        } else {
+            System.out.println("Pending appointment not found for acceptance.");
         }
     }
 }
