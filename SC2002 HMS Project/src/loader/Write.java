@@ -17,8 +17,7 @@ import entity.appointment;
 import entity.appointmentoutcome;
 import entity.doctoravailability;
 
-public class Write {
-    
+public class Write {    
     // Write to Patient_List csv file
     public static void savePatientListToCSV(List<patient> patientList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Patient_List.csv"))) {
@@ -62,8 +61,6 @@ public class Write {
         }
     }
     
-    
-
     public static void saveMedicalRecord(List<medicalrecord> records) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/medical_records.csv"))) {
             for (medicalrecord record : records) {
@@ -72,6 +69,18 @@ public class Write {
             }
         } catch (IOException e) {
             System.out.println("Error saving medical records: " + e.getMessage());
+        }
+    }
+    //write medical record
+    public static void saveNewMedicalRecord(String mrID, String doctorID, String patID, String patName, String diag, String treat, List<String> medication) {
+    
+        String newMedRec = mrID + "," + doctorID + "," + patID + "," + patName + "," + diag + "," + treat + "," + medication;
+    
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/Medical_Records.csv", true))) {
+            writer.write(newMedRec);  
+            writer.newLine();    
+        } catch (IOException e) {
+            System.out.println("Error saving new medical record: " + e.getMessage());
         }
     }
 

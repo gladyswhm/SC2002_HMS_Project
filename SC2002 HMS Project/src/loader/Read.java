@@ -128,13 +128,16 @@ public class Read {
                 
                 try {
                     String id = fields[0].trim();
-                    String name = fields[1].trim();
-                    String diag = fields[2].trim();
-                    String treatment = fields[3].trim();
+                    String doctorid = fields[1].trim();
+                    String patid = fields[2].trim();
+                    String name = fields[3].trim();
+                    String diag = fields[4].trim();
+                    String treatment = fields[5].trim();
                     List<String> meds = new ArrayList<>(Arrays.asList(fields[4].trim().split(";"))); // Split medications by semicolon
     
                     // Create a new MedicalRecord and set fields
-                    medicalrecord record = new medicalrecord(id, name);
+                    medicalrecord record = new medicalrecord(patid, name);
+                    record.setRecordID(id);
                     record.setDiagnosis(diag);
                     record.setTreatmentPlan(treatment);
                     record.setMedications(meds);
@@ -152,7 +155,7 @@ public class Read {
         return records;
     }
 
-    //read doctor availability
+    //read doctor availability - accepting and declining done here too
     public static List<AvailabilityCon> loadAvailability(String AVAILABILITY_FILE_PATH) {
         List<AvailabilityCon> availabilityList = new ArrayList<>();
         File file = new File(AVAILABILITY_FILE_PATH);
@@ -168,10 +171,11 @@ public class Read {
                 String[] fields = line.split(",");
                 if (fields.length < 4) continue;
 
-                String doctorId = fields[0].trim();
-                String date = fields[1].trim();
-                String timeSlot = fields[2].trim();
-                String s = fields[3].trim();
+                String id = fields[0].trim();
+                String doctorId = fields[1].trim();
+                String date = fields[2].trim();
+                String timeSlot = fields[3].trim();
+                String s = fields[4].trim();
                 AvailStatus status = AvailStatus.valueOf(s);
                 
                 availabilityList.add(new AvailabilityCon(doctorId, date, timeSlot, status));

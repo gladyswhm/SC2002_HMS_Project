@@ -13,6 +13,8 @@ public class DoctorCon {
     static List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
     static List<AvailabilityCon> avail = Read.loadAvailability("data/Doctor_Availability.csv");
 
+    static int value = 2001; //hold current value
+
     //option 1: view medical record
     public static void displayMedicalRecords(){
         if (records.isEmpty()) {
@@ -27,6 +29,28 @@ public class DoctorCon {
         System.out.println("------------------------------------");
     }
 
+    public static void addPatientMedicalRecords(String doctorID, List<medicalrecord> medicalRecords, Scanner sc){
+        value++;
+
+        System.out.println("Enter Patient ID: ");
+        String patID = sc.nextLine();
+
+        System.out.println("Enter Patient Name: ");
+        String patName = sc.nextLine();
+
+        System.out.println("Enter new Diagnosis: ");
+        String newdiagnosis = sc.nextLine();
+        
+        System.out.println("Enter new Treatment Plan: ");
+        String newTP = sc.nextLine();
+
+        System.out.println("Enter prescribed medication (separate by comma): ");
+        String inputMed = sc.nextLine();
+        List<String> PresMedication = new ArrayList<>(Arrays.asList(inputMed.split(",\\s*")));
+            
+        //add into list
+        Write.saveNewMedicalRecord(Integer.toString(value), doctorID, patID, patName, newdiagnosis, inputMed, PresMedication);
+    }
     //edit medical record (option 2 for doctor)
     public static void updatePatientMedicalRecords(List<medicalrecord> medicalRecords, Scanner sc) {
         System.out.print("Enter Patient ID to update (e.g., P1001): ");
@@ -95,9 +119,5 @@ public class DoctorCon {
             }
         }
         return null; //if not found
-    }
-
-    //option 3
-    
-    
+    }   
 }
