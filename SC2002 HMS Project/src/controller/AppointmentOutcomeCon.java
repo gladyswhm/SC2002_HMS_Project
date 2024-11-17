@@ -54,7 +54,7 @@ public class AppointmentOutcomeCon {
                 System.out.println("Date of Appointment: " + line.getDate());
                 System.out.println("Services: " + line.getServices());
                 System.out.println("Prescription: " + line.getMedication());
-                System.out.println("Notes: \n" + line.getNotes());
+                System.out.println("Amount: " + line.getAmount());
                 System.out.println("Prescription status: " + line.getStatus());
 
                 patientFound = true;
@@ -116,13 +116,11 @@ public class AppointmentOutcomeCon {
         String aptType = sc.nextLine();
         System.out.println("Enter the prescribed medications: ");
         String aptMedications = sc.nextLine();
-        System.out.println("Enter the notes: ");
-        String aptNotes = sc.nextLine();
+        System.out.println("Enter the amount required: ");
+        String amount = sc.nextLine();
 
         // Create new appointment object
-       // public appointmentoutcome(String Appid, String patientId, String doctorId, String date, String services, String medication, String notes, String status) {
-
-        appointmentoutcome newOut = new appointmentoutcome(Integer.toString(OUTid), patID, doctorId,aptDate, aptType,aptMedications, aptNotes, "Pending");
+        appointmentoutcome newOut = new appointmentoutcome(Integer.toString(OUTid), patID, doctorId,aptDate, aptType,aptMedications, amount, "Pending");
         appointmentOutcomeList.add(newOut);
 
         // Write new entry to Replenishment_List CSV file

@@ -7,17 +7,17 @@ public class appointmentoutcome {
     private String date;       // YYYY-MM-DD
     private String services;
     private String medication;
-    private String notes;
+    private String amount;
     private String status;
 
-    public appointmentoutcome(String Appid, String patientId, String doctorId, String date, String services, String medication, String notes, String status) {
+    public appointmentoutcome(String Appid, String patientId, String doctorId, String date, String services, String medication, String amount, String status) {
         this.Appid = Appid;
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.date = date;
         this.services = services;
         this.medication = medication;
-        this.notes = notes;
+        this.amount = amount;
         this.status=status;
     }
 
@@ -45,8 +45,8 @@ public class appointmentoutcome {
         return medication;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getAmount() {
+        return amount;
     }
 
     public String getStatus() {
@@ -77,8 +77,8 @@ public class appointmentoutcome {
         this.medication = medication;
     }
 
-    public void setNotes(String notes){
-        this.notes = notes;
+    public void setAmount(String amount){
+        this.amount = amount;
     }
 
     public void setStatus(String status){
@@ -90,6 +90,6 @@ public class appointmentoutcome {
     @Override
     public String toString() {
         return String.format("Appointment ID: %s, Patient ID: %s, Doctor ID: %s, Date: %s, Services: %s, Medication: %s, Notes: %s, Status: %s",
-                Appid, patientId, doctorId, date, services, medication, notes, status);
+                Appid, patientId, doctorId, date, services, medication, amount, status);
     }
 }

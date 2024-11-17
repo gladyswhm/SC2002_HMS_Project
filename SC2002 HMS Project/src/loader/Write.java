@@ -107,7 +107,7 @@ public class Write {
                     outcome.getDate() + "," +
                     outcome.getServices() + "," +
                     outcome.getMedication() + "," +
-                    outcome.getNotes() + "," +
+                    outcome.getAmount() + "," +
                     outcome.getStatus()
                 );
                 writer.newLine();
