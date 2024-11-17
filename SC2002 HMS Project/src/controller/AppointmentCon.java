@@ -106,6 +106,18 @@ public class AppointmentCon {
         }
     }
 
+    public static void displayAvailableAppointments(String doctorId) {
+        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+        System.out.println("--- Available Appointments for Doctor ID: " + doctorId + " ---");
+
+        for (appointment appointment : appointmentList) {
+            if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus() == AvailStatus.Available) {
+                System.out.println("Appointment ID: " + appointment.getAppID() + "Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
+            }
+        }
+        System.out.println("------------------------------------");
+    }
+
     public static void displayPendingAppointments(String doctorId) {
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         System.out.println("--- Pending Appointments for Doctor ID: " + doctorId + " ---");
@@ -143,15 +155,15 @@ public class AppointmentCon {
     }
 
     public static void displayAllDoctor(String doctorId) {
-        List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
-        System.out.println("--- Appointments for Doctor ID: " + doctorId + " ---");
+    List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
+    System.out.println("--- Appointments for Doctor ID: " + doctorId + " ---");
 
-        for (appointment appointment : appointmentList) {
-            if (appointment.getDoctorId().equals(doctorId)) {
-                System.out.println("Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot() + ", Patient ID: " + appointment.getDetails() + ", Status: " + appointment.getStatus());
-            }
+    for (appointment appointment : appointmentList) {
+        if (appointment.getDoctorId().equals(doctorId)) {
+            System.out.println("Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot() + ", Patient ID: " + appointment.getDetails() + ", Status: " + appointment.getStatus());
         }
-        System.out.println("------------------------------------");
+    }
+    System.out.println("------------------------------------");
     }
 
     //admin display appointment list

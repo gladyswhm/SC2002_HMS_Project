@@ -46,13 +46,13 @@ public class PatientMenu {
                     viewAvailableAppointments();
                     break;
                 case 4:
-                    scheduleAppointment();
+                    PatientCon.scheduleAppointment(userID);
                     break;
                 case 5:
-                    rescheduleAppointment();
+                    PatientCon.rescheduleAppointment(userID);
                     break;
                 case 6:
-                    cancelAppointment();
+                    PatientCon.cancelAppointment(userID);
                     break;
                 case 7:
                     viewScheduledAppointments();
