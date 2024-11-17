@@ -21,9 +21,10 @@ import enum_class.*;
 
 public class AdminMenu implements UserMenu{
 
-    public void showMenu(String userID, List<staff> lines) { 
-        List<staff> staffList = (List<staff>) lines;
-        Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
+    
+    public void showMenu(String userID, List<staff> staffList) { 
+        
         int choice;
 
         do {
@@ -53,7 +54,7 @@ public class AdminMenu implements UserMenu{
                     break;
                 case 5:
                     // Change Password
-                    ChangePassword.changeStaffPassword(userID, lines);
+                    ChangePassword.changeStaffPassword(userID, staffList);
                     break;
                 case 6:
                     System.out.println("Logging out...");
@@ -69,7 +70,7 @@ public class AdminMenu implements UserMenu{
     
     private static void manageStaff() {
         
-        Scanner scanner = new Scanner(System.in);
+       
         int choice;
         AdminCon adminCon = new AdminCon();
 
@@ -182,7 +183,7 @@ public class AdminMenu implements UserMenu{
     
     private static void manageInventory() { 
         InventoryCon inventoryCon = new InventoryCon();
-        Scanner scanner = new Scanner(System.in);
+        
         int choice;
 
         do {
@@ -274,7 +275,7 @@ public class AdminMenu implements UserMenu{
 
 
     private static void approveReplenishmentRequests() {
-        Scanner scanner = new Scanner(System.in);
+        
     
         ReplenishCon replenishCon = new ReplenishCon();
         List<replenish> replenishList = replenishCon.getReplenishList();
@@ -310,7 +311,7 @@ public class AdminMenu implements UserMenu{
     }
     
     private static void displayAppointments() {
-    Scanner scanner = new Scanner(System.in);
+    
     int choice;
 
     do {
