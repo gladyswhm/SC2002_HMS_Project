@@ -155,28 +155,40 @@ public class AppointmentOutcomeCon {
         System.out.println("--- Make Payment ---");
         System.out.print("Enter Appointment ID (e.g. 13001): ");
         String appID = sc.nextLine();
+        String method;
 
         for (appointmentoutcome list : appointmentOutcomeList) {
             if (list.getAppId().equals(appID)) {
-                
-                System.out.println("Select payment method: \n");
-                System.out.println("1. Cash");
-                System.out.println("2. Card");
-                String method = sc.nextLine();
-                if(method.equals("1") || method.equals("2")){
-                    list.setPayment("Paid");
+                if (!(list.getPayment().equals("Paid"))){
+                    do{
+                        System.out.println("Select payment method:");
+                        System.out.println("1. Cash");
+                        System.out.println("2. Card");
+                        method = sc.nextLine();
+                        if(method.equals("1") || method.equals("2")){
+                            list.setPayment("Paid");
+                        }
+                        else{
+                            System.out.println("You have selected an invalid payment method.\n");
+                        }
+                    }while(!(method.equals("1") || method.equals("2")));
+                    
+                    
+                    found = true;
+                    break;
                 }
-                found = true;
-                break;
+
+                else{
+                    System.out.println("You have already paid.");
+                }
+                
             }
         }
 
         if (found) {
             Write.saveAppointmentOutcome(appointmentOutcomeList);
             System.out.println("Payment has been made");
-        } else {
-            System.out.println("Pending payment.");
-        }
+        } 
     }
 
 }
