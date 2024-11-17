@@ -47,10 +47,11 @@ public class PatientCon {
 
     // Iterate through the records to find the one matching the patient's ID
         for (medicalrecord record : records) {
+
             if (record.getPatientId().equalsIgnoreCase(patientID)) {
-                System.out.println("Medical Record for Patient: " + record.getPatientName());
-                System.out.println("Diagnosis: " + record.getDiagnosis());
-                System.out.println("Treatment Plan: " + record.getTreatmentPlan());
+                System.out.print("Appointment ID: " + record.getMRID());
+                System.out.print(", Diagnosis: " + record.getDiagnosis());
+                System.out.print(", Treatment Plan: " + record.getTreatmentPlan() + "\n");
                 found = true;
             }
         }
@@ -86,7 +87,7 @@ public class PatientCon {
         }
         if (found) {
             Write.saveAppointments(appointmentList);
-            System.out.println("Appointment accepted for " + aptID);
+            System.out.println("Pending appointment (awaiting doctors' approval): " + aptID);
         } else {
             System.out.println("Pending appointment not found for acceptance.");
         }
@@ -99,15 +100,16 @@ public class PatientCon {
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         boolean found = false;
 
-        //call option 7 method to display all booked appointments
+        AppointmentCon.displayScheduledAppointments(patientID);
 
+        System.out.println("------------------------------------------------------");
         System.out.print("Enter Appointment ID you want to reschedule: ");
         String id = scanner.nextLine().trim();
 
         for (appointment appointment : appointmentList) {
             if (appointment.getAppID().trim().equals(id)) {
 
-                //display available appointments (option 3)
+                AppointmentCon.displayAvailableAppointmentList();
                 System.out.print("Enter new Appointment ID: ");
                 String NEWaptID = scanner.nextLine();
                 for (appointment ap : appointmentList) {
@@ -125,7 +127,7 @@ public class PatientCon {
         }
         if (found) {
             Write.saveAppointments(appointmentList);
-            System.out.println("Appointment rescheduled from " + id + " to ");
+            System.out.println("Appointment rescheduled successfully");
         } else {
             System.out.println("Not found.");
         }
@@ -138,7 +140,7 @@ public class PatientCon {
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         boolean found = false;
 
-        //call option 7 method to display
+        AppointmentCon.displayScheduledAppointments(patientID);
 
         System.out.print("Enter Appointment ID you want to cancel: ");
         String aptID = scanner.nextLine();

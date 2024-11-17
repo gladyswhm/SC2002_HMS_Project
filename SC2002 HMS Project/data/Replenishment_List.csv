@@ -1,7 +1,7 @@
-Paracetamol,50,Approved
+Paracetamol,100,Rejected
 Ibuprofen,3,Rejected
 Amoxicillin,3,Approved
 Paracetamol,50,Approved
 Paracetmol,100,Rejected
-Fever Medicine,90,Pending
-Paracetamol,100,Pending
+Fever Medicine,90,Approved
+Paracetamol,100,Rejected

@@ -21,6 +21,7 @@ public class PharmacistMenu implements UserMenu{
         {
             System.out.println("\n\nPharmacist Menu:");
             System.out.println("1. View Appointment Outcome Record");
+            //System.out.println("2. View Specific Appointment Outcome Record");
             System.out.println("2. Update Prescription Status");
             System.out.println("3. View Medication Inventory");
             System.out.println("4. Submit Replenishment Request");

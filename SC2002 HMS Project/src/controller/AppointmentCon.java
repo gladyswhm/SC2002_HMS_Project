@@ -112,7 +112,7 @@ public class AppointmentCon {
 
         for (appointment appointment : appointmentList) {
             if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus() == AvailStatus.Available) {
-                System.out.println("Appointment ID: " + appointment.getAppID() + "Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
+                System.out.println("Appointment ID: " + appointment.getAppID() + " Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
             }
         }
         System.out.println("------------------------------------");
@@ -124,7 +124,7 @@ public class AppointmentCon {
 
         for (appointment appointment : appointmentList) {
             if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus() == AvailStatus.Pending) {
-                System.out.println("Appointment ID: " + appointment.getAppID() + "Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
+                System.out.println("Appointment ID: " + appointment.getAppID() + " Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
             }
         }
         System.out.println("------------------------------------");
@@ -148,7 +148,7 @@ public class AppointmentCon {
 
         for (appointment appointment : appointmentList) {
             if (appointment.getDoctorId().equals(doctorId) && appointment.getStatus() == AvailStatus.Pending) {
-                System.out.println("Appointment ID: " + appointment.getAppID() + "Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
+                System.out.println("Appointment ID: " + appointment.getAppID() + " Date: " + appointment.getDate() + ", Time Slot: " + appointment.getTimeSlot());
             }
         }
         System.out.println("------------------------------------");

@@ -50,7 +50,7 @@ public class DoctorCon {
         //add into list
         Write.saveNewMedicalRecord(Integer.toString(value), doctorID, patID, patName, newdiagnosis, newTP, PresMedication);
     }
-    //edit medical record (option 2 for doctor)
+    //edit medical record (option 3 for doctor)
     public static void updatePatientMedicalRecords(List<medicalrecord> medicalRecords, Scanner sc, String DoctorID) {
         System.out.print("Enter Medical Record ID to update (e.g., 2004): ");
         String MRID = sc.nextLine();
@@ -108,7 +108,7 @@ public class DoctorCon {
 
         System.out.println("Available Patient IDs:");
         for (medicalrecord record : records) {
-            System.out.println("ID: " + record.getMRID() +"Patient ID: " + record.getPatientId() + ", Name: " + record.getPatientName());
+            System.out.println("ID: " + record.getMRID() +" Patient ID: " + record.getPatientId() + ", Name: " + record.getPatientName());
         }
         System.out.println("------------------------------------");
     }

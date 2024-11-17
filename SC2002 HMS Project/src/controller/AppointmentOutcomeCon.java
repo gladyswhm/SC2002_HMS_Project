@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import entity.appointment;
 import entity.appointmentoutcome;
 import entity.patient;
 import entity.replenish;
@@ -36,11 +37,12 @@ public class AppointmentOutcomeCon {
     public static void viewOutcomeRecord()
     {
         System.out.println("\n\n----- View Appointment Outcome Record -----");
-        System.out.print("Enter Appointment ID: ");
+        System.out.print("Enter Appointment ID (e.g. 13001): ");
         String appID = sc.nextLine();
         
         // Used to check if there is such an appointment
         boolean aptFound = false;
+
 
         // Traverse each line from the file
         for (appointmentoutcome line : appointmentOutcomeList)
@@ -145,4 +147,5 @@ public class AppointmentOutcomeCon {
         // Write new entry to Replenishment_List CSV file
         Write.saveAppointmentOutcome(appointmentOutcomeList);
     }
+    
 }

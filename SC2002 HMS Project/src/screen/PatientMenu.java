@@ -37,13 +37,13 @@ public class PatientMenu {
             switch (choice) {
                 case 1:
                     //done for view medical record
+                    viewPatientDetails(userID);
                     PatientCon.viewMedicalRecord(userID); 
                     break;
                 case 2:
                     updatePersonalInfo(userID);
                     break;
                 case 3:
-                    
                     viewAvailableAppointments();
                     break;
                 case 4:
@@ -76,8 +76,21 @@ public class PatientMenu {
     }
 
 
-    private static void viewMedicalRecord() {
-        System.out.println("Displaying medical record...");
+    private static void viewPatientDetails(String userID) {
+        List<patient> patients = PatientCon.getPatientList();
+        patient patient = null;
+        for (patient p : patients) {
+            if (p.getUserID().equals(userID)) {
+                System.out.println("Name: " + p.getName());
+                System.out.println("Phone Number: " + p.getPhonenumber());
+                System.out.println("Email: " + p.getEmail());
+                System.out.println("Blood Type: " + p.getBlood());
+                System.out.println("Date of Birth: " + p.getDobAsFormattedString());
+                System.out.println("Gender: " + p.getGender());
+                patient = p;
+                break;
+            }
+        }
 
     }
 
