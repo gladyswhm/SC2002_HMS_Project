@@ -209,7 +209,7 @@ public class appointmentoutcome {
      */
     @Override
     public String toString() {
-        return String.format("Appointment ID: %s, Patient ID: %s, Doctor ID: %s, Date: %s, Services: %s, Medication: %s, Notes: %s, Status: %s, Payment Status: %s",
+        return String.format("Appointment ID: %s, Patient ID: %s, Doctor ID: %s, Date: %s, Services: %s, Medication: %s, Quantity: %s, Status: %s, Payment Status: %s",
                 Appid, patientId, doctorId, date, services, medication, amount, status, payment);
     }
 }
