@@ -1,15 +1,56 @@
 package enum_class;
 
+/**
+ * Enum representing different blood types, including their positive and negative variants.
+ */
 public enum BloodType {
+    /**
+     * O negative blood type.
+     */
     O_NEG,
+    
+    /**
+     * A negative blood type.
+     */
     A_NEG,
+    
+    /**
+     * B negative blood type.
+     */
     B_NEG,
+    
+    /**
+     * AB negative blood type.
+     */
     AB_NEG,
+    
+    /**
+     * O positive blood type.
+     */
     O_POS,
+    
+    /**
+     * A positive blood type.
+     */
     A_POS,
+    
+    /**
+     * B positive blood type.
+     */
     B_POS,
+    
+    /**
+     * AB positive blood type.
+     */
     AB_POS;
 
+    /**
+     * Converts a string representation of a blood type into its corresponding {@code BloodType} enum.
+     *
+     * @param input the string representation of the blood type (e.g., "A+", "B_NEG").
+     * @return the corresponding {@code BloodType}.
+     * @throws IllegalArgumentException if the input does not match any known blood type.
+     */
     public static BloodType fromString(String input) {
         switch (input.toUpperCase()) {
             case "A+":

@@ -9,19 +9,27 @@ import controller.InventoryCon;
 import controller.ReplenishCon;
 import entity.staff;
 
-public class PharmacistMenu implements UserMenu{
+/**
+ * The PharmacistMenu class allows pharmacists to manage prescription status,
+ * view appointment outcomes, handle inventory, submit replenishment requests, and manage their account settings.
+ */
+public class PharmacistMenu implements UserMenu {
 
     static Scanner sc = new Scanner(System.in);
-    
-    public void showMenu(String userID, List<staff> lines)
-    {
+
+    /**
+     * Displays the main menu for the pharmacist with options to manage prescriptions,
+     * view appointment outcomes, handle inventory, and perform account settings.
+     *
+     * @param userID The user identifier of the logged-in pharmacist.
+     * @param lines The list of all staff members in the system.
+     */
+    public void showMenu(String userID, List<staff> lines) {
         int menuChoice;
 
-        do
-        {
+        do {
             System.out.println("\n\nPharmacist Menu:");
             System.out.println("1. View Appointment Outcome Record");
-            //System.out.println("2. View Specific Appointment Outcome Record");
             System.out.println("2. Update Prescription Status");
             System.out.println("3. View Medication Inventory");
             System.out.println("4. Submit Replenishment Request");
@@ -36,7 +44,7 @@ public class PharmacistMenu implements UserMenu{
                     // View Appointment Outcome Record
                     AppointmentOutcomeCon.viewOutcomeRecord();
                     break;
-                
+
                 case 2:
                     // Update Prescription Status
                     AppointmentOutcomeCon.updateStatus();
@@ -56,17 +64,17 @@ public class PharmacistMenu implements UserMenu{
                     // Change Password
                     ChangePassword.changeStaffPassword(userID, lines);
                     break;
-                
+
                 case 6:
                     // Logout
                     System.out.println("Logging out...");
                     break;
-            
+
                 default:
                     System.out.println("Invalid choice selected. Please try again.");
                     break;
             }
 
-        } while(menuChoice!=6);
+        } while(menuChoice != 6);
     }
 }

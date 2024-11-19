@@ -29,11 +29,24 @@ import controller.AppointmentCon;
 import controller.AppointmentOutcomeCon;
 import controller.AvailabilityCon;
 
+
+ /**
+ * The Read class provides methods for reading data from various CSV files and loading it into entity objects.
+ */
 public class Read {
     
-    // Read Patient_List csv file
-    public static List<patient> readPatientList(String filePath)
+   
+/** 
+ *
+ * Read patient list from csv file
+ *
+ * @param filePath the file path of the patient list CSV file.
+ * @return objects of List<patient>
+ */ 
+// Read Patient_List csv file
+    public static List<patient> readPatientList(String filePath) 
     {
+
         List<patient> patientList = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  // Updated format
         
@@ -66,10 +79,17 @@ public class Read {
         return patientList;
     }
 
-
+/** 
+ *
+ * Load staff list from a csv file
+ *
+ * @param FILE_PATH the file path of the staff list CSV file.
+ * @return objects from List<staff>
+ */
     // Read Staff_List csv file
-    public static List<staff> loadStaffList(String FILE_PATH)
+    public static List<staff> loadStaffList(String FILE_PATH) 
     {
+
         List<staff> staffList = new ArrayList<>();
         File file = new File(FILE_PATH);
     
@@ -108,11 +128,16 @@ public class Read {
     
         return staffList;
     }
-    
-    
-    
-    //read medical records
-    public static List<medicalrecord> loadMedicalRecords(String FILE_PATH) {
+
+/** 
+ *
+ * Loads medical records from a CSV file.
+ *
+ * @param FILE_PATH the file path of the medical records CSV file.
+ * @return objects of List<medicalrecord>
+ */
+    public static List<medicalrecord> loadMedicalRecords(String FILE_PATH) { 
+
         List<medicalrecord> records = new ArrayList<>();
         File file = new File(FILE_PATH);
     
@@ -155,8 +180,15 @@ public class Read {
         return records;
     }
 
-    //read doctor availability - accepting and declining done here too
-    public static List<AvailabilityCon> loadAvailability(String AVAILABILITY_FILE_PATH) {
+/** 
+ *
+ * Loads availability data for doctors from a CSV file.
+ *
+ * @param AVAILABILITY_FILE_PATH the file path of the availability records CSV file.
+ * @return objects of List<AvailabilityCon>
+ */
+    public static List<AvailabilityCon> loadAvailability(String AVAILABILITY_FILE_PATH) { 
+
         List<AvailabilityCon> availabilityList = new ArrayList<>();
         File file = new File(AVAILABILITY_FILE_PATH);
 
@@ -188,8 +220,18 @@ public class Read {
     }
 
     // Read file (USER part)
-    public static List<String> readFile(String filePath)
+
+
+/** 
+ *
+ * Reads a file and returns its content as a list of strings.
+ *
+ * @param filePath  the file path. 
+ * @return List<String>
+ */
+    public static List<String> readFile(String filePath) 
     {
+
         List<String> lines = new ArrayList<>();     // Initialize an empty list to avoid returning null in case of exceptions
         
         try
@@ -204,7 +246,16 @@ public class Read {
     }
 
     //load appointments list
-    public static List<appointment> loadAppointments(String APPOINTMENT_FILE_PATH) {
+
+/** 
+ *
+ * Load appointments
+ *
+ * @param APPOINTMENT_FILE_PATH  the  APPOINTMEN t_ FIL e_ PATH. 
+ * @return List<appointment>
+ */
+    public static List<appointment> loadAppointments(String APPOINTMENT_FILE_PATH) { 
+
         List<appointment> appointmentList = new ArrayList<>();
         File file = new File(APPOINTMENT_FILE_PATH);
 
@@ -235,7 +286,16 @@ public class Read {
         return appointmentList;
     }
 
-    public static List<appointmentoutcome> loadAppointmentsOutcome(String APPOINTMENT_FILE_PATH) {
+
+/** 
+ *
+ * Load appointments outcome
+ *
+ * @param APPOINTMENT_FILE_PATH  the  APPOI NTMEN t_ FIL e_ PATH. 
+ * @return List<appointmentoutcome>
+ */
+    public static List<appointmentoutcome> loadAppointmentsOutcome(String APPOINTMENT_FILE_PATH) { 
+
     List<appointmentoutcome> appointmentOutcomeList = new ArrayList<>();
     File file = new File(APPOINTMENT_FILE_PATH);
 
@@ -281,9 +341,15 @@ public class Read {
     return appointmentOutcomeList;
 }
     
+/** 
+ *
+ * Load medicine list from csv file
+ *
+ * @param FILE_PATH  the  file path of the medicine list csv file. 
+ * @return objects from List<medicine>
+ */
+    public static List<medicine> loadMedicineList(String FILE_PATH) { 
 
-    // read medicine
-    public static List<medicine> loadMedicineList(String FILE_PATH) {
         List<medicine> medicineList = new ArrayList<>();
         Path path = Paths.get(FILE_PATH);
 
@@ -316,8 +382,15 @@ public class Read {
         return medicineList;
     }
 
-    //read replenish
-    public static List<replenish> readReplenishmentList(String filePath) {
+/** 
+ *
+ * Read replenishment list from csv file
+ *
+ * @param filePath  the file path of the replenishment list csv file 
+ * @return objects from List<replenish>
+ */
+    public static List<replenish> readReplenishmentList(String filePath) { 
+
         List<replenish> replenishList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -336,12 +409,25 @@ public class Read {
     }
 
     
-    public static int getOutcomeID(String filepath) {
-        int latestId = 13113;  //for testing
+
+/** 
+ *
+ * Gets the latest ID from the csv file
+ *
+ * @param filepath  the filepath to obtain the ID from csv file 
+ * @return the latest ID in the csv file input as filepath
+ */
+    public static int getOutcomeID(String filepath) { 
+
+        int latestId = 0;  //default but should not be used in any case
         String line = null;
         String lastnonempty = null;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            /** 
+             *
+             * store the latest line so when it returns it indeed returns the latest data line
+             */
             while ((line = reader.readLine()) != null) {
                 if(!line.trim().isEmpty()){
                     lastnonempty = line;

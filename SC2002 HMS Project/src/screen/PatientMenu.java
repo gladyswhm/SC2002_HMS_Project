@@ -10,20 +10,30 @@ import controller.PatientCon;
 import entity.appointmentoutcome;
 import entity.patient;
 
+
+ /**
+ * The PatientMenu class allows patients to manage their personal information,
+ * appointments, medical records, and other functionalities specific to their role.
+ */
 public class PatientMenu {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void showMenu(String userID, List<patient> patientList) { 
-        
+    /**
+     * Displays the main menu for the patient with options to view and manage personal information,
+     * medical records, appointments, and other patient-related functions.
+     *
+     * @param userID The user identifier of the logged-in patient.
+     * @param patientList The list of all patients in the system.
+     */
+    public static void showMenu(String userID, List<patient> patientList) {  
         int choice;
-
         do {
             System.out.println("\n--- Patient Menu ---");
             System.out.println("1. View Medical Record");
             System.out.println("2. Update Personal Information");
-            System.out.println("3. View Available Appointment Slots"); //all available 
-            System.out.println("4. Schedule an Appointment"); //choose by doctor
+            System.out.println("3. View Available Appointment Slots");
+            System.out.println("4. Schedule an Appointment");
             System.out.println("5. Reschedule an Appointment");
             System.out.println("6. Cancel an Appointment");
             System.out.println("7. View Scheduled Appointments");
@@ -33,39 +43,48 @@ public class PatientMenu {
             System.out.println("11. Logout");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    //done for view medical record
+                    // View medical record
                     viewPatientDetails(userID);
                     PatientCon.viewMedicalRecord(userID); 
                     break;
                 case 2:
+                    // Update personal information
                     updatePersonalInfo(userID);
                     break;
                 case 3:
+                    // View available appointment slots
                     viewAvailableAppointments();
                     break;
                 case 4:
+                    // Schedule an appointment
                     PatientCon.scheduleAppointment(userID);
                     break;
                 case 5:
+                    // Reschedule an appointment
                     PatientCon.rescheduleAppointment(userID);
                     break;
                 case 6:
+                    // Cancel an appointment
                     PatientCon.cancelAppointment(userID);
                     break;
                 case 7:
+                    // View scheduled appointments
                     viewScheduledAppointments(userID);
                     break;
                 case 8:
+                    // View past appointment outcome records
                     viewPastAppointmentOutcomes(userID);
                     break;
                 case 9:
+                    // Make payment for appointments
                     AppointmentOutcomeCon.makePayment(userID);
                     break;
                 case 10:
+                    // Change patient password
                     ChangePassword.changePatientPassword(userID, patientList);
                     break;
                 case 11:
@@ -78,8 +97,12 @@ public class PatientMenu {
         } while (choice != 11);
     }
 
-
-    private static void viewPatientDetails(String userID) {
+    /**
+     * Displays the personal details of the patient.
+     *
+     * @param userID The user identifier of the patient.
+     */
+    private static void viewPatientDetails(String userID) { 
         List<patient> patients = PatientCon.getPatientList();
         patient patient = null;
         for (patient p : patients) {
@@ -94,12 +117,14 @@ public class PatientMenu {
                 break;
             }
         }
-
     }
 
-    private static void updatePersonalInfo(String userID) {
-    
-        // Fetch the list of patients and find the matching patient using the userID
+    /**
+     * Allows the patient to update their personal information such as email or phone number, or both.
+     *
+     * @param userID The user identifier of the patient.
+     */
+    private static void updatePersonalInfo(String userID) { 
         List<patient> patients = PatientCon.getPatientList();
         patient patientToUpdate = null;
         for (patient p : patients) {
@@ -125,35 +150,52 @@ public class PatientMenu {
             System.out.println("Patient ID not found.");
         }
     }
-    
 
-
-    private static void viewAvailableAppointments() {
+    /**
+     * Displays the available appointment slots.
+     */
+    private static void viewAvailableAppointments() { 
         System.out.println("Displaying available appointment slots...");
         AppointmentCon.displayAvailableAppointmentList();
     }
 
-    private static void scheduleAppointment() {
+    /**
+     * Schedules a new appointment.
+     */
+    private static void scheduleAppointment() { 
         System.out.println("Scheduling an appointment...");
-
     }
 
-    private static void rescheduleAppointment() {
+    /**
+     * Reschedules an existing appointment.
+     */
+    private static void rescheduleAppointment() { 
         System.out.println("Rescheduling an appointment...");
     }
 
-    private static void cancelAppointment() {
+    /**
+     * Cancels an existing appointment.
+     */
+    private static void cancelAppointment() { 
         System.out.println("Canceling an appointment...");
-
     }
 
-    private static void viewScheduledAppointments(String userID) {
+    /**
+     * Displays the scheduled appointments for the patient.
+     *
+     * @param userID The user identifier of the patient.
+     */
+    private static void viewScheduledAppointments(String userID) { 
         System.out.println("Displaying your scheduled appointments...");
         AppointmentCon.displayScheduledAppointments(userID);
-
     }
 
-    private static void viewPastAppointmentOutcomes(String userID) {
+    /**
+     * Displays the past appointment outcome records for the patient.
+     *
+     * @param userID The user identifier of the patient.
+     */
+    private static void viewPastAppointmentOutcomes(String userID) { 
         // Fetch and display the appointment outcomes for the entered ID
         List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeForPatient(userID);
     
@@ -165,5 +207,5 @@ public class PatientMenu {
                 System.out.println(record);
             }
         }
-    }    
+    }
 }

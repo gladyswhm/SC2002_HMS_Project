@@ -1,3 +1,8 @@
+/**
+ * This class represents the Administrator Menu where an administrator can manage hospital staff,
+ * appointments, medication inventory, and approve replenishment requests.
+ * It also allows the administrator to change their password and log out.
+ */
 package screen;
 
 import java.util.ArrayList;
@@ -23,6 +28,13 @@ public class AdminMenu implements UserMenu{
 
     static Scanner scanner = new Scanner(System.in);
     
+    /**
+     * Displays the main menu for the administrator with options to manage staff,
+     * appointments, inventory, and other administrative functions.
+     *
+     * @param userID The user ID of the logged-in administrator.
+     * @param staffList The list of hospital staff.
+     */
     public void showMenu(String userID, List<staff> staffList) { 
         
         int choice;
@@ -68,6 +80,10 @@ public class AdminMenu implements UserMenu{
         
     }
     
+    /**
+     * Allows the administrator to manage hospital staff including adding, removing, updating,
+     * and displaying staff members.
+     */
     private static void manageStaff() {
         
        
@@ -180,7 +196,10 @@ public class AdminMenu implements UserMenu{
         } while (choice != 5);
     }
     
-    
+    /**
+     * Allows the administrator to manage medication inventory, including adding new medication,
+     * updating stock levels, removing medication, and setting low stock alerts.
+     */
     private static void manageInventory() { 
         InventoryCon inventoryCon = new InventoryCon();
         
@@ -273,7 +292,9 @@ public class AdminMenu implements UserMenu{
         } while (choice != 6);
     }
 
-
+    /**
+     * Approves or rejects replenishment requests based on the status and updates the inventory accordingly.
+     */
     private static void approveReplenishmentRequests() {
         
     
@@ -310,55 +331,46 @@ public class AdminMenu implements UserMenu{
         System.out.println("Replenishment requests have been processed.");
     }
     
+    /**
+     * Displays the appointment details and outcomes for the administrator to view or process.
+     */
     private static void displayAppointments() {
     
-    int choice;
+        int choice;
 
-    do {
-        System.out.println("\n--- View Appointment Details ---");
-        System.out.println("1. View All Appointments");
-        System.out.println("2. View Appointment Outcome Records");
-        System.out.println("3. Return to Main Menu");
-        System.out.print("Enter your choice: ");
-        choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        do {
+            System.out.println("\n--- View Appointment Details ---");
+            System.out.println("1. View All Appointments");
+            System.out.println("2. View Appointment Outcome Records");
+            System.out.println("3. Return to Main Menu");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-        switch (choice) {
-            case 1:
-            AppointmentCon.displayAppointmentList();
-                break;
+            switch (choice) {
+                case 1:
+                AppointmentCon.displayAppointmentList();
+                    break;
 
-            case 2:
-                List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeList() ;
-                if (records.isEmpty()) {
-                    System.out.println("No outcome records found.");
-                } else {
-                    for (appointmentoutcome record : records) {
-                        System.out.println(record);
+                case 2:
+                    List<appointmentoutcome> records = AppointmentOutcomeCon.getAppointmentOutcomeList() ;
+                    if (records.isEmpty()) {
+                        System.out.println("No outcome records found.");
+                    } else {
+                        for (appointmentoutcome record : records) {
+                            System.out.println(record);
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case 3:
-                System.out.println("Returning to main menu...");
-                break;
+                case 3:
+                    System.out.println("Returning to main menu...");
+                    break;
 
-            default:
-                System.out.println("Invalid choice! Please try again.");
-                break;
-        }
-    } while (choice != 3);
-}
-
-
-
-    
-
-    // public static void main(String[] args){
-
-    //      List<staff> staffList = new ArrayList<>(); // Create or populate the list as needed
-    //     AdminMenu.showMenu("A001", staffList);
-    // }
-
-
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+                    break;
+            }
+        } while (choice != 3);
+    }
 }

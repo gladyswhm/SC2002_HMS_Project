@@ -1,3 +1,7 @@
+/**
+ * This class represents the Doctor Menu where a doctor can manage their medical records,
+ * schedule, availability, appointments, and other functions relevant to their role.
+ */
 package screen;
 
 import java.util.ArrayList;
@@ -15,6 +19,13 @@ import entity.staff;
 public class DoctorMenu implements UserMenu{
     private static List<medicalrecord> medicalRecords = new ArrayList<>();
 
+    /**
+     * Displays the main menu for the doctor with options to view and manage patient records,
+     * schedule, availability, and appointments, as well as change the password or log out.
+     *
+     * @param doctorID The user ID of the logged-in doctor.
+     * @param lines The list of staff members (for password change functionality).
+     */
     public void showMenu(String doctorID, List<staff> lines) {
         Scanner sc = new Scanner(System.in);
         int option;
@@ -80,9 +91,4 @@ public class DoctorMenu implements UserMenu{
 
         }while(option!=10);
     }
-    //public static void main(String[] args){
-
-        //DoctorMenu doctormenu = new DoctorMenu();  
-        //doctormenu.displayDoctorMenu("D1001");  
-    //}
 }
