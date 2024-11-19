@@ -124,7 +124,7 @@ public class DoctorCon {
 
         //iterate through records to find the matching patientId
         for (medicalrecord record : records) {
-            System.out.println("Comparing: " + record.getMRID() + " with " + MRID);
+            //System.out.println("Comparing: " + record.getMRID() + " with " + MRID);
             if (record.getMRID().trim().equalsIgnoreCase(MRID)) {
                 record.setDiagnosis(newDiagnosis) ;
                 record.setTreatmentPlan(newTreatmentPlan) ;

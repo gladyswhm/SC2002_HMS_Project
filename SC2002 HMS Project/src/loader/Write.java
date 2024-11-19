@@ -13,10 +13,8 @@ import entity.patient;
 import entity.replenish;
 import entity.staff;
 import enum_class.AvailStatus;
-import enum_class.DoctorAppointmentStatus;
 import entity.appointment;
 import entity.appointmentoutcome;
-import entity.doctoravailability;
 
 /**
  * The Write class provides utility methods for saving various data lists to the respective CSV files.
