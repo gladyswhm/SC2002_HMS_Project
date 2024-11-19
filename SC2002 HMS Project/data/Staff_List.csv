@@ -1,4 +1,4 @@
-A002,newpassword,John Tan,Administrator,Female,46
-D002,Hi,Emily Clarke,Doctor,Female,38
-P001,Hi,Mark Lee,Pharmacist,Male,29
-A001,Hi,Sarah Lee,Administrator,Female,40
+D002,password,John Tan,Doctor,Male,46
+D002,password,Emily Clarke,Doctor,Female,38
+P001,password,Mark Lee,Pharmacist,Male,29
+A001,password,Sarah Lee,Administrator,Female,40
