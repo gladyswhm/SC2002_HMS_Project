@@ -7,16 +7,36 @@ import entity.medicine;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Inventory con
+ */ 
 public class InventoryCon {
     static List<medicine> medicineList = Read.loadMedicineList("data/Medicine_List.csv");
 
-    public List<medicine> getMedicineList() {
+
+/** 
+ *
+ * Gets the medicine list
+ *
+ * @return the medicine list
+ */
+    public List<medicine> getMedicineList() { 
+
         return medicineList;
     }
 
     // Pharmacist 3: View Medication Inventory
-    public static void viewInventory()
+
+
+/** 
+ *
+ * View inventory
+ *
+ */
+    public static void viewInventory() 
     {
+
         System.out.println("\n\n----- View Medication Inventory -----");
 
         // Traverse each line from the file
@@ -34,8 +54,18 @@ public class InventoryCon {
 
 
     // Update stock level after dispense
-    public static void dispensedMedicine(String medName, int dispensedAmt)
+
+
+/** 
+ *
+ * Dispensed medicine
+ *
+ * @param medName  the med name. 
+ * @param dispensedAmt  the dispensed amt. 
+ */
+    public static void dispensedMedicine(String medName, int dispensedAmt) 
     {
+
         // Traverse each line from the file
         for (medicine line : medicineList)
         {
@@ -49,13 +79,30 @@ public class InventoryCon {
     }
 
 
-    public void addMedicine(medicine medicine) {
+
+/** 
+ *
+ * Add medicine
+ *
+ * @param medicine  the medicine. 
+ */
+    public void addMedicine(medicine medicine) { 
+
         medicineList.add(medicine); 
         Write.saveMedicineListToCSV(medicineList); 
     }
     
 
-    public boolean removeMedicine(String medicineName) {
+
+/** 
+ *
+ * Remove medicine
+ *
+ * @param medicineName  the medicine name. 
+ * @return boolean
+ */
+    public boolean removeMedicine(String medicineName) { 
+
         medicine medicineToRemove = findMedicineByName(medicineName);
         if (medicineToRemove != null) {
             medicineList.remove(medicineToRemove);
@@ -66,7 +113,16 @@ public class InventoryCon {
     }
     
 
-    public medicine findMedicineByName(String name) {
+
+/** 
+ *
+ * Find medicine by name
+ *
+ * @param name  the name. 
+ * @return medicine
+ */
+    public medicine findMedicineByName(String name) { 
+
         for (medicine medicine : medicineList) {
             if (medicine.getName().equalsIgnoreCase(name)) {
                 return medicine;
@@ -75,7 +131,16 @@ public class InventoryCon {
         return null;
     }
     
-    public void updateStockLevel(String medicineName, int newStockLevel) {
+
+/** 
+ *
+ * Update stock level
+ *
+ * @param medicineName  the medicine name. 
+ * @param newStockLevel  the new stock level. 
+ */
+    public void updateStockLevel(String medicineName, int newStockLevel) { 
+
         medicine medicine = findMedicineByName(medicineName);
         if (medicine != null) {
             System.out.println("Before update: " + medicine.getStockLevel());
@@ -88,7 +153,16 @@ public class InventoryCon {
         }
     }
 
-    public void updateLowStockAlert(String medicineName, int newLowStockAlert) {
+
+/** 
+ *
+ * Update low stock alert
+ *
+ * @param medicineName  the medicine name. 
+ * @param newLowStockAlert  the new low stock alert. 
+ */
+    public void updateLowStockAlert(String medicineName, int newLowStockAlert) { 
+
         medicine medicine = findMedicineByName(medicineName);
         if (medicine != null) {
             medicine.setLowStockAlert(newLowStockAlert);
@@ -100,7 +174,16 @@ public class InventoryCon {
     }
 
     // New method to update stock level after replenishment
-    public void updateStockLevelAfterReplenishment(String medicineName, int replenishmentQuantity) {
+
+/** 
+ *
+ * Update stock level after replenishment
+ *
+ * @param medicineName  the medicine name. 
+ * @param replenishmentQuantity  the replenishment quantity. 
+ */
+    public void updateStockLevelAfterReplenishment(String medicineName, int replenishmentQuantity) { 
+
         medicine medicine = findMedicineByName(medicineName);
         if (medicine != null) {
             int updatedStockLevel = medicine.getStockLevel() + replenishmentQuantity;

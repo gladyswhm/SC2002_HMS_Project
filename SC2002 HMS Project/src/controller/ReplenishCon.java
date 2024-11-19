@@ -10,19 +10,39 @@ import enum_class.ReplenishStatus;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Replenish con
+ */ 
 public class ReplenishCon {
     
     static Scanner sc = new Scanner(System.in);
     
     static List<replenish> replenishList = Read.readReplenishmentList("data/Replenishment_List.csv");
 
-    public List<replenish> getReplenishList() {
+
+/** 
+ *
+ * Gets the replenish list
+ *
+ * @return the replenish list
+ */
+    public List<replenish> getReplenishList() { 
+
         return replenishList;
     }
 
     // Pharmacist 4: Submit Replenishment Request
-    public static void replenishmentRequest()
+
+
+/** 
+ *
+ * Replenishment request
+ *
+ */
+    public static void replenishmentRequest() 
     {
+
         System.out.println("\n\n----- Submit Replenishment Request -----");
 
         // Ask Pharmacist to enter new replenishment request details
@@ -44,7 +64,17 @@ public class ReplenishCon {
 
 
 
-    public void updateReplenishment(String name, Integer newQuantity, ReplenishStatus newStatus) {
+
+/** 
+ *
+ * Update replenishment
+ *
+ * @param name  the name. 
+ * @param newQuantity  the new quantity. 
+ * @param newStatus  the new status. 
+ */
+    public void updateReplenishment(String name, Integer newQuantity, ReplenishStatus newStatus) { 
+
         for (replenish replenish : replenishList) {
             if (replenish.getMedicineName().equalsIgnoreCase(name)) {
                 // Update the replenishment request
@@ -70,7 +100,16 @@ public class ReplenishCon {
     }
     
 
-    public void displayReplenishment(String filterType, String value) {
+
+/** 
+ *
+ * Display replenishment
+ *
+ * @param filterType  the filter type. 
+ * @param value  the value. 
+ */
+    public void displayReplenishment(String filterType, String value) { 
+
         System.out.println("Replenishment List:");
         for (replenish replenish : replenishList) {
             boolean matches = true;

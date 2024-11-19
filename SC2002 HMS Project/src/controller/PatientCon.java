@@ -10,16 +10,37 @@ import loader.Read;
 import loader.Write;
 import java.util.Scanner;
 
+
+ /**
+ * The class Patient con
+ */ 
 public class PatientCon {
     static List<patient> patientList = Read.readPatientList("data/Patient_List.csv");
 
-    public static List<patient> getPatientList() {
+
+/** 
+ *
+ * Gets the patient list
+ *
+ * @return the patient list
+ */
+    public static List<patient> getPatientList() { 
+
         return patientList;
     }
 
     static List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
     
-    public static void updateContactInfo(patient patients, int option) {
+
+/** 
+ *
+ * Update contact info
+ *
+ * @param patients  the patients. 
+ * @param option  the option. 
+ */
+    public static void updateContactInfo(patient patients, int option) { 
+
         Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
 
         if (option == 1) {  // Update email
@@ -42,7 +63,15 @@ public class PatientCon {
         Write.savePatientListToCSV(patientList);
     }
 
-    public static void viewMedicalRecord(String patientID){
+
+/** 
+ *
+ * View medical record
+ *
+ * @param patientID  the patient identifier. 
+ */
+    public static void viewMedicalRecord(String patientID){ 
+
         boolean found = false;
 
     // Iterate through the records to find the one matching the patient's ID
@@ -62,7 +91,15 @@ public class PatientCon {
     }
 
     //option 4
-    public static void scheduleAppointment(String patientID){
+
+/** 
+ *
+ * Schedule appointment
+ *
+ * @param patientID  the patient identifier. 
+ */
+    public static void scheduleAppointment(String patientID){ 
+
         Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
 
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
@@ -94,7 +131,15 @@ public class PatientCon {
     }
 
     //option 5: reschedule an appointment
-    public static void rescheduleAppointment(String patientID){
+
+/** 
+ *
+ * Reschedule appointment
+ *
+ * @param patientID  the patient identifier. 
+ */
+    public static void rescheduleAppointment(String patientID){ 
+
         Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
 
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
@@ -134,7 +179,15 @@ public class PatientCon {
     }
 
     //option 6: cancel appointment
-    public static void cancelAppointment(String patientID){
+
+/** 
+ *
+ * Cancel appointment
+ *
+ * @param patientID  the patient identifier. 
+ */
+    public static void cancelAppointment(String patientID){ 
+
         Scanner scanner = new Scanner(System.in); // Initialize Scanner for user input
 
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");

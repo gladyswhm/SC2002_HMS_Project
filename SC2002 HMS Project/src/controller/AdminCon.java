@@ -12,16 +12,42 @@ import enum_class.*;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Admin con implements staff con
+ */ 
 public class AdminCon implements StaffCon{
     List<staff> staffList = Read.loadStaffList("data/Staff_List.csv");
 
-    public void addStaff(String staffId, String password, String name, Gender gender, Role role, int age) {
+
+/** 
+ *
+ * Add staff
+ *
+ * @param staffId  the staff identifier. 
+ * @param password  the password. 
+ * @param name  the name. 
+ * @param gender  the gender. 
+ * @param role  the role. 
+ * @param age  the age. 
+ */
+    public void addStaff(String staffId, String password, String name, Gender gender, Role role, int age) { 
+
     staff newStaff = new staff(staffId, password, name, gender, role, age);
     staffList.add(newStaff);
     Write.saveStaffList(staffList);
     }
 
-    public boolean removeStaff(String staffId) {
+
+/** 
+ *
+ * Remove staff
+ *
+ * @param staffId  the staff identifier. 
+ * @return boolean
+ */
+    public boolean removeStaff(String staffId) { 
+
         boolean removed = staffList.removeIf(user -> user.getUserID().equalsIgnoreCase(staffId));
         if (removed) {
             Write.saveStaffList(staffList);
@@ -29,7 +55,20 @@ public class AdminCon implements StaffCon{
         return removed;
     }
 
-    public void updateStaff(String staffId, String newStaffId, String newName, Gender newGender, Role newRole, Integer newAge) {
+
+/** 
+ *
+ * Update staff
+ *
+ * @param staffId  the staff identifier. 
+ * @param newStaffId  the new staff identifier. 
+ * @param newName  the new name. 
+ * @param newGender  the new gender. 
+ * @param newRole  the new role. 
+ * @param newAge  the new age. 
+ */
+    public void updateStaff(String staffId, String newStaffId, String newName, Gender newGender, Role newRole, Integer newAge) { 
+
         for (staff staff : staffList) {
             if (staff.getUserID().equals(staffId)) {
                 if (newStaffId != null) {
@@ -57,7 +96,16 @@ public class AdminCon implements StaffCon{
 
 
 
-    public void displayStaff(String filterType, String value) {
+
+/** 
+ *
+ * Display staff
+ *
+ * @param filterType  the filter type. 
+ * @param value  the value. 
+ */
+    public void displayStaff(String filterType, String value) { 
+
         System.out.println("Staff List:");
         boolean printed = false;  // To track if any staff was printed after filtering
         for (staff staff : staffList) {

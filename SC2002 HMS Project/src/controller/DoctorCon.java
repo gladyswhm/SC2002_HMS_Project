@@ -9,11 +9,22 @@ import entity.medicalrecord;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Doctor con
+ */ 
 public class DoctorCon {
     static List<AvailabilityCon> avail = Read.loadAvailability("data/Doctor_Availability.csv");
  
     //option 1: view medical record
-    public static void displayMedicalRecords(){
+
+/** 
+ *
+ * Display medical records
+ *
+ */
+    public static void displayMedicalRecords(){ 
+
         List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
         if (records.isEmpty()) {
             System.out.println("No medical records available.");
@@ -27,7 +38,17 @@ public class DoctorCon {
         System.out.println("------------------------------------");
     }
 
-    public static void addPatientMedicalRecords(String doctorID, List<medicalrecord> medicalRecords, Scanner sc){
+
+/** 
+ *
+ * Add patient medical records
+ *
+ * @param doctorID  the doctor identifier. 
+ * @param medicalRecords  the medical records. 
+ * @param sc  the sc. 
+ */
+    public static void addPatientMedicalRecords(String doctorID, List<medicalrecord> medicalRecords, Scanner sc){ 
+
         int value = Read.getOutcomeID("data/Medical_Records.csv");
         value++;
 
@@ -51,7 +72,17 @@ public class DoctorCon {
         Write.saveNewMedicalRecord(Integer.toString(value), doctorID, patID, patName, newdiagnosis, newTP, PresMedication);
     }
     //edit medical record (option 3 for doctor)
-    public static void updatePatientMedicalRecords(List<medicalrecord> medicalRecords, Scanner sc, String DoctorID) {
+
+/** 
+ *
+ * Update patient medical records
+ *
+ * @param medicalRecords  the medical records. 
+ * @param sc  the sc. 
+ * @param DoctorID  the doctor identifier. 
+ */
+    public static void updatePatientMedicalRecords(List<medicalrecord> medicalRecords, Scanner sc, String DoctorID) { 
+
         System.out.print("Enter Medical Record ID to update (e.g., 2004): ");
         String MRID = sc.nextLine();
 
@@ -75,7 +106,19 @@ public class DoctorCon {
         else System.out.println("Medical Record not found for: " + MRID);
     }
     
-    public static void editMedicalRecord(String MRID, String newDiagnosis, String newTreatmentPlan, List<String> newMedications, String DoctorID) {
+
+/** 
+ *
+ * Edit medical record
+ *
+ * @param MRID  the  MRID. 
+ * @param newDiagnosis  the new diagnosis. 
+ * @param newTreatmentPlan  the new treatment plan. 
+ * @param newMedications  the new medications. 
+ * @param DoctorID  the doctor identifier. 
+ */
+    public static void editMedicalRecord(String MRID, String newDiagnosis, String newTreatmentPlan, List<String> newMedications, String DoctorID) { 
+
         boolean found = false;
         List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
 
@@ -99,7 +142,14 @@ public class DoctorCon {
         }
     }
 
-    public static void displayAvailablePatientIds() {
+
+/** 
+ *
+ * Display available patient ids
+ *
+ */
+    public static void displayAvailablePatientIds() { 
+
         List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
         if (records.isEmpty()) {
             System.out.println("No medical records available.");
@@ -113,7 +163,17 @@ public class DoctorCon {
         System.out.println("------------------------------------");
     }
 
-    public static medicalrecord findMedicalRecord(String MRID, List<medicalrecord> medicalRecords){
+
+/** 
+ *
+ * Find medical record
+ *
+ * @param MRID  the  MRID. 
+ * @param medicalRecords  the medical records. 
+ * @return medicalrecord
+ */
+    public static medicalrecord findMedicalRecord(String MRID, List<medicalrecord> medicalRecords){ 
+
         List<medicalrecord> records = Read.loadMedicalRecords("data/Medical_Records.csv");
         for(medicalrecord r : records){
             if(r.getMRID().equals(MRID)){

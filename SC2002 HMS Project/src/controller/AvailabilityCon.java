@@ -8,6 +8,10 @@ import enum_class.AvailStatus;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Availability con
+ */ 
 public class AvailabilityCon {
     private static final String AVAILABILITY_FILE_PATH = "data/Doctor_Availability.csv";
 
@@ -19,7 +23,20 @@ public class AvailabilityCon {
     private String notes;
 
 
-    public AvailabilityCon(int id, String doctorID, String date, String timeSlot, AvailStatus status, String notes) {
+
+/** 
+ *
+ * It is a constructor. 
+ *
+ * @param id  the id. 
+ * @param doctorID  the doctor identifier. 
+ * @param date  the date. 
+ * @param timeSlot  the time slot. 
+ * @param status  the status. 
+ * @param notes  the notes. 
+ */
+    public AvailabilityCon(int id, String doctorID, String date, String timeSlot, AvailStatus status, String notes) { 
+
         this.id = id;
         this.doctorID = doctorID;
         this.date = date;
@@ -28,7 +45,16 @@ public class AvailabilityCon {
         this.notes = notes; //default
     }
 
-    public static void setAvailability(String doctorId, Scanner sc) {
+
+/** 
+ *
+ * Sets the availability
+ *
+ * @param doctorId  the doctor identifier. 
+ * @param sc  the sc. 
+ */
+    public static void setAvailability(String doctorId, Scanner sc) { 
+
         int id = Read.getOutcomeID("data/Doctor_Availability.csv"); // Availability ID
         id++;  
         System.out.println("Enter the date (DD/MM/YYYY): ");

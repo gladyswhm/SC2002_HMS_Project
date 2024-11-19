@@ -10,16 +10,38 @@ import enum_class.AvailStatus;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Appointment con
+ */ 
 public class AppointmentCon {
     private String Appid;
     private String doctorId;
     private String patientId;
     private String date;       // YYYY-MM-DD
     private String timeSlot;   // HH:MM
-    private AvailStatus status;     // Pending, Accepted, Declined, Completed (for last part)
+
+
+/** 
+ *
+ * It is a constructor. 
+ *
+ * @param part  the part.  It is for 
+ * @throws 
+    
+    // Constructor
+    public AppointmentCon(String Appid
+ * @throws  String doctorId
+ * @throws  String patientId
+ * @throws  String date
+ * @throws  String timeSlot
+ * @throws  AvailStatus status
+ */
+    private AvailStatus status;     // Pending, Accepted, Declined, Completed (for last part) 
     
     // Constructor
     public AppointmentCon(String Appid, String doctorId, String patientId, String date, String timeSlot, AvailStatus status) {
+
         this.Appid=Appid;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -29,7 +51,16 @@ public class AppointmentCon {
     }
 
     
-    public static void AppointmentUpdate(String doctorId, Scanner sc){
+
+/** 
+ *
+ * Appointment update
+ *
+ * @param doctorId  the doctor identifier. 
+ * @param sc  the sc. 
+ */
+    public static void AppointmentUpdate(String doctorId, Scanner sc){ 
+
         System.out.println("\nWould you like to accept or decline any appointments? (A/D): ");
         String choice = sc.nextLine();
 
@@ -59,7 +90,16 @@ public class AppointmentCon {
     }
 
 
-    public static void acceptAppointment(String doctorId, String appID) {
+
+/** 
+ *
+ * Accept appointment
+ *
+ * @param doctorId  the doctor identifier. 
+ * @param appID  the application identifier. 
+ */
+    public static void acceptAppointment(String doctorId, String appID) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
 
         boolean found = false;
@@ -83,7 +123,16 @@ public class AppointmentCon {
         }
     }
 
-    public static void declineAppointment(String doctorId, String appID) {
+
+/** 
+ *
+ * Decline appointment
+ *
+ * @param doctorId  the doctor identifier. 
+ * @param appID  the application identifier. 
+ */
+    public static void declineAppointment(String doctorId, String appID) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         boolean found = false;
 
@@ -106,7 +155,15 @@ public class AppointmentCon {
         }
     }
 
-    public static void displayAvailableAppointments(String doctorId) {
+
+/** 
+ *
+ * Display available appointments
+ *
+ * @param doctorId  the doctor identifier. 
+ */
+    public static void displayAvailableAppointments(String doctorId) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         System.out.println("--- Available Appointments for Doctor ID: " + doctorId + " ---");
 
@@ -118,7 +175,15 @@ public class AppointmentCon {
         System.out.println("------------------------------------");
     }
 
-    public static void displayPendingAppointments(String doctorId) {
+
+/** 
+ *
+ * Display pending appointments
+ *
+ * @param doctorId  the doctor identifier. 
+ */
+    public static void displayPendingAppointments(String doctorId) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         System.out.println("--- Pending Appointments for Doctor ID: " + doctorId + " ---");
 
@@ -130,7 +195,15 @@ public class AppointmentCon {
         System.out.println("------------------------------------");
     }
 
-    public static void displayUpcomingAppointments(String doctorId) {
+
+/** 
+ *
+ * Display upcoming appointments
+ *
+ * @param doctorId  the doctor identifier. 
+ */
+    public static void displayUpcomingAppointments(String doctorId) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         System.out.println("--- Upcoming Appointments for Doctor ID: " + doctorId + " ---");
 
@@ -142,7 +215,15 @@ public class AppointmentCon {
         System.out.println("------------------------------------");
     }
 
-    public static void displayAvailableSlots(String doctorId) {
+
+/** 
+ *
+ * Display available slots
+ *
+ * @param doctorId  the doctor identifier. 
+ */
+    public static void displayAvailableSlots(String doctorId) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         System.out.println("--- Pending Appointments for Doctor ID: " + doctorId + " ---");
 
@@ -154,7 +235,15 @@ public class AppointmentCon {
         System.out.println("------------------------------------");
     }
 
-    public static void displayAllDoctor(String doctorId) {
+
+/** 
+ *
+ * Display all doctor
+ *
+ * @param doctorId  the doctor identifier. 
+ */
+    public static void displayAllDoctor(String doctorId) { 
+
     List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
     System.out.println("--- Appointments for Doctor ID: " + doctorId + " ---");
 
@@ -167,7 +256,14 @@ public class AppointmentCon {
     }
 
     //admin display appointment list
-    public static void displayAppointmentList() {
+
+/** 
+ *
+ * Display appointment list
+ *
+ */
+    public static void displayAppointmentList() { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         if (appointmentList.isEmpty()) {
             System.out.println("No appointments found.");
@@ -183,7 +279,14 @@ public class AppointmentCon {
     
 
     //patient to print available slots
-    public static void displayAvailableAppointmentList() {
+
+/** 
+ *
+ * Display available appointment list
+ *
+ */
+    public static void displayAvailableAppointmentList() { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         if (appointmentList.isEmpty()) {
             System.out.println("No available appointments found.");
@@ -210,7 +313,15 @@ public class AppointmentCon {
 
 
     //patient view scheduled appointment
-    public static void displayScheduledAppointments(String userID) {
+
+/** 
+ *
+ * Display scheduled appointments
+ *
+ * @param userID  the user identifier. 
+ */
+    public static void displayScheduledAppointments(String userID) { 
+
         List<appointment> appointmentList = Read.loadAppointments("data/Doctor_Availability.csv");
         if (appointmentList.isEmpty()) {
             System.out.println("No appointments found.");

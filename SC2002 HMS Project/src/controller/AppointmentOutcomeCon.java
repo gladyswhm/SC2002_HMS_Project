@@ -13,6 +13,10 @@ import enum_class.ReplenishStatus;
 import loader.Read;
 import loader.Write;
 
+
+ /**
+ * The class Appointment outcome con
+ */ 
 public class AppointmentOutcomeCon {
 
     static Scanner sc = new Scanner(System.in);
@@ -21,12 +25,29 @@ public class AppointmentOutcomeCon {
     static List<appointmentoutcome> appointmentOutcomeList = Read.loadAppointmentsOutcome("data/AppointmentOutcome_List.csv");
 
      //admin display appointment outcome
-     public static List<appointmentoutcome> getAppointmentOutcomeList() {
+
+/** 
+ *
+ * Gets the appointment outcome list
+ *
+ * @return the appointment outcome list
+ */
+     public static List<appointmentoutcome> getAppointmentOutcomeList() { 
+
         return appointmentOutcomeList;
     }
 
     //patient view their appointment records
-    public static List<appointmentoutcome> getAppointmentOutcomeForPatient(String patientId) {
+
+/** 
+ *
+ * Gets the appointment outcome for patient
+ *
+ * @param patientId  the patient identifier. 
+ * @return the appointment outcome for patient
+ */
+    public static List<appointmentoutcome> getAppointmentOutcomeForPatient(String patientId) { 
+
         return appointmentOutcomeList.stream()
                                      .filter(record -> record.getPatientId().equals(patientId))
                                      .collect(Collectors.toList());
@@ -34,8 +55,16 @@ public class AppointmentOutcomeCon {
 
 
     // Pharmacist 1: View Appointment Outcome Record
-    public static void viewOutcomeRecord()
+
+
+/** 
+ *
+ * View outcome record
+ *
+ */
+    public static void viewOutcomeRecord() 
     {
+
         System.out.println("\n\n----- View Appointment Outcome Record -----");
         System.out.print("Enter Appointment ID (e.g. 13001): ");
         String appID = sc.nextLine();
@@ -73,8 +102,16 @@ public class AppointmentOutcomeCon {
     
     
     // Pharmacist 2: Update Prescription Status
-    public static void updateStatus()
+
+
+/** 
+ *
+ * Update status
+ *
+ */
+    public static void updateStatus() 
     {
+
         System.out.println("\n\n----- Update Prescription Status -----");
         System.out.print("Enter Appointment ID: ");
         String appID = sc.nextLine();
@@ -126,7 +163,16 @@ public class AppointmentOutcomeCon {
     }
 
     //for appointment outcome record (option 7)
-    public static void AppointmentOutcomeRecord(String doctorId, Scanner sc){
+
+/** 
+ *
+ * Appointment outcome record
+ *
+ * @param doctorId  the doctor identifier. 
+ * @param sc  the sc. 
+ */
+    public static void AppointmentOutcomeRecord(String doctorId, Scanner sc){ 
+
         OUTid++;
         AppointmentCon.displayUpcomingAppointments(doctorId);
         System.out.println("\n--- Recording Appointment Outcome ---");
@@ -149,7 +195,15 @@ public class AppointmentOutcomeCon {
         Write.saveAppointmentOutcome(appointmentOutcomeList);
     }
     
-    public static void makePayment(String userID){
+
+/** 
+ *
+ * Make payment
+ *
+ * @param userID  the user identifier. 
+ */
+    public static void makePayment(String userID){ 
+
         boolean found = false;
 
         System.out.println("--- Make Payment ---");
